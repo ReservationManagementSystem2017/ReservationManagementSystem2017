@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/F:/林翔鹏文件夹/计算机/数据库课程设计/ReservationManagementSystem2017/ReservationMIS/src/com/view/OrderManageFrame.java</file>
+            <file>file:/F:/林翔鹏文件夹/计算机/数据库课程设计/ReservationManagementSystem2017/ReservationMIS/src/com/view/DiscountManageFrame.java</file>
+            <file>file:/F:/林翔鹏文件夹/计算机/数据库课程设计/ReservationManagementSystem2017/ReservationMIS/src/com/view/EmployeeManageFrame.java</file>
+            <file>file:/F:/林翔鹏文件夹/计算机/数据库课程设计/ReservationManagementSystem2017/ReservationMIS/src/com/view/RoomOrTableManageFrame.java</file>
+            <file>file:/F:/林翔鹏文件夹/计算机/数据库课程设计/ReservationManagementSystem2017/ReservationMIS/src/com/view/BillManageFrame.java</file>
+            <file>file:/F:/林翔鹏文件夹/计算机/数据库课程设计/ReservationManagementSystem2017/ReservationMIS/src/com/view/MenuManageFrame.java</file>
+        </group>
     </open-files>
 </project-private>
