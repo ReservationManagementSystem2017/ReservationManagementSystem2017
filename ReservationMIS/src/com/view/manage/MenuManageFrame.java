@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.view;
+package com.view.manage;
 
 /**
  *
  * @author Administrator
  */
-public class DiscountManageFrame extends javax.swing.JInternalFrame {
+public class MenuManageFrame extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form DiscountManageFrame
+     * Creates new form MenuManageFrame
      */
-    public DiscountManageFrame() {
+    public MenuManageFrame() {
         initComponents();
     }
 

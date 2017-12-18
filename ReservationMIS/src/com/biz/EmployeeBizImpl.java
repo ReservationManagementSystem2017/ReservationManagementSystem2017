@@ -18,7 +18,7 @@ public class EmployeeBizImpl implements EmployeeBiz{
     BaseDao edao = new BaseDao();
 
     public boolean add(Employee e) {
-        String sql = "insert into t_employee values(?,?,?,?,?,?,?,?)";
+        String sql = "insert into t_employee values(?,?,?,?,?,?,?,1)";
         //params中的参数是按顺序逐个给？赋值，所以需要注意数据表顺序
         Object[] params = {null, e.getEname(), e.getEsex(), e.getEage(), e.getEwage(),
             e.getEphone(), e.getEtype(), 1};

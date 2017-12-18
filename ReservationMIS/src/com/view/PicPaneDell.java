@@ -5,18 +5,37 @@
  */
 package com.view;
 
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.net.URL;
+
 /**
  *
- * @author Administrator
+ * @author lin xiangpeng
  */
-public class OrderManageFrame extends javax.swing.JInternalFrame {
+public class PicPaneDell extends javax.swing.JPanel {
+    // 增加类属性：
+    private Image img;
 
     /**
-     * Creates new form OrderManageFrame
+     * Creates new form PicPanel
      */
-    public OrderManageFrame() {
+    public PicPaneDell() {
         initComponents();
+           //设置面板的背景图片，注意图片路径
+        this.setImgURL(this.getClass().getResource("/com/img/food2.jpg"));
+
     }
+   // 增加成员方法：
+        public void setImgURL(URL imgURL){
+           img = Toolkit.getDefaultToolkit().createImage(imgURL);
+    }
+    // 重写paintComponent方法
+    public void paintComponent(Graphics g){        
+        if(this.img == null) return;   
+        g.drawImage(img, 0,0,this.getParent().getWidth(),this.getParent().getHeight(),this);         
+    } 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -27,18 +46,16 @@ public class OrderManageFrame extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGap(0, 1117, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGap(0, 677, Short.MAX_VALUE)
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
 

@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.view;
+package com.view.order;
 
 /**
  *
  * @author Administrator
  */
-public class BillManageFrame extends javax.swing.JInternalFrame {
+public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form BillManageFrame
+     * Creates new form OrderByWaiter
      */
-    public BillManageFrame() {
+    public OrderByWaiterFrame() {
         initComponents();
     }
 

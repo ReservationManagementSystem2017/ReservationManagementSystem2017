@@ -5,10 +5,23 @@
  */
 package com.view;
 
+import com.view.manage.EmployeeManageFrame;
 import com.biz.EmployeeBiz;
 import com.biz.EmployeeBizImpl;
 import com.po.Employee;
+import com.po.User;
+import com.util.FrameUtil;
+import com.util.LocationUtil;
+import com.view.manage.CustomerManageFrame;
+import com.view.manage.DiscountManageFrame;
+import com.view.manage.MenuManageFrame;
+import com.view.manage.RoomOrTableManageFrame;
+import com.view.order.BillByWaiterFrame;
+import com.view.order.OrderByCookFrame;
+import com.view.order.OrderByWaiterFrame;
+import java.beans.PropertyVetoException;
 import java.util.List;
+import javax.swing.JInternalFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,14 +29,22 @@ import javax.swing.JOptionPane;
  * @author Administrator
  */
 public class MainFrame extends javax.swing.JFrame {
-
+     public User user = null;//设置静态值对象，供界面传值用
+    public static String permission = null;
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
         initComponents();
+        //全屏
+//        LocationUtil.setFullScreen(this);
+//        初始化按键
+        initButton(permission);
     }
-
+    
+ private void initButton(String permission) {
+     
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -33,92 +54,169 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        mainDeskPaneDell = new com.view.MainDeskPaneDell();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        mnuSystem = new javax.swing.JMenu();
+        itemLogin = new javax.swing.JMenuItem();
+        mnuOrder = new javax.swing.JMenu();
+        itemOrderByWaiter = new javax.swing.JMenuItem();
+        itemBillByWaiter = new javax.swing.JMenuItem();
+        itemOrderByCook = new javax.swing.JMenuItem();
+        mnuManager = new javax.swing.JMenu();
+        itemEmployeeManage = new javax.swing.JMenuItem();
+        itemCustomerManage = new javax.swing.JMenuItem();
+        itemDiscountManage = new javax.swing.JMenuItem();
+        itemMenuManage = new javax.swing.JMenuItem();
+        itemRoomOrTableManage = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        mnuSystem.setText("系统设置");
+
+        itemLogin.setText("登录用户");
+        itemLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                itemLoginActionPerformed(evt);
             }
         });
+        mnuSystem.add(itemLogin);
 
-        jTextField1.setText("jTextField1");
+        jMenuBar1.add(mnuSystem);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 313, Short.MAX_VALUE)
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 186, Short.MAX_VALUE)
-        );
+        mnuOrder.setText("订单管理");
 
-        jLabel1.setText("jLabel1");
+        itemOrderByWaiter.setText("顾客下单");
+        itemOrderByWaiter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemOrderByWaiterActionPerformed(evt);
+            }
+        });
+        mnuOrder.add(itemOrderByWaiter);
+
+        itemBillByWaiter.setText("顾客结账");
+        itemBillByWaiter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemBillByWaiterActionPerformed(evt);
+            }
+        });
+        mnuOrder.add(itemBillByWaiter);
+
+        itemOrderByCook.setText("厨师做菜");
+        itemOrderByCook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemOrderByCookActionPerformed(evt);
+            }
+        });
+        mnuOrder.add(itemOrderByCook);
+
+        jMenuBar1.add(mnuOrder);
+
+        mnuManager.setText("基本资料管理");
+
+        itemEmployeeManage.setText("职员管理");
+        itemEmployeeManage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemEmployeeManageActionPerformed(evt);
+            }
+        });
+        mnuManager.add(itemEmployeeManage);
+
+        itemCustomerManage.setText("顾客管理");
+        itemCustomerManage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemCustomerManageActionPerformed(evt);
+            }
+        });
+        mnuManager.add(itemCustomerManage);
+
+        itemDiscountManage.setText("打折管理");
+        itemDiscountManage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemDiscountManageActionPerformed(evt);
+            }
+        });
+        mnuManager.add(itemDiscountManage);
+
+        itemMenuManage.setText("菜单管理");
+        itemMenuManage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemMenuManageActionPerformed(evt);
+            }
+        });
+        mnuManager.add(itemMenuManage);
+
+        itemRoomOrTableManage.setText("房间与餐桌管理");
+        itemRoomOrTableManage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemRoomOrTableManageActionPerformed(evt);
+            }
+        });
+        mnuManager.add(itemRoomOrTableManage);
+
+        jMenuBar1.add(mnuManager);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(283, 283, 283)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(93, 93, 93))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(394, 394, 394))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(102, 102, 102))))
+                .addComponent(mainDeskPaneDell, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(65, 65, 65)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(72, 72, 72)
-                .addComponent(jButton1)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1)
-                .addGap(148, 148, 148))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(mainDeskPaneDell, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void itemEmployeeManageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemEmployeeManageActionPerformed
+        showFrame(EmployeeManageFrame.class);
+    }//GEN-LAST:event_itemEmployeeManageActionPerformed
 
-        String text = this.jTextField1.getText().trim();
-        
-        
-        System.out.println("hello world");
-        System.out.println("hello world");
-        Employee e  = new Employee(1,text,"男",12,100,"15060988388",1,1);
-        EmployeeBiz ebiz = new EmployeeBizImpl();
-        
-        boolean result = ebiz.add(e);
-        if (result == true) {
-            JOptionPane.showMessageDialog(this, "添加成功");
-        } else {
-            JOptionPane.showMessageDialog(this, "添加失败");
-        }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void itemCustomerManageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCustomerManageActionPerformed
+        showFrame(CustomerManageFrame.class);
+    }//GEN-LAST:event_itemCustomerManageActionPerformed
+
+    private void itemMenuManageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuManageActionPerformed
+       showFrame(MenuManageFrame.class);
+    }//GEN-LAST:event_itemMenuManageActionPerformed
+
+    private void itemDiscountManageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemDiscountManageActionPerformed
+        showFrame(DiscountManageFrame.class);
+    }//GEN-LAST:event_itemDiscountManageActionPerformed
+
+    private void itemRoomOrTableManageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemRoomOrTableManageActionPerformed
+      showFrame(RoomOrTableManageFrame.class);
+    }//GEN-LAST:event_itemRoomOrTableManageActionPerformed
+
+    private void itemOrderByWaiterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemOrderByWaiterActionPerformed
+       showFrame(OrderByWaiterFrame.class);
+    }//GEN-LAST:event_itemOrderByWaiterActionPerformed
+
+    private void itemBillByWaiterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemBillByWaiterActionPerformed
+         showFrame(BillByWaiterFrame.class);
+    }//GEN-LAST:event_itemBillByWaiterActionPerformed
+
+    private void itemOrderByCookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemOrderByCookActionPerformed
+        showFrame(OrderByCookFrame.class);
+    }//GEN-LAST:event_itemOrderByCookActionPerformed
+
+    private void itemLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemLoginActionPerformed
+//        //创建
+//        LoginFrame ldf = new LoginFrame(null, this, true);
+//        //显示
+//        LocationUtil.setScreenCenter(ldf);
+//        ldf.setVisible(true);
+//        if(user != null){
+//        this.initButton(user.getPermission());
+//        }
+    }//GEN-LAST:event_itemLoginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -154,11 +252,64 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
     }
-
+    
+     //显示内部窗体的公共方法
+    public void showFrame(Class clazz) {
+        try {
+            //打开商品管理内部窗体
+            //1new对象
+            JInternalFrame frame = FrameUtil.buildFrame(clazz);
+            //2桌面容器先删除
+            this.mainDeskPaneDell.remove(frame);
+            //3桌面容器再添加
+            this.mainDeskPaneDell.add(frame);
+            //4显示
+            LocationUtil.setParentCenter(this,frame);
+            frame.setVisible(true);
+            //5显示在最前
+            frame.toFront();
+            //6处于选中状态
+            frame.setSelected(true);
+        } catch (PropertyVetoException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+     //显示内部窗体的公共方法
+    public void showFrame(Class clazz,User user) {
+        try {
+            //打开商品管理内部窗体
+            //1new对象
+            JInternalFrame frame = FrameUtil.buildFrame(clazz,user);
+            //2桌面容器先删除
+            this.mainDeskPaneDell.remove(frame);
+            //3桌面容器再添加
+            this.mainDeskPaneDell.add(frame);
+            //4显示
+           LocationUtil.setParentCenter(this,frame);
+            frame.setVisible(true);
+            //5显示在最前
+            frame.toFront();
+            //6处于选中状态
+            frame.setSelected(true);
+        } catch (PropertyVetoException ex) {
+            ex.printStackTrace();
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JMenuItem itemBillByWaiter;
+    private javax.swing.JMenuItem itemCustomerManage;
+    private javax.swing.JMenuItem itemDiscountManage;
+    private javax.swing.JMenuItem itemEmployeeManage;
+    private javax.swing.JMenuItem itemLogin;
+    private javax.swing.JMenuItem itemMenuManage;
+    private javax.swing.JMenuItem itemOrderByCook;
+    private javax.swing.JMenuItem itemOrderByWaiter;
+    private javax.swing.JMenuItem itemRoomOrTableManage;
+    private javax.swing.JMenuBar jMenuBar1;
+    private com.view.MainDeskPaneDell mainDeskPaneDell;
+    private javax.swing.JMenu mnuManager;
+    private javax.swing.JMenu mnuOrder;
+    private javax.swing.JMenu mnuSystem;
     // End of variables declaration//GEN-END:variables
 }

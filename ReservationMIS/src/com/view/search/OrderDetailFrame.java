@@ -3,18 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.view;
+package com.view.search;
 
 /**
  *
  * @author Administrator
  */
-public class MenuManageFrame extends javax.swing.JInternalFrame {
+public class OrderDetailFrame extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form MenuManageFrame
+     * Creates new form OrderDetailFrame
      */
-    public MenuManageFrame() {
+    public OrderDetailFrame() {
         initComponents();
     }
 
