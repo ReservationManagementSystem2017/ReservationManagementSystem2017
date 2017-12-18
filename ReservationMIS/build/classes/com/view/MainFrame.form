@@ -40,12 +40,20 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemBillByWaiterActionPerformed"/>
               </Events>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="itemOrderByCook">
+            <MenuItem class="javax.swing.JMenuItem" name="itemOrderDishesByCook">
               <Properties>
                 <Property name="text" type="java.lang.String" value="&#x53a8;&#x5e08;&#x505a;&#x83dc;"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemOrderByCookActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemOrderDishesByCookActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="itemOrderDishesByWaiter">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&#x670d;&#x52a1;&#x5458;&#x4e0a;&#x83dc;"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemOrderDishesByWaiterActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>

@@ -17,8 +17,9 @@ import com.view.manage.DiscountManageFrame;
 import com.view.manage.MenuManageFrame;
 import com.view.manage.RoomOrTableManageFrame;
 import com.view.order.BillByWaiterFrame;
-import com.view.order.OrderByCookFrame;
+import com.view.order.OrderDishesByCookFrame;
 import com.view.order.OrderByWaiterFrame;
+import com.view.order.OrderDishesByWaiterFrame;
 import java.beans.PropertyVetoException;
 import java.util.List;
 import javax.swing.JInternalFrame;
@@ -61,7 +62,8 @@ public class MainFrame extends javax.swing.JFrame {
         mnuOrder = new javax.swing.JMenu();
         itemOrderByWaiter = new javax.swing.JMenuItem();
         itemBillByWaiter = new javax.swing.JMenuItem();
-        itemOrderByCook = new javax.swing.JMenuItem();
+        itemOrderDishesByCook = new javax.swing.JMenuItem();
+        itemOrderDishesByWaiter = new javax.swing.JMenuItem();
         mnuManager = new javax.swing.JMenu();
         itemEmployeeManage = new javax.swing.JMenuItem();
         itemCustomerManage = new javax.swing.JMenuItem();
@@ -101,13 +103,21 @@ public class MainFrame extends javax.swing.JFrame {
         });
         mnuOrder.add(itemBillByWaiter);
 
-        itemOrderByCook.setText("厨师做菜");
-        itemOrderByCook.addActionListener(new java.awt.event.ActionListener() {
+        itemOrderDishesByCook.setText("厨师做菜");
+        itemOrderDishesByCook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemOrderByCookActionPerformed(evt);
+                itemOrderDishesByCookActionPerformed(evt);
             }
         });
-        mnuOrder.add(itemOrderByCook);
+        mnuOrder.add(itemOrderDishesByCook);
+
+        itemOrderDishesByWaiter.setText("服务员上菜");
+        itemOrderDishesByWaiter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemOrderDishesByWaiterActionPerformed(evt);
+            }
+        });
+        mnuOrder.add(itemOrderDishesByWaiter);
 
         jMenuBar1.add(mnuOrder);
 
@@ -203,9 +213,9 @@ public class MainFrame extends javax.swing.JFrame {
          showFrame(BillByWaiterFrame.class);
     }//GEN-LAST:event_itemBillByWaiterActionPerformed
 
-    private void itemOrderByCookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemOrderByCookActionPerformed
-        showFrame(OrderByCookFrame.class);
-    }//GEN-LAST:event_itemOrderByCookActionPerformed
+    private void itemOrderDishesByCookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemOrderDishesByCookActionPerformed
+        showFrame(OrderDishesByCookFrame.class);
+    }//GEN-LAST:event_itemOrderDishesByCookActionPerformed
 
     private void itemLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemLoginActionPerformed
 //        //创建
@@ -217,6 +227,10 @@ public class MainFrame extends javax.swing.JFrame {
 //        this.initButton(user.getPermission());
 //        }
     }//GEN-LAST:event_itemLoginActionPerformed
+
+    private void itemOrderDishesByWaiterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemOrderDishesByWaiterActionPerformed
+     showFrame(OrderDishesByWaiterFrame.class);
+    }//GEN-LAST:event_itemOrderDishesByWaiterActionPerformed
 
     /**
      * @param args the command line arguments
@@ -303,8 +317,9 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemEmployeeManage;
     private javax.swing.JMenuItem itemLogin;
     private javax.swing.JMenuItem itemMenuManage;
-    private javax.swing.JMenuItem itemOrderByCook;
     private javax.swing.JMenuItem itemOrderByWaiter;
+    private javax.swing.JMenuItem itemOrderDishesByCook;
+    private javax.swing.JMenuItem itemOrderDishesByWaiter;
     private javax.swing.JMenuItem itemRoomOrTableManage;
     private javax.swing.JMenuBar jMenuBar1;
     private com.view.MainDeskPaneDell mainDeskPaneDell;

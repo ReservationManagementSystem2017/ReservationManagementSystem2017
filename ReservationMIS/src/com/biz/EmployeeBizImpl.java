@@ -41,19 +41,19 @@ public class EmployeeBizImpl implements EmployeeBiz{
     }
 
     public Employee findByID(int eid) {
-        String sql = "select * from t_employee where eid=? and state = 1";
+        String sql = "select * from t_employee where eid=? and estate = 1";
         Object[] params = {eid};
         return (Employee) edao.get(sql, Employee.class, params);
 
     }
 
     public List<Employee> findAll() {
-        String sql = "select * from t_employee where state = 1";
+        String sql = "select * from t_employee where estate = 1";
         return edao.query(sql, Employee.class);
     }
 
     public List<Employee> findByCondition(String condition) {
-        String sql = "select * from t_employee where state = 1";
+        String sql = "select * from t_employee where estate = 1";
         if (condition.length() > 0) {
             sql += " and concat(ename) like '%" + condition + "%'";
         }

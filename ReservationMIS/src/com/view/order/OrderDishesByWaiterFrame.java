@@ -9,12 +9,12 @@ package com.view.order;
  *
  * @author Administrator
  */
-public class OrderByCookFrame extends javax.swing.JInternalFrame {
+public class OrderDishesByWaiterFrame extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form OrderByCookFrame
+     * Creates new form OrderDishesByWaiterFrame
      */
-    public OrderByCookFrame() {
+    public OrderDishesByWaiterFrame() {
         initComponents();
     }
 

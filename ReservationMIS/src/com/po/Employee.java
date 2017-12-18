@@ -10,19 +10,19 @@ package com.po;
  * @author Administrator
  */
 public class Employee {
-    int eid;//员工id
-    String ename;//员工姓名
-    String esex;//员工性别
-    int eage;//员工年龄
-    double ewage;//员工工资
-    String ephone;//员工联系方式
-    int etype;//员工身份，1服务员，2厨师，3采购员
+    private Integer eid;//员工id
+    private String ename;//员工姓名
+    private String esex;//员工性别
+    private Integer eage;//员工年龄
+    private double ewage;//员工工资
+    private String ephone;//员工联系方式
+    private Integer etype;//员工身份，1服务员，2厨师，3采购员
     //state,员工状态，0销毁，1工作，2休假
 
     public Employee() {
     }
 
-    public Employee(int eid, String ename, String esex, int eage, double ewage, String ephone, int etype) {
+    public Employee(int eid, String ename, String esex, Integer eage, double ewage, String ephone, Integer etype) {
         this.eid = eid;
         this.ename = ename;
         this.esex = esex;
@@ -32,11 +32,11 @@ public class Employee {
         this.etype = etype;
     }
 
-    public int getEid() {
+    public Integer getEid() {
         return eid;
     }
 
-    public void setEid(int eid) {
+    public void setEid(Integer eid) {
         this.eid = eid;
     }
 
@@ -60,7 +60,7 @@ public class Employee {
         return eage;
     }
 
-    public void setEage(int eage) {
+    public void setEage(Integer eage) {
         this.eage = eage;
     }
 
@@ -84,7 +84,7 @@ public class Employee {
         return etype;
     }
 
-    public void setEtype(int etype) {
+    public void setEtype(Integer etype) {
         this.etype = etype;
     }
     

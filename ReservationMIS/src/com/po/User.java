@@ -10,7 +10,7 @@ package com.po;
  * @author lin xiangpeng
  */
 public class User {
-   private Integer uid;
+    private Integer uid;
     private String uname;
     private String password;
     private Integer eid;
