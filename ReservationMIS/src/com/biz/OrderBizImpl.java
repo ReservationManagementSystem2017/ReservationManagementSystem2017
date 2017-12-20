@@ -50,4 +50,11 @@ public class OrderBizImpl implements OrderBiz{
         String sql = "select * from t_orders where ostate = 1";
         return edao.query(sql, Order.class);
     }
+    
+    public Order findLastOne()
+    {
+         String sql = "select * from t_orders order by oid desc limit 1 ";
+         Object[] params = {};
+         return (Order) edao.get(sql, Order.class, params);
+    }
 }

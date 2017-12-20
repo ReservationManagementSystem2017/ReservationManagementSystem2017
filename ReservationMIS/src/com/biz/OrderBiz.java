@@ -29,5 +29,6 @@ public interface OrderBiz {
     // 5 查询所有订单
     public List<Order> findAll();
 
-  
+  //查找最后一条数据
+    public Order findLastOne();
 }

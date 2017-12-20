@@ -11,17 +11,23 @@ import com.biz.MenuBiz;
 import com.biz.MenuBizImpl;
 import com.biz.OrderBiz;
 import com.biz.OrderBizImpl;
+import com.biz.OrderDishesBiz;
+import com.biz.OrderDishesBizImpl;
 import com.biz.RoomBiz;
 import com.biz.RoomBizImpl;
 import com.biz.TableBiz;
 import com.biz.TableBizImpl;
-import com.po.Employee;
 import com.po.Menu;
 import com.po.Order;
+import com.po.OrderDishes;
 import com.po.Room;
 import com.po.Table;
+import com.util.StringUtil;
 import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.DefaultCellEditor;
@@ -40,6 +46,7 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
     OrderBiz obiz = new OrderBizImpl();
     TableBiz tbiz = new TableBizImpl();
     RoomBiz rbiz = new RoomBizImpl();
+    OrderDishesBiz odbiz = new OrderDishesBizImpl();
 
     /**
      * Creates new form OrderByWaiter
@@ -99,11 +106,11 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "菜品名称", "菜品类型", "菜品价格", "做菜时间", "份数"
+                "菜单编号", "菜品名称", "菜品类型", "菜品价格", "做菜时间", "份数"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, true
+                false, false, false, false, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -116,7 +123,8 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
             tblOrder.getColumnModel().getColumn(1).setResizable(false);
             tblOrder.getColumnModel().getColumn(2).setResizable(false);
             tblOrder.getColumnModel().getColumn(3).setResizable(false);
-            tblOrder.getColumnModel().getColumn(4).setHeaderValue("份数");
+            tblOrder.getColumnModel().getColumn(4).setResizable(false);
+            tblOrder.getColumnModel().getColumn(5).setResizable(false);
         }
 
         tblMenu.setModel(new javax.swing.table.DefaultTableModel(
@@ -124,11 +132,11 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "菜品名称", "菜品类型", "菜品价格", "做菜时间"
+                "菜单编号", "菜品名称", "菜品类型", "菜品价格", "做菜时间"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -146,6 +154,7 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
             tblMenu.getColumnModel().getColumn(1).setResizable(false);
             tblMenu.getColumnModel().getColumn(2).setResizable(false);
             tblMenu.getColumnModel().getColumn(3).setResizable(false);
+            tblMenu.getColumnModel().getColumn(4).setResizable(false);
         }
 
         lblMenu.setText("菜单");
@@ -367,15 +376,15 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
 
     private void tblMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMenuMouseClicked
         int selectrow = this.tblMenu.getSelectedRow();
-//        Integer mid = (Integer) this.tblMenu.getValueAt(selectrow, 0);
-        String mname = (String) this.tblMenu.getValueAt(selectrow, 0);
-        String mtype = (String) this.tblMenu.getValueAt(selectrow, 1);
-        double mprice = (Double) this.tblMenu.getValueAt(selectrow, 2);
-        Integer mcooktime = (Integer) this.tblMenu.getValueAt(selectrow, 3);
+        Integer mid = (Integer) this.tblMenu.getValueAt(selectrow, 0);
+        String mname = (String) this.tblMenu.getValueAt(selectrow, 1);
+        String mtype = (String) this.tblMenu.getValueAt(selectrow, 2);
+        double mprice = (Double) this.tblMenu.getValueAt(selectrow, 3);
+        Integer mcooktime = (Integer) this.tblMenu.getValueAt(selectrow, 4);
 //        Integer mcount = (Integer) this.tblMenu.getValueAt(selectrow, 5);
 
         Vector vt = new Vector();
-//        vt.add(mid);
+        vt.add(mid);
         vt.add(mname);
         vt.add(mtype);
         vt.add(mprice);
@@ -397,6 +406,88 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnCreateOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateOrderActionPerformed
+        //获取信息
+        DefaultTableModel dtm = (DefaultTableModel) this.tblOrder.getModel();
+        //格式验证
+        for (int row = 0; row < dtm.getRowCount(); row++) {
+            if (this.tblOrder.getValueAt(row, 5) == null) {
+                JOptionPane.showMessageDialog(this, "请选择份数！");
+                return;
+            }
+        }
+        Boolean cidFlag = false;
+        String cid = this.txtCid.getText().trim();
+        String cusNumber = this.txtCusNumber.getText().trim();
+        if (StringUtil.checkLength(cid) == true) {
+            cidFlag = true;
+            if (StringUtil.checkDigit(cid) == false) {
+                JOptionPane.showMessageDialog(this, "顾客账号只能为数字");
+                return;
+            }
+        }
+        if (StringUtil.checkLength(cusNumber) == false) {
+            JOptionPane.showMessageDialog(this, "顾客人数不能为空");
+            return;
+        }
+        if (StringUtil.checkDigit(cusNumber) == false) {
+            JOptionPane.showMessageDialog(this, "顾客人数只能为数字");
+            return;
+        }
+        if (StringUtil.checkLength(this.txtTable.getText().trim()) == false) {
+            JOptionPane.showMessageDialog(this, "餐桌编号不能为空");
+            return;
+        }
+        if (StringUtil.checkLength(this.txtRoom.getText().trim()) == false) {
+            JOptionPane.showMessageDialog(this, "房间编号不能为空");
+            return;
+        }
+        int tid = Integer.parseInt(this.txtTable.getText());
+        int rid = Integer.parseInt(this.txtRoom.getText());
+        int cid_int = 0;
+        if (cidFlag == true) {
+            cid_int = Integer.parseInt(cid);
+        }
+        int cusNumber_int = Integer.parseInt(cusNumber);
+
+        Table t = tbiz.findByID(tid);
+        Integer seat = t.getTseat();
+        if (seat < cusNumber_int) {
+            JOptionPane.showMessageDialog(this, "桌子无法容纳该人数");
+            return;
+        }
+        //当前时间
+        Date date = new Date();
+        DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String time = format.format(date);
+
+        Order o = new Order();
+        if (cidFlag == true) {
+            o = new Order(null, cid_int, cusNumber_int, time, 1, tid, rid);
+        } else {
+            o = new Order(null, null, cusNumber_int, time, 1, tid, rid);
+        }
+        //生成订单，并获取订单对象
+        boolean result_order = obiz.add(o);
+        Order newOrder = obiz.findLastOne();
+
+        //table类的修改
+        t.setTcondition(0);
+        boolean result_table = tbiz.update(t);
+
+        for (int row = 0; row < dtm.getRowCount(); row++) {
+            Integer oid = newOrder.getOid();
+            Integer mid = (Integer) this.tblOrder.getValueAt(row, 0);
+            Integer odcount = (Integer) this.tblOrder.getValueAt(row, 5);
+            OrderDishes od = new OrderDishes(null, oid, mid, odcount, time);
+            odbiz.add(od);
+        }
+
+        if (result_order == true) {
+            JOptionPane.showMessageDialog(this, "添加预约成功");
+        } else {
+            JOptionPane.showMessageDialog(this, "添加预约失败");
+        }
+        clearUp();    
 
     }//GEN-LAST:event_btnCreateOrderActionPerformed
 
@@ -443,7 +534,7 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
         //3.显示数据
         for (Menu m : list) {
             Vector vt = new Vector();
-//            vt.add(m.getMid());
+            vt.add(m.getMid());
             vt.add(m.getMname());
             vt.add(m.getMtype());
             vt.add(m.getMprice());
@@ -472,24 +563,29 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
     public void initPurchaseTable() {
         JComboBox cobsup = new JComboBox();
         List<Integer> numberlist = new ArrayList<Integer>();
-        for (int i = 1; i < 10; i++) {
+        for (int i = 1; i < 5; i++) {
             numberlist.add(i);
         }
 
         for (Integer number : numberlist) {
             cobsup.addItem(number);
         }
-        this.tblOrder.getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor(cobsup));
+        this.tblOrder.getColumnModel().getColumn(5).setCellEditor(new DefaultCellEditor(cobsup));
 
         //隐藏两列
-        DefaultTableColumnModel dtm = (DefaultTableColumnModel) this.tblOrder.getColumnModel();
-        dtm.getColumn(2).setMinWidth(0);
-        dtm.getColumn(2).setMaxWidth(0);
-        dtm.getColumn(3).setMinWidth(0);
-        dtm.getColumn(3).setMaxWidth(0);
+        DefaultTableColumnModel dtm_order = (DefaultTableColumnModel) this.tblOrder.getColumnModel();
+        dtm_order.getColumn(0).setMinWidth(0);
+        dtm_order.getColumn(0).setMaxWidth(0);
+        dtm_order.getColumn(3).setMinWidth(0);
+        dtm_order.getColumn(3).setMaxWidth(0);
+        dtm_order.getColumn(4).setMinWidth(0);
+        dtm_order.getColumn(4).setMaxWidth(0);
+        DefaultTableColumnModel dtm_menu = (DefaultTableColumnModel) this.tblMenu.getColumnModel();
+        dtm_menu.getColumn(0).setMinWidth(0);
+        dtm_menu.getColumn(0).setMaxWidth(0);
+
     }
 
-    
     private void showOnTable_tables(List<Table> list) {
         //1.获取指定表格（tblMenu）模型
         DefaultTableModel dtm = (DefaultTableModel) this.tblTable.getModel();
@@ -506,6 +602,25 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
             vt.add(t.getTseat());
 //            vt.add(m.getMcount());
             dtm.addRow(vt);
+        }
+    }
+
+    private void clearUp() {
+        this.txtCid.setText("");
+        this.txtCusNumber.setText("");
+        this.txtTable.setText("");
+        this.txtRoom.setText("");
+        DefaultTableModel dtm_menu = (DefaultTableModel) this.tblMenu.getModel();
+        DefaultTableModel dtm_order = (DefaultTableModel) this.tblOrder.getModel();
+        DefaultTableModel dtm_table = (DefaultTableModel) this.tblTable.getModel();
+        while (dtm_menu.getRowCount() > 0) {
+            dtm_menu.removeRow(0);
+        }
+        while (dtm_order.getRowCount() > 0) {
+            dtm_order.removeRow(0);
+        }
+        while (dtm_table.getRowCount() > 0) {
+            dtm_table.removeRow(0);
         }
     }
 
