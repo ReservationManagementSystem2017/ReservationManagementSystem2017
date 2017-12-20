@@ -6,6 +6,8 @@
 package com.biz;
 
 import com.dao.BaseDao;
+import com.po.Menu;
+import java.util.List;
 
 /**
  *
@@ -14,4 +16,49 @@ import com.dao.BaseDao;
 public class MenuBizImpl implements MenuBiz{
        //引入dao
     BaseDao edao = new BaseDao();
+    
+    
+    
+    public boolean add(Menu m) {
+        String sql = "insert into t_menu values(?,?,?,?,?,?,1)";
+        //params中的参数是按顺序逐个给？赋值，所以需要注意数据表顺序
+        Object[] params = {null, m.getMname(), m.getMtype(), m.getMprice(), m.getMcooktime(),
+            m.getMcount()};
+        return edao.update(sql, params);
+    }
+
+    public boolean delete(int mid) {
+        //软删除操作
+        String sql = "update t_menu set mstate = 0 where mid = ?";
+        Object[] params = {mid};
+        return edao.update(sql, params);
+    }
+
+    public boolean update(Menu m) {
+         String sql = "update t_menu set mname=?,mtype=?,mprice=?,mcooktime=?,mcount=? where mid = ?";
+        //params中的参数是按顺序逐个给？赋值，所以需要注意数据表顺序
+        Object[] params = {m.getMname(), m.getMtype(), m.getMprice(), m.getMcooktime(),
+            m.getMcount(), m.getMid()};
+        return edao.update(sql, params);
+    }
+
+    public Menu findByID(int mid) {
+        String sql = "select * from t_menu where mid=? and mstate = 1";
+        Object[] params = {mid};
+        return (Menu) edao.get(sql, Menu.class, params);
+
+    }
+
+    public List<Menu> findAll() {
+        String sql = "select * from t_menu where mstate = 1";
+        return edao.query(sql, Menu.class);
+    }
+
+    public List<Menu> findByCondition(String condition) {
+        String sql = "select * from t_menu where mstate = 1";
+        if (condition.length() > 0) {
+            sql += " and concat(ename) like '%" + condition + "%'";
+        }
+        return edao.query(sql, Menu.class);
+    }
 }

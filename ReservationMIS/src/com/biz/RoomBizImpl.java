@@ -6,6 +6,8 @@
 package com.biz;
 
 import com.dao.BaseDao;
+import com.po.Room;
+import java.util.List;
 
 /**
  *
@@ -14,4 +16,37 @@ import com.dao.BaseDao;
 public class RoomBizImpl implements RoomBiz{
        //引入dao
     BaseDao edao = new BaseDao();
+    
+    public boolean add(Room r) {
+        String sql = "insert into t_room values(?,?,?,1)";
+        //params中的参数是按顺序逐个给？赋值，所以需要注意数据表顺序
+        Object[] params = {null, r.getRcounttable(),r.getRcondition()};
+        return edao.update(sql, params);
+    }
+
+    public boolean delete(int rid) {
+        //软删除操作
+        String sql = "update t_room set rstate = 0 where rid = ?";
+        Object[] params = {rid};
+        return edao.update(sql, params);
+    }
+
+    public boolean update(Room r) {
+         String sql = "update t_room set rcounttable=?,rcondition=? where rid = ?";
+        //params中的参数是按顺序逐个给？赋值，所以需要注意数据表顺序
+        Object[] params = {r.getRcounttable(),r.getRcondition(),r.getRid()};
+        return edao.update(sql, params);
+    }
+
+    public Room findByID(int rid) {
+        String sql = "select * from t_room where rid=? and rstate = 1";
+        Object[] params = {rid};
+        return (Room) edao.get(sql, Room.class, params);
+
+    }
+
+    public List<Room> findAll() {
+        String sql = "select * from t_room where rstate = 1";
+        return edao.query(sql, Room.class);
+    }
 }

@@ -5,10 +5,26 @@
  */
 package com.biz;
 
+import com.po.OrderDishes;
+import java.util.List;
+
 /**
  *
  * @author Administrator
  */
 public interface OrderDishesBiz {
-    
+     // 1 增加已点的具体菜
+    public boolean add(OrderDishes od);
+
+    // 2 删除已点的具体菜
+    public boolean delete(int odid);
+
+    // 3 修改已点的具体菜
+    public boolean update(OrderDishes od);
+
+    // 4 根据编号查找已点的具体菜
+    public OrderDishes findByID(int odid);
+
+    // 5 查询所有已点的具体菜
+    public List<OrderDishes> findAll();
 }

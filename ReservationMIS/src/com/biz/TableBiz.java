@@ -5,10 +5,26 @@
  */
 package com.biz;
 
+import com.po.Table;
+import java.util.List;
+
 /**
  *
  * @author Administrator
  */
 public interface TableBiz {
-    
+      // 1 增加桌子
+    public boolean add(Table t);
+
+    // 2 删除桌子
+    public boolean delete(int tid);
+
+    // 3 修改桌子
+    public boolean update(Table t);
+
+    // 4 根据编号查找桌子
+    public Table findByID(int tid);
+
+    // 5 查询所有桌子
+    public List<Table> findAll();
 }
