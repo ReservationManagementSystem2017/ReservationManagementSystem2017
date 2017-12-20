@@ -57,4 +57,11 @@ public class OrderBizImpl implements OrderBiz{
          Object[] params = {};
          return (Order) edao.get(sql, Order.class, params);
     }
+    
+//    public double getTotalPrice(int oid)
+//    {
+//        String sql = "select sum(odcount*mprice) from t_orderdishes INNER JOIN t_menu on t_orderdishes.mid = t_menu.mid where oid =? ";
+//        Object[] params = {oid};
+//        return (Double) edao.get(sql, Double.class, params);
+//    }
 }

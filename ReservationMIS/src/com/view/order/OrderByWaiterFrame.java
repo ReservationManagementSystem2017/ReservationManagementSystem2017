@@ -483,9 +483,9 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
         }
 
         if (result_order == true) {
-            JOptionPane.showMessageDialog(this, "添加预约成功");
+            JOptionPane.showMessageDialog(this, "创建订单成功");
         } else {
-            JOptionPane.showMessageDialog(this, "添加预约失败");
+            JOptionPane.showMessageDialog(this, "创建订单失败");
         }
         clearUp();    
 

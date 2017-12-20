@@ -31,4 +31,7 @@ public interface OrderBiz {
 
   //查找最后一条数据
     public Order findLastOne();
+    
+//    //返回该订单价格
+//    public double getTotalPrice(int oid);
 }
