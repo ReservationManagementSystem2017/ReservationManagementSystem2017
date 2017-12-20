@@ -5,17 +5,37 @@
  */
 package com.view.order;
 
+import com.biz.EmployeeBiz;
+import com.biz.EmployeeBizImpl;
+import com.biz.MenuBiz;
+import com.biz.MenuBizImpl;
+import com.po.Employee;
+import com.po.Menu;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+import javax.swing.DefaultCellEditor;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableColumnModel;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Administrator
  */
 public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
 
+    MenuBiz mbiz = new MenuBizImpl();
+    EmployeeBiz ebiz=new EmployeeBizImpl(); 
     /**
      * Creates new form OrderByWaiter
      */
     public OrderByWaiterFrame() {
         initComponents();
+        initPurchaseTable();
+        
     }
 
     /**
@@ -27,21 +47,250 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        txtSearch = new javax.swing.JTextField();
+        btnSearch = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblOrder = new javax.swing.JTable();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblMenu = new javax.swing.JTable();
+        lblMenu = new javax.swing.JLabel();
+        lblMenu1 = new javax.swing.JLabel();
+        btnDelete = new javax.swing.JButton();
+
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSearchKeyPressed(evt);
+            }
+        });
+
+        btnSearch.setText("查询");
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
+
+        tblOrder.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "菜品名称", "菜品类型", "菜品价格", "做菜时间", "份数"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tblOrder);
+        if (tblOrder.getColumnModel().getColumnCount() > 0) {
+            tblOrder.getColumnModel().getColumn(0).setResizable(false);
+            tblOrder.getColumnModel().getColumn(1).setResizable(false);
+            tblOrder.getColumnModel().getColumn(2).setResizable(false);
+            tblOrder.getColumnModel().getColumn(3).setResizable(false);
+        }
+
+        tblMenu.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "菜品名称", "菜品类型", "菜品价格", "做菜时间"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblMenuMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblMenu);
+        if (tblMenu.getColumnModel().getColumnCount() > 0) {
+            tblMenu.getColumnModel().getColumn(0).setResizable(false);
+            tblMenu.getColumnModel().getColumn(1).setResizable(false);
+            tblMenu.getColumnModel().getColumn(2).setResizable(false);
+            tblMenu.getColumnModel().getColumn(3).setResizable(false);
+        }
+
+        lblMenu.setText("菜单");
+
+        lblMenu1.setText("待下单");
+
+        btnDelete.setText("删除");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblMenu)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(34, 34, 34))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(43, 43, 43)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(265, 265, 265)
+                                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblMenu1))))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(43, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnSearch)
+                        .addComponent(lblMenu))
+                    .addComponent(lblMenu1, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnDelete)
+                .addGap(286, 286, 286))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void txtSearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyPressed
+        this.getRootPane().setDefaultButton(btnSearch);
+    }//GEN-LAST:event_txtSearchKeyPressed
 
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        String condition = txtSearch.getText().trim();
+        List<Menu> list = mbiz.findAll();
+        showOnTable(list);
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void tblMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMenuMouseClicked
+        int selectrow = this.tblMenu.getSelectedRow();
+//        Integer mid = (Integer) this.tblMenu.getValueAt(selectrow, 0);
+        String mname = (String) this.tblMenu.getValueAt(selectrow, 0);
+        String mtype = (String) this.tblMenu.getValueAt(selectrow, 1);
+        double mprice = (Double)this.tblMenu.getValueAt(selectrow, 2);
+        Integer mcooktime = (Integer) this.tblMenu.getValueAt(selectrow,3);
+//        Integer mcount = (Integer) this.tblMenu.getValueAt(selectrow, 5);
+        
+
+        Vector vt = new Vector();
+//        vt.add(mid);
+        vt.add(mname);
+        vt.add(mtype);
+        vt.add(mprice);
+        vt.add(mcooktime);
+//        vt.add(mcount);
+        //添加到采购表格
+        addOrderTable(vt);
+    }//GEN-LAST:event_tblMenuMouseClicked
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        int row = this.tblOrder.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, "请输入要删除的记录！");
+            return;
+        }
+        DefaultTableModel dtm = (DefaultTableModel) this.tblOrder.getModel();
+        dtm.removeRow(row);
+        row = -1;
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void showOnTable(List<Menu> list) {
+        //1.获取指定表格（tblMenu）模型
+        DefaultTableModel dtm = (DefaultTableModel) this.tblMenu.getModel();
+        //2.清空表格信息
+        while (dtm.getRowCount() > 0) {
+            dtm.removeRow(0);
+        }
+        //3.显示数据
+        for (Menu m : list) {
+            Vector vt = new Vector();
+//            vt.add(m.getMid());
+            vt.add(m.getMname());
+            vt.add(m.getMtype());
+            vt.add(m.getMprice());
+            vt.add(m.getMcooktime());
+//            vt.add(m.getMcount());
+            dtm.addRow(vt);
+        }
+    }
+    
+    //将tblMenu表中的选中信息添加到tblOrder表中
+    private void addOrderTable(Vector vt) {
+        boolean flag = false;
+        DefaultTableModel dtm = (DefaultTableModel) this.tblOrder.getModel();
+        for (int i = 0; i < dtm.getRowCount(); i++) {
+            if (vt.get(0) == tblOrder.getValueAt(i, 0)) {
+                flag = true;
+                break;
+            }
+        }
+        if (flag == false) {
+            dtm.addRow(vt);
+        }
+    }
+    
+    //将组合框添加到表中某列，并对组合框添加相应的items
+    public void initPurchaseTable() {
+        JComboBox cobsup = new JComboBox();
+        List<Integer> numberlist = new ArrayList<Integer>() ;
+        for(int i=1;i<10;i++)
+        {
+            numberlist.add(i);
+        }
+        
+        for (Integer number : numberlist) {
+            cobsup.addItem(number);
+        }
+        this.tblOrder.getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor(cobsup));
+        
+        //隐藏两列
+         DefaultTableColumnModel  dtm = (DefaultTableColumnModel ) this.tblOrder.getColumnModel();
+         dtm.getColumn(2).setMinWidth(0);  
+         dtm.getColumn(2).setMaxWidth(0);  
+         dtm.getColumn(3).setMinWidth(0);  
+         dtm.getColumn(3).setMaxWidth(0);  
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnSearch;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel lblMenu;
+    private javax.swing.JLabel lblMenu1;
+    private javax.swing.JTable tblMenu;
+    private javax.swing.JTable tblOrder;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }

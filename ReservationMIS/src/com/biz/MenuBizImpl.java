@@ -57,7 +57,7 @@ public class MenuBizImpl implements MenuBiz{
     public List<Menu> findByCondition(String condition) {
         String sql = "select * from t_menu where mstate = 1";
         if (condition.length() > 0) {
-            sql += " and concat(ename) like '%" + condition + "%'";
+            sql += " and concat(mname) like '%" + condition + "%'";
         }
         return edao.query(sql, Menu.class);
     }

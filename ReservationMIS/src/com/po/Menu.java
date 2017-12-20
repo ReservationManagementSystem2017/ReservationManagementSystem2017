@@ -5,6 +5,8 @@
  */
 package com.po;
 
+import java.math.BigDecimal;
+
 /**
  *
  * @author Administrator
