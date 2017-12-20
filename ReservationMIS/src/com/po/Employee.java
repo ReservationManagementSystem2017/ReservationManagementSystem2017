@@ -16,13 +16,13 @@ public class Employee {
     private Integer eage;//员工年龄
     private double ewage;//员工工资
     private String ephone;//员工联系方式
-    private Integer etype;//员工身份，1服务员，2厨师，3采购员
+    private String etype;//员工身份，1服务员，2厨师，3采购员
     //state,员工状态，0销毁，1工作，2休假
 
     public Employee() {
     }
 
-    public Employee(int eid, String ename, String esex, Integer eage, double ewage, String ephone, Integer etype) {
+    public Employee(Integer eid, String ename, String esex, Integer eage, double ewage, String ephone, String etype) {
         this.eid = eid;
         this.ename = ename;
         this.esex = esex;
@@ -56,7 +56,7 @@ public class Employee {
         this.esex = esex;
     }
 
-    public int getEage() {
+    public Integer getEage() {
         return eage;
     }
 
@@ -80,11 +80,11 @@ public class Employee {
         this.ephone = ephone;
     }
 
-    public int getEtype() {
+    public String getEtype() {
         return etype;
     }
 
-    public void setEtype(Integer etype) {
+    public void setEtype(String etype) {
         this.etype = etype;
     }
     
