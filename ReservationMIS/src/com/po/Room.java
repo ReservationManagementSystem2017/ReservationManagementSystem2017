@@ -11,14 +11,16 @@ package com.po;
  */
 public class Room {
     private Integer rid;//房间id
+    private String rname;
     private Integer rcounttable;//房间餐桌数
     private Integer rcondition;//房间使用情况
 
     public Room() {
     }
 
-    public Room(Integer rid, Integer rcounttable, Integer rcondition) {
+    public Room(Integer rid, String rname, Integer rcounttable, Integer rcondition) {
         this.rid = rid;
+        this.rname = rname;
         this.rcounttable = rcounttable;
         this.rcondition = rcondition;
     }
@@ -31,6 +33,14 @@ public class Room {
         this.rid = rid;
     }
 
+    public String getRname(){
+        return rname;
+    }    
+    
+    public void setRname(String rname){
+        this.rname = rname;
+    }
+    
     public Integer getRcounttable() {
         return rcounttable;
     }
