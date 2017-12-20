@@ -23,7 +23,9 @@ public interface RoomBiz {
 	//5.查询所有房间
 	public List<Room> findAll();
 	//6.模糊查询
+        public List<Room> findByCondition(String conditions);
 	/*public List<Product> findByCondition (String condition);
         public List<Product> findByCondition(String conditions,String type,Integer proid);*/
 
 }
+

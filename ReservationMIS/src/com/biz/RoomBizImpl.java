@@ -41,14 +41,21 @@ public class RoomBizImpl implements RoomBiz{
 
     @Override
     public Room findByID(int rid) {
-        String sql = "select *from t_room where rid = ? and state = 1";
+        String sql = "select *from t_room where rid = ? and rstate = 1";
 	Object[] params = {rid};	
 	return (Room)rdao.get(sql, Room.class, params);
     }
 
     @Override
     public List<Room> findAll() {
-        String sql = "select *from t_room where state = 1";
+        String sql = "select *from t_room where rstate = 1";
 	return rdao.query(sql, Room.class);
+    }
+    public List<Room> findByCondition(String conditions) {
+        String sql = "select * from t_room where rstate=1 ";
+        if(conditions !=null && conditions.length()>0){
+            sql +=" and rname) like '%"+conditions+"%'";
+        }
+        return rdao.query(sql, Room.class);
     }
 }

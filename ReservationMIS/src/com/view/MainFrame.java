@@ -15,6 +15,7 @@ import com.util.LocationUtil;
 import com.view.manage.CustomerManageFrame;
 import com.view.manage.DiscountManageFrame;
 import com.view.manage.MenuManageFrame;
+import com.view.manage.RoomManageFrame;
 import com.view.manage.RoomOrTableManageFrame;
 import com.view.order.BillByWaiterFrame;
 import com.view.order.OrderDishesByCookFrame;
@@ -33,7 +34,7 @@ public class MainFrame extends javax.swing.JFrame {
      public User user = null;//设置静态值对象，供界面传值用
     public static String permission = null;
     /**
-     * Creates new form MainFrame
+     * Createsd new form MainFrame
      */
     public MainFrame() {
         initComponents();
@@ -68,8 +69,9 @@ public class MainFrame extends javax.swing.JFrame {
         itemEmployeeManage = new javax.swing.JMenuItem();
         itemCustomerManage = new javax.swing.JMenuItem();
         itemDiscountManage = new javax.swing.JMenuItem();
-        itemMenuManage = new javax.swing.JMenuItem();
+        itemManuManage = new javax.swing.JMenuItem();
         itemRoomOrTableManage = new javax.swing.JMenuItem();
+        itemRoomManage = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -147,13 +149,13 @@ public class MainFrame extends javax.swing.JFrame {
         });
         mnuManager.add(itemDiscountManage);
 
-        itemMenuManage.setText("菜单管理");
-        itemMenuManage.addActionListener(new java.awt.event.ActionListener() {
+        itemManuManage.setText("菜单管理");
+        itemManuManage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemMenuManageActionPerformed(evt);
+                itemManuManageActionPerformed(evt);
             }
         });
-        mnuManager.add(itemMenuManage);
+        mnuManager.add(itemManuManage);
 
         itemRoomOrTableManage.setText("房间与餐桌管理");
         itemRoomOrTableManage.addActionListener(new java.awt.event.ActionListener() {
@@ -162,6 +164,14 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         mnuManager.add(itemRoomOrTableManage);
+
+        itemRoomManage.setText("房间管理");
+        itemRoomManage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemRoomManageActionPerformed(evt);
+            }
+        });
+        mnuManager.add(itemRoomManage);
 
         jMenuBar1.add(mnuManager);
 
@@ -193,9 +203,9 @@ public class MainFrame extends javax.swing.JFrame {
         showFrame(CustomerManageFrame.class);
     }//GEN-LAST:event_itemCustomerManageActionPerformed
 
-    private void itemMenuManageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemMenuManageActionPerformed
+    private void itemManuManageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemManuManageActionPerformed
        showFrame(MenuManageFrame.class);
-    }//GEN-LAST:event_itemMenuManageActionPerformed
+    }//GEN-LAST:event_itemManuManageActionPerformed
 
     private void itemDiscountManageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemDiscountManageActionPerformed
         showFrame(DiscountManageFrame.class);
@@ -231,6 +241,10 @@ public class MainFrame extends javax.swing.JFrame {
     private void itemOrderDishesByWaiterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemOrderDishesByWaiterActionPerformed
      showFrame(OrderDishesByWaiterFrame.class);
     }//GEN-LAST:event_itemOrderDishesByWaiterActionPerformed
+
+    private void itemRoomManageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemRoomManageActionPerformed
+        showFrame(RoomManageFrame.class);
+    }//GEN-LAST:event_itemRoomManageActionPerformed
 
     /**
      * @param args the command line arguments
@@ -316,10 +330,11 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemDiscountManage;
     private javax.swing.JMenuItem itemEmployeeManage;
     private javax.swing.JMenuItem itemLogin;
-    private javax.swing.JMenuItem itemMenuManage;
+    private javax.swing.JMenuItem itemManuManage;
     private javax.swing.JMenuItem itemOrderByWaiter;
     private javax.swing.JMenuItem itemOrderDishesByCook;
     private javax.swing.JMenuItem itemOrderDishesByWaiter;
+    private javax.swing.JMenuItem itemRoomManage;
     private javax.swing.JMenuItem itemRoomOrTableManage;
     private javax.swing.JMenuBar jMenuBar1;
     private com.view.MainDeskPaneDell mainDeskPaneDell;
