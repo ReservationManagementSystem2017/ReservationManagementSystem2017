@@ -27,4 +27,7 @@ public interface TableBiz {
 
     // 5 查询所有桌子
     public List<Table> findAll();
+    
+    // 5 查询所有状态空闲的桌子
+    public List<Table> findByTcondition();
 }

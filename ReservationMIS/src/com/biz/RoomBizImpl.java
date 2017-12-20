@@ -7,6 +7,7 @@ package com.biz;
 
 import com.dao.BaseDao;
 import com.po.Room;
+import com.po.Table;
 import java.util.List;
 
 /**
@@ -48,5 +49,11 @@ public class RoomBizImpl implements RoomBiz{
     public List<Room> findAll() {
         String sql = "select * from t_room where rstate = 1";
         return edao.query(sql, Room.class);
+    }
+    
+    
+      public List<Room> findByRcondition() {
+        String sql = "select * from t_room where rstate = 1 and rcondition = 1";
+        return edao.query(sql, Table.class);
     }
 }

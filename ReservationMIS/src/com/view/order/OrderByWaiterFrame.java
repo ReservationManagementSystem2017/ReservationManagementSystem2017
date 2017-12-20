@@ -9,8 +9,17 @@ import com.biz.EmployeeBiz;
 import com.biz.EmployeeBizImpl;
 import com.biz.MenuBiz;
 import com.biz.MenuBizImpl;
+import com.biz.OrderBiz;
+import com.biz.OrderBizImpl;
+import com.biz.RoomBiz;
+import com.biz.RoomBizImpl;
+import com.biz.TableBiz;
+import com.biz.TableBizImpl;
 import com.po.Employee;
 import com.po.Menu;
+import com.po.Order;
+import com.po.Room;
+import com.po.Table;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,14 +37,17 @@ import javax.swing.table.DefaultTableModel;
 public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
 
     MenuBiz mbiz = new MenuBizImpl();
-    EmployeeBiz ebiz=new EmployeeBizImpl(); 
+    OrderBiz obiz = new OrderBizImpl();
+    TableBiz tbiz = new TableBizImpl();
+    RoomBiz rbiz = new RoomBizImpl();
+
     /**
      * Creates new form OrderByWaiter
      */
     public OrderByWaiterFrame() {
         initComponents();
         initPurchaseTable();
-        
+
     }
 
     /**
@@ -56,6 +68,18 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
         lblMenu = new javax.swing.JLabel();
         lblMenu1 = new javax.swing.JLabel();
         btnDelete = new javax.swing.JButton();
+        btnCreateOrder = new javax.swing.JButton();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        tblTable = new javax.swing.JTable();
+        btnUpdate = new javax.swing.JButton();
+        lblCid = new javax.swing.JLabel();
+        txtCid = new javax.swing.JTextField();
+        lblCusNumber = new javax.swing.JLabel();
+        txtCusNumber = new javax.swing.JTextField();
+        lblTable = new javax.swing.JLabel();
+        txtTable = new javax.swing.JTextField();
+        lblRoom = new javax.swing.JLabel();
+        txtRoom = new javax.swing.JTextField();
 
         txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -92,6 +116,7 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
             tblOrder.getColumnModel().getColumn(1).setResizable(false);
             tblOrder.getColumnModel().getColumn(2).setResizable(false);
             tblOrder.getColumnModel().getColumn(3).setResizable(false);
+            tblOrder.getColumnModel().getColumn(4).setHeaderValue("份数");
         }
 
         tblMenu.setModel(new javax.swing.table.DefaultTableModel(
@@ -134,6 +159,102 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
             }
         });
 
+        btnCreateOrder.setText("生成订单");
+        btnCreateOrder.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCreateOrderActionPerformed(evt);
+            }
+        });
+
+        tblTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "桌子编号", "房间编号", "座位数"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblTableMouseClicked(evt);
+            }
+        });
+        jScrollPane5.setViewportView(tblTable);
+        if (tblTable.getColumnModel().getColumnCount() > 0) {
+            tblTable.getColumnModel().getColumn(0).setResizable(false);
+            tblTable.getColumnModel().getColumn(1).setResizable(false);
+            tblTable.getColumnModel().getColumn(2).setResizable(false);
+        }
+
+        btnUpdate.setText("刷新");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+
+        lblCid.setFont(new java.awt.Font("微软雅黑 Light", 1, 14)); // NOI18N
+        lblCid.setForeground(new java.awt.Color(204, 0, 51));
+        lblCid.setText("顾客编号");
+        lblCid.setToolTipText("员工姓名须由2-4个中文组成");
+        lblCid.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
+
+        txtCid.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
+        txtCid.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCidKeyPressed(evt);
+            }
+        });
+
+        lblCusNumber.setFont(new java.awt.Font("微软雅黑 Light", 1, 14)); // NOI18N
+        lblCusNumber.setForeground(new java.awt.Color(204, 0, 51));
+        lblCusNumber.setText("顾客人数");
+        lblCusNumber.setToolTipText("员工姓名须由2-4个中文组成");
+        lblCusNumber.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
+
+        txtCusNumber.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
+        txtCusNumber.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCusNumberKeyPressed(evt);
+            }
+        });
+
+        lblTable.setFont(new java.awt.Font("微软雅黑 Light", 1, 14)); // NOI18N
+        lblTable.setForeground(new java.awt.Color(204, 0, 51));
+        lblTable.setText("桌子编号");
+        lblTable.setToolTipText("员工姓名须由2-4个中文组成");
+        lblTable.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
+
+        txtTable.setEditable(false);
+        txtTable.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
+        txtTable.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtTableKeyPressed(evt);
+            }
+        });
+
+        lblRoom.setFont(new java.awt.Font("微软雅黑 Light", 1, 14)); // NOI18N
+        lblRoom.setForeground(new java.awt.Color(204, 0, 51));
+        lblRoom.setText("房间编号");
+        lblRoom.setToolTipText("员工姓名须由2-4个中文组成");
+        lblRoom.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
+
+        txtRoom.setEditable(false);
+        txtRoom.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
+        txtRoom.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtRoomKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -141,7 +262,6 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(layout.createSequentialGroup()
@@ -157,13 +277,37 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(265, 265, 265)
                                 .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lblMenu1))))
+                            .addComponent(lblMenu1)))
+                    .addComponent(btnCreateOrder)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 372, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnUpdate)
+                        .addGap(52, 52, 52)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblCusNumber)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtCusNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblCid)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtCid, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblTable)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtTable, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblRoom)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(43, Short.MAX_VALUE)
+                .addContainerGap(88, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -174,9 +318,38 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnDelete)
-                .addGap(286, 286, 286))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnDelete)
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtCid, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCid))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtCusNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCusNumber))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtTable, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblTable))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblRoom))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(39, 39, 39)
+                                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 188, Short.MAX_VALUE)
+                                .addComponent(btnUpdate)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addComponent(btnCreateOrder)
+                .addGap(24, 24, 24))
         );
 
         pack();
@@ -197,10 +370,9 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
 //        Integer mid = (Integer) this.tblMenu.getValueAt(selectrow, 0);
         String mname = (String) this.tblMenu.getValueAt(selectrow, 0);
         String mtype = (String) this.tblMenu.getValueAt(selectrow, 1);
-        double mprice = (Double)this.tblMenu.getValueAt(selectrow, 2);
-        Integer mcooktime = (Integer) this.tblMenu.getValueAt(selectrow,3);
+        double mprice = (Double) this.tblMenu.getValueAt(selectrow, 2);
+        Integer mcooktime = (Integer) this.tblMenu.getValueAt(selectrow, 3);
 //        Integer mcount = (Integer) this.tblMenu.getValueAt(selectrow, 5);
-        
 
         Vector vt = new Vector();
 //        vt.add(mid);
@@ -224,6 +396,43 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
         row = -1;
     }//GEN-LAST:event_btnDeleteActionPerformed
 
+    private void btnCreateOrderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateOrderActionPerformed
+
+    }//GEN-LAST:event_btnCreateOrderActionPerformed
+
+    private void txtCidKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCidKeyPressed
+
+    }//GEN-LAST:event_txtCidKeyPressed
+
+    private void txtCusNumberKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCusNumberKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCusNumberKeyPressed
+
+    private void txtTableKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTableKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtTableKeyPressed
+
+    private void txtRoomKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRoomKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtRoomKeyPressed
+
+    private void tblTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTableMouseClicked
+        //鼠标选中某行，该行信息显示到输入面板
+        int row = this.tblTable.getSelectedRow();
+        //根据row获取每列的值
+        this.txtTable.setText(this.tblTable.getValueAt(row, 0) + "");
+        this.txtRoom.setText(this.tblTable.getValueAt(row, 1) + "");
+
+
+    }//GEN-LAST:event_tblTableMouseClicked
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+
+        List<Table> tlist = tbiz.findByTcondition();
+//        List<Room> rlist = rbiz.findByRcondition();
+        showOnTable_tables(tlist);
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
     private void showOnTable(List<Menu> list) {
         //1.获取指定表格（tblMenu）模型
         DefaultTableModel dtm = (DefaultTableModel) this.tblMenu.getModel();
@@ -243,7 +452,7 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
             dtm.addRow(vt);
         }
     }
-    
+
     //将tblMenu表中的选中信息添加到tblOrder表中
     private void addOrderTable(Vector vt) {
         boolean flag = false;
@@ -258,39 +467,69 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
             dtm.addRow(vt);
         }
     }
-    
+
     //将组合框添加到表中某列，并对组合框添加相应的items
     public void initPurchaseTable() {
         JComboBox cobsup = new JComboBox();
-        List<Integer> numberlist = new ArrayList<Integer>() ;
-        for(int i=1;i<10;i++)
-        {
+        List<Integer> numberlist = new ArrayList<Integer>();
+        for (int i = 1; i < 10; i++) {
             numberlist.add(i);
         }
-        
+
         for (Integer number : numberlist) {
             cobsup.addItem(number);
         }
         this.tblOrder.getColumnModel().getColumn(4).setCellEditor(new DefaultCellEditor(cobsup));
-        
+
         //隐藏两列
-         DefaultTableColumnModel  dtm = (DefaultTableColumnModel ) this.tblOrder.getColumnModel();
-         dtm.getColumn(2).setMinWidth(0);  
-         dtm.getColumn(2).setMaxWidth(0);  
-         dtm.getColumn(3).setMinWidth(0);  
-         dtm.getColumn(3).setMaxWidth(0);  
+        DefaultTableColumnModel dtm = (DefaultTableColumnModel) this.tblOrder.getColumnModel();
+        dtm.getColumn(2).setMinWidth(0);
+        dtm.getColumn(2).setMaxWidth(0);
+        dtm.getColumn(3).setMinWidth(0);
+        dtm.getColumn(3).setMaxWidth(0);
     }
+
     
-    
+    private void showOnTable_tables(List<Table> list) {
+        //1.获取指定表格（tblMenu）模型
+        DefaultTableModel dtm = (DefaultTableModel) this.tblTable.getModel();
+        //2.清空表格信息
+        while (dtm.getRowCount() > 0) {
+            dtm.removeRow(0);
+        }
+        //3.显示数据
+        for (Table t : list) {
+            Vector vt = new Vector();
+//            vt.add(m.getMid());
+            vt.add(t.getTid());
+            vt.add(t.getRid());
+            vt.add(t.getTseat());
+//            vt.add(m.getMcount());
+            dtm.addRow(vt);
+        }
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCreateOrder;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSearch;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JLabel lblCid;
+    private javax.swing.JLabel lblCusNumber;
     private javax.swing.JLabel lblMenu;
     private javax.swing.JLabel lblMenu1;
+    private javax.swing.JLabel lblRoom;
+    private javax.swing.JLabel lblTable;
     private javax.swing.JTable tblMenu;
     private javax.swing.JTable tblOrder;
+    private javax.swing.JTable tblTable;
+    private javax.swing.JTextField txtCid;
+    private javax.swing.JTextField txtCusNumber;
+    private javax.swing.JTextField txtRoom;
     private javax.swing.JTextField txtSearch;
+    private javax.swing.JTextField txtTable;
     // End of variables declaration//GEN-END:variables
 }

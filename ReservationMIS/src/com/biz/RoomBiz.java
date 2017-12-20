@@ -6,6 +6,7 @@
 package com.biz;
 
 import com.po.Room;
+import com.po.Table;
 import java.util.List;
 
 /**
@@ -27,4 +28,7 @@ public interface RoomBiz {
 
     // 5 查询所有房间
     public List<Room> findAll();
+    
+     // 5 查询所有状态空闲的房间
+    public List<Room> findByRcondition();
 }

@@ -49,4 +49,9 @@ public class TableBizImpl implements TableBiz{
         String sql = "select * from t_tables where tstate = 1";
         return edao.query(sql, Table.class);
     }
+    
+     public List<Table> findByTcondition() {
+        String sql = "select * from t_tables where tstate = 1 and tcondition = 1";
+        return edao.query(sql, Table.class);
+    }
 }
