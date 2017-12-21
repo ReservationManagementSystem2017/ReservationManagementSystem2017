@@ -89,6 +89,8 @@ public class BillByWaiterFrame extends javax.swing.JInternalFrame {
         lblDiscount = new javax.swing.JLabel();
         lblDiscount2 = new javax.swing.JLabel();
 
+        setClosable(true);
+
         btnSearch.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         btnSearch.setForeground(new java.awt.Color(51, 51, 51));
         btnSearch.setText("Search");

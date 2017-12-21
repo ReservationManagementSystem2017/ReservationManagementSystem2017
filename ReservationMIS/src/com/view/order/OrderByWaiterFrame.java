@@ -88,6 +88,8 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
         lblRoom = new javax.swing.JLabel();
         txtRoom = new javax.swing.JTextField();
 
+        setClosable(true);
+
         txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txtSearchKeyPressed(evt);
@@ -519,7 +521,7 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
 
-        List<Table> tlist = tbiz.findByTcondition();
+        List<Table> tlist = tbiz.findEmpty();
 //        List<Room> rlist = rbiz.findByRcondition();
         showOnTable_tables(tlist);
     }//GEN-LAST:event_btnUpdateActionPerformed

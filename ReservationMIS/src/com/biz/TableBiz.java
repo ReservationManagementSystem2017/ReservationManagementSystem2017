@@ -23,7 +23,7 @@ public interface TableBiz {
     public boolean update(Table t);
 
     // 4 根据编号查找桌子
-    public Table findByID(int tid);
+    public Table findByID(Integer tid);
 
     // 5 查询所有桌子
     public List<Table> findAll();

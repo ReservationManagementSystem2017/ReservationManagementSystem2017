@@ -38,7 +38,7 @@ public class TableBizImpl implements TableBiz{
         return edao.update(sql, params);
     }
 
-    public Table findByID(int tid) {
+    public Table findByID(Integer tid) {
         String sql = "select * from t_tables where tid=? and tstate = 1";
         Object[] params = {tid};
         return (Table) edao.get(sql, Table.class, params);
@@ -50,12 +50,9 @@ public class TableBizImpl implements TableBiz{
         return edao.query(sql, Table.class);
     }
     
-     public List<Table> findEmpty(String conditions) {
-        String sql = "select * from t_tables where tstate=1 ";
-        if(conditions !=null && conditions.length()>0){
-            sql +=" and tname) like '%"+conditions+"%'";
-        }
+     public List<Table> findEmpty() {
+        String sql = "select * from t_tables where tstate=1 and tcondition=1";
         return edao.query(sql, Table.class);
     }
-    }
+    
 }
