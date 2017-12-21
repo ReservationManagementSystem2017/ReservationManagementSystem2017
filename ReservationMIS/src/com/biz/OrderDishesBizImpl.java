@@ -49,6 +49,13 @@ public class OrderDishesBizImpl implements OrderDishesBiz{
         String sql = "select * from t_orderdishes where odstate = 1";
         return edao.query(sql, OrderDishes.class);
     }
+    //查找已经做好的菜
+     public List<OrderDishes> findFinshed(){
+            String sql="select * from t_orderdishes where odstate=2";
+             return edao.query(sql, OrderDishes.class);
+            
+        }
+
     
     public List<OrderDishes> findByOid(int oid)
     {
@@ -57,4 +64,15 @@ public class OrderDishesBizImpl implements OrderDishesBiz{
         return edao.query(sql, OrderDishes.class,params);
         
     }
+     //上菜
+    public boolean Shangcai(OrderDishes od){
+        
+         String sql = "update t_orderdishes set odstate = 3 where odid =  ?";
+        //params中的参数是按顺序逐个给？赋值，所以需要注意数据表顺序
+        Object[] params = {od.getOdid()};
+       return edao.update(sql, params);
+        
+    }
+            
+    
 }
