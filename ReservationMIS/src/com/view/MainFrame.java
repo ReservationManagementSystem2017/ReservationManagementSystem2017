@@ -16,6 +16,7 @@ import com.view.manage.CustomerManageFrame;
 import com.view.manage.DiscountManageFrame;
 import com.view.manage.MenuManageFrame;
 import com.view.manage.RoomManageFrame;
+import com.view.manage.TableManageFrame;
 import com.view.manage.RoomOrTableManageFrame;
 import com.view.order.BillByWaiterFrame;
 import com.view.order.OrderDishesByCookFrame;
@@ -175,6 +176,11 @@ public class MainFrame extends javax.swing.JFrame {
         mnuManager.add(itemRoomManage);
 
         itemTableManage.setText("餐桌管理");
+        itemTableManage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemTableManageActionPerformed(evt);
+            }
+        });
         mnuManager.add(itemTableManage);
 
         jMenuBar1.add(mnuManager);
@@ -249,6 +255,10 @@ public class MainFrame extends javax.swing.JFrame {
     private void itemRoomManageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemRoomManageActionPerformed
         showFrame(RoomManageFrame.class);
     }//GEN-LAST:event_itemRoomManageActionPerformed
+
+    private void itemTableManageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemTableManageActionPerformed
+        showFrame(TableManageFrame.class);
+    }//GEN-LAST:event_itemTableManageActionPerformed
 
     /**
      * @param args the command line arguments
