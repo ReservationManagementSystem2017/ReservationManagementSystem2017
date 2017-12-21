@@ -50,8 +50,12 @@ public class TableBizImpl implements TableBiz{
         return edao.query(sql, Table.class);
     }
     
-     public List<Table> findByTcondition() {
-        String sql = "select * from t_tables where tstate = 1 and tcondition = 1";
+     public List<Table> findEmpty(String conditions) {
+        String sql = "select * from t_tables where tstate=1 ";
+        if(conditions !=null && conditions.length()>0){
+            sql +=" and tname) like '%"+conditions+"%'";
+        }
         return edao.query(sql, Table.class);
+    }
     }
 }

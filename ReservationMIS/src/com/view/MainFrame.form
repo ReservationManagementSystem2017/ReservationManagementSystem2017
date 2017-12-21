@@ -111,6 +111,11 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="itemRoomManageActionPerformed"/>
               </Events>
             </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="itemTableManage">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&#x9910;&#x684c;&#x7ba1;&#x7406;"/>
+              </Properties>
+            </MenuItem>
           </SubComponents>
         </Menu>
       </SubComponents>

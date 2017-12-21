@@ -72,6 +72,7 @@ public class MainFrame extends javax.swing.JFrame {
         itemManuManage = new javax.swing.JMenuItem();
         itemRoomOrTableManage = new javax.swing.JMenuItem();
         itemRoomManage = new javax.swing.JMenuItem();
+        itemTableManage = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -172,6 +173,9 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         mnuManager.add(itemRoomManage);
+
+        itemTableManage.setText("餐桌管理");
+        mnuManager.add(itemTableManage);
 
         jMenuBar1.add(mnuManager);
 
@@ -336,6 +340,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemOrderDishesByWaiter;
     private javax.swing.JMenuItem itemRoomManage;
     private javax.swing.JMenuItem itemRoomOrTableManage;
+    private javax.swing.JMenuItem itemTableManage;
     private javax.swing.JMenuBar jMenuBar1;
     private com.view.MainDeskPaneDell mainDeskPaneDell;
     private javax.swing.JMenu mnuManager;
