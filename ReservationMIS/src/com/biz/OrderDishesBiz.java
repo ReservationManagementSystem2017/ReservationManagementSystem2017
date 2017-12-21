@@ -27,4 +27,7 @@ public interface OrderDishesBiz {
 
     // 5 查询所有已点的具体菜
     public List<OrderDishes> findAll();
+    
+    //根据OID去寻找所有结果
+    public List<OrderDishes> findByOid(int oid);
 }

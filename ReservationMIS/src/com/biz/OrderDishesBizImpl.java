@@ -50,4 +50,11 @@ public class OrderDishesBizImpl implements OrderDishesBiz{
         return edao.query(sql, OrderDishes.class);
     }
     
+    public List<OrderDishes> findByOid(int oid)
+    {
+        String sql = "select * from t_orderdishes where oid = ?";
+        Object[] params = {oid};
+        return edao.query(sql, OrderDishes.class,params);
+        
+    }
 }
