@@ -17,6 +17,8 @@ import com.biz.OrderBiz;
 import com.biz.OrderBizImpl;
 import com.biz.OrderDishesBiz;
 import com.biz.OrderDishesBizImpl;
+import com.biz.RoomBiz;
+import com.biz.RoomBizImpl;
 import com.biz.TableBiz;
 import com.biz.TableBizImpl;
 import com.po.Bill;
@@ -25,6 +27,7 @@ import com.po.Discount;
 import com.po.Menu;
 import com.po.Order;
 import com.po.OrderDishes;
+import com.po.Room;
 import com.po.Table;
 import com.util.StringUtil;
 import java.text.DateFormat;
@@ -47,6 +50,7 @@ public class BillByWaiterFrame extends javax.swing.JInternalFrame {
     CustomerBiz cbiz = new CustomerBizImpl();
     BillBiz bbiz = new BillBizImpl();
     TableBiz tbiz = new TableBizImpl();
+    RoomBiz rbiz = new RoomBizImpl();
     
     /**
      * Creates new form BillByWaiterFrame
@@ -481,6 +485,12 @@ public class BillByWaiterFrame extends javax.swing.JInternalFrame {
         Table t = tbiz.findByID(tid);
         t.setTcondition(1);
         tbiz.update(t);
+        
+        //房间中可用桌子数增加1
+        Room room = rbiz.findByID(tid);
+        int curcondition = room.getRcondition();
+        room.setRcondition(curcondition-1);
+        boolean result_room = rbiz.update(room);
         
         
         if (result == true) {
