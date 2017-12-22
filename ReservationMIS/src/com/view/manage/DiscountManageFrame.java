@@ -25,6 +25,7 @@ public class DiscountManageFrame extends javax.swing.JInternalFrame {
      * Creates new form DiscountManageFrame
      */
     DiscountBiz dbiz = new DiscountBizImpl();
+    int deltid;
     public DiscountManageFrame() {
         initComponents();
     }
@@ -49,6 +50,8 @@ public class DiscountManageFrame extends javax.swing.JInternalFrame {
         txtMeet = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         txtDecrease = new javax.swing.JTextField();
+        btnAdd = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
 
         setClosable(true);
         setResizable(true);
@@ -62,6 +65,11 @@ public class DiscountManageFrame extends javax.swing.JInternalFrame {
                 "规则编号", "规则类型", "规则描述"
             }
         ));
+        tblDiscount.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDiscountMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tblDiscount);
         if (tblDiscount.getColumnModel().getColumnCount() > 0) {
             tblDiscount.getColumnModel().getColumn(0).setResizable(false);
@@ -90,9 +98,29 @@ public class DiscountManageFrame extends javax.swing.JInternalFrame {
 
         jLabel2.setText("折扣额度");
 
+        txtDiscount.setEditable(false);
+
         jLabel3.setText("满");
 
+        txtMeet.setEditable(false);
+
         jLabel4.setText("减");
+
+        txtDecrease.setEditable(false);
+
+        btnAdd.setText("添加");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
+
+        btnDelete.setText("删除");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -103,30 +131,35 @@ public class DiscountManageFrame extends javax.swing.JInternalFrame {
                 .addComponent(btnSearch)
                 .addGap(43, 43, 43))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 632, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(57, 57, 57)
+                        .addGap(149, 149, 149)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(47, 47, 47)
+                        .addComponent(cbType, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(217, 217, 217)
+                                .addComponent(btnAdd)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnDelete))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(58, 58, 58)
                                 .addComponent(jLabel2)
-                                .addGap(44, 44, 44)
+                                .addGap(43, 43, 43)
                                 .addComponent(txtDiscount, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(140, 140, 140)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtMeet, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtDecrease, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(47, 47, 47)
-                                .addComponent(cbType, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(168, 168, 168)))))
+                                .addComponent(jLabel3)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtMeet, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtDecrease, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -136,9 +169,9 @@ public class DiscountManageFrame extends javax.swing.JInternalFrame {
                 .addGap(10, 10, 10)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -147,7 +180,11 @@ public class DiscountManageFrame extends javax.swing.JInternalFrame {
                     .addComponent(txtMeet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
                     .addComponent(txtDecrease, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAdd)
+                    .addComponent(btnDelete))
+                .addContainerGap())
         );
 
         pack();
@@ -159,8 +196,96 @@ public class DiscountManageFrame extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void cbTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTypeActionPerformed
-        
+        String type =(String) this.cbType.getSelectedItem();
+        if (type.equals("折扣")){
+            this.txtDiscount.setEditable(true);
+            this.txtMeet.setEditable(false);
+            this.txtDecrease.setEditable(false);
+            this.txtDiscount.setText("");
+            this.txtMeet.setText("");
+            this.txtDecrease.setText("");
+        }
+        else if(type.equals("满减")){
+            this.txtDiscount.setEditable(false);
+            this.txtMeet.setEditable(true);
+            this.txtDecrease.setEditable(true);
+            this.txtDiscount.setText("");
+            this.txtMeet.setText("");
+            this.txtDecrease.setText("");
+        }
     }//GEN-LAST:event_cbTypeActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        String dct = this.txtDiscount.getText().trim();
+        String mt = this.txtMeet.getText().trim();
+        String dcs = this.txtDecrease.getText().trim();
+        
+        String type =(String) this.cbType.getSelectedItem();
+        Discount d = new Discount();
+        if(type.equals("折扣")){
+            if(StringUtil.checkLength(dct)==false){
+            JOptionPane.showMessageDialog(this, "折扣额度不能为空");
+            return ;
+            }
+            //组合对象
+            Double d_dcs = Double.valueOf(dct);
+            d = new Discount(null,1,d_dcs,0,0);
+        }
+        else if(type.equals("满减")){
+            if(StringUtil.checkLength(dcs)==false||StringUtil.checkLength(mt)==false){
+            JOptionPane.showMessageDialog(this, "满减不能为空");
+            return ;
+        }
+        d = new Discount(null,2,0,Double.valueOf(mt),Double.valueOf(dcs));
+
+        }
+        //调用业务类
+        boolean result = dbiz.add(d);
+        if(result == true){
+            JOptionPane.showMessageDialog(this,"添加成功");
+            List<Discount> list = dbiz.findAll();
+            //显示list中的信息
+            showOnTable(list);
+        }else{
+            JOptionPane.showMessageDialog(this,"添加失败");
+        }
+        //清空面板信息
+        clearInput();
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        int answer = JOptionPane.showConfirmDialog(this, "您确定要删除吗？");
+        if(answer == JOptionPane.YES_OPTION){
+            // 删除
+            //调用业务
+            boolean result = dbiz.delete(deltid);
+            if(result == true){
+                JOptionPane.showMessageDialog(this, "删除成功");
+            }else{
+                JOptionPane.showMessageDialog(this, "删除失败");
+            }
+        }
+        List<Discount> list = dbiz.findAll();
+        showOnTable(list);
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void tblDiscountMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDiscountMouseClicked
+            this.txtDiscount.setEditable(false);
+            this.txtMeet.setEditable(false);
+            this.txtDecrease.setEditable(false);
+        // 鼠标选中某行，改行信息显示到输入面板。
+        int row = this.tblDiscount.getSelectedRow();
+        //根据row获取每列的值。
+        deltid =  new Integer(this.tblDiscount.getValueAt(row, 0).toString());
+
+        this.btnDelete.setEnabled(true);
+    }//GEN-LAST:event_tblDiscountMouseClicked
+    
+    private void clearInput() {
+        this.txtDiscount.setText("");
+        this.txtMeet.setText("");
+        this.txtDecrease.setText("");
+    }
     private void showOnTable(List<Discount> list) {
       /**
        * 将制定的list数据显示到表上
@@ -177,6 +302,11 @@ public class DiscountManageFrame extends javax.swing.JInternalFrame {
             Vector vt = new Vector();
             vt.add(d.getDid());
             Discount dct = d;
+            System.out.println(d.getDid());
+            System.out.println(d.getDtype());
+            System.out.println(d.getDiscountrate());
+            System.out.println(d.getDmeetmoney());
+            System.out.println(d.getDreducemoney());
             if(d.getDtype() == 1){
                 //打折
                 vt.add("打折");
@@ -190,10 +320,11 @@ public class DiscountManageFrame extends javax.swing.JInternalFrame {
             }
             dtm.addRow(vt);
         }
-       
-}
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSearch;
     private javax.swing.JComboBox<String> cbType;
     private javax.swing.JLabel jLabel1;
