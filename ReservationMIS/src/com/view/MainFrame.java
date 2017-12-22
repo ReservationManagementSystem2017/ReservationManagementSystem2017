@@ -22,6 +22,7 @@ import com.view.order.BillByWaiterFrame;
 import com.view.order.OrderDishesByCookFrame;
 import com.view.order.OrderByWaiterFrame;
 import com.view.order.OrderDishesByWaiterFrame;
+import com.view.search.OrderDetailFrame;
 import java.beans.PropertyVetoException;
 import java.util.List;
 import javax.swing.JInternalFrame;
@@ -57,6 +58,7 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenu1 = new javax.swing.JMenu();
         mainDeskPaneDell = new com.view.MainDeskPaneDell();
         jMenuBar1 = new javax.swing.JMenuBar();
         mnuSystem = new javax.swing.JMenu();
@@ -66,6 +68,7 @@ public class MainFrame extends javax.swing.JFrame {
         itemBillByWaiter = new javax.swing.JMenuItem();
         itemOrderDishesByCook = new javax.swing.JMenuItem();
         itemOrderDishesByWaiter = new javax.swing.JMenuItem();
+        itemOrderDetail = new javax.swing.JMenuItem();
         mnuManager = new javax.swing.JMenu();
         itemEmployeeManage = new javax.swing.JMenuItem();
         itemCustomerManage = new javax.swing.JMenuItem();
@@ -74,6 +77,8 @@ public class MainFrame extends javax.swing.JFrame {
         itemRoomOrTableManage = new javax.swing.JMenuItem();
         itemRoomManage = new javax.swing.JMenuItem();
         itemTableManage = new javax.swing.JMenuItem();
+
+        jMenu1.setText("jMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -122,6 +127,14 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         mnuOrder.add(itemOrderDishesByWaiter);
+
+        itemOrderDetail.setText("订单详细");
+        itemOrderDetail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemOrderDetailActionPerformed(evt);
+            }
+        });
+        mnuOrder.add(itemOrderDetail);
 
         jMenuBar1.add(mnuOrder);
 
@@ -260,6 +273,10 @@ public class MainFrame extends javax.swing.JFrame {
         showFrame(TableManageFrame.class);
     }//GEN-LAST:event_itemTableManageActionPerformed
 
+    private void itemOrderDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemOrderDetailActionPerformed
+        showFrame(OrderDetailFrame.class);
+    }//GEN-LAST:event_itemOrderDetailActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -346,11 +363,13 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemLogin;
     private javax.swing.JMenuItem itemManuManage;
     private javax.swing.JMenuItem itemOrderByWaiter;
+    private javax.swing.JMenuItem itemOrderDetail;
     private javax.swing.JMenuItem itemOrderDishesByCook;
     private javax.swing.JMenuItem itemOrderDishesByWaiter;
     private javax.swing.JMenuItem itemRoomManage;
     private javax.swing.JMenuItem itemRoomOrTableManage;
     private javax.swing.JMenuItem itemTableManage;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private com.view.MainDeskPaneDell mainDeskPaneDell;
     private javax.swing.JMenu mnuManager;

@@ -5,6 +5,25 @@
  */
 package com.view.search;
 
+import com.biz.CustomerBiz;
+import com.biz.CustomerBizImpl;
+import com.biz.MenuBiz;
+import com.biz.MenuBizImpl;
+import com.biz.OrderBiz;
+import com.biz.OrderBizImpl;
+import com.biz.OrderDishesBiz;
+import com.biz.OrderDishesBizImpl;
+import com.po.Customer;
+import com.po.Menu;
+import com.po.Order;
+import com.po.OrderDishes;
+import com.util.StringUtil;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Vector;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Administrator
@@ -14,10 +33,20 @@ public class OrderDetailFrame extends javax.swing.JInternalFrame {
     /**
      * Creates new form OrderDetailFrame
      */
+    OrderBiz orderBiz = new OrderBizImpl();
+    OrderDishesBiz orderDishesBiz = new OrderDishesBizImpl();
+    CustomerBizImpl customerBiz = new CustomerBizImpl();
     public OrderDetailFrame() {
         initComponents();
+        initEmpSex();
     }
-
+    private void initEmpSex() {
+        //模拟从数据库中获取Title并填充到组合框
+            String[] sex = {"已取消订单", "待做订单","待上菜订单","已上菜订单"};
+            for (String s : sex) {
+                this.choiceEmp.addItem(s);
+            }
+        }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,21 +56,330 @@ public class OrderDetailFrame extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        jTextField1 = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblOrder = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        txtSearch = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tblDishes = new javax.swing.JTable();
+        btnDelete = new javax.swing.JButton();
+        choiceEmp = new javax.swing.JComboBox();
+        jTextField3 = new javax.swing.JTextField();
+
+        jTextField1.setFont(new java.awt.Font("微软雅黑", 1, 24)); // NOI18N
+        jTextField1.setForeground(new java.awt.Color(0, 0, 204));
+        jTextField1.setText("      订单明细");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
+        tblOrder.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "订单编号", "顾客姓名", "用餐人数", "下单时间", "服务员编号", "餐桌编号"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, true, false, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblOrder.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblOrderMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblOrder);
+        if (tblOrder.getColumnModel().getColumnCount() > 0) {
+            tblOrder.getColumnModel().getColumn(4).setHeaderValue("服务员编号");
+            tblOrder.getColumnModel().getColumn(5).setHeaderValue("餐桌编号");
+        }
+
+        jButton1.setForeground(new java.awt.Color(204, 0, 0));
+        jButton1.setText("确定");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        txtSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSearchActionPerformed(evt);
+            }
+        });
+        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtSearchKeyPressed(evt);
+            }
+        });
+
+        jTextField2.setText("订单号");
+
+        tblDishes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "订单编号", "订菜品编号", "菜品名称", "菜品数量", "下单时间"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, false, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblDishes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblDishesMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(tblDishes);
+
+        btnDelete.setText("删除");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
+        choiceEmp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
+        choiceEmp.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
+        choiceEmp.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                choiceEmpItemStateChanged(evt);
+            }
+        });
+        choiceEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                choiceEmpActionPerformed(evt);
+            }
+        });
+
+        jTextField3.setFont(new java.awt.Font("宋体", 1, 18)); // NOI18N
+        jTextField3.setForeground(new java.awt.Color(0, 0, 153));
+        jTextField3.setText("菜单详细页");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 646, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 646, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(choiceEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(jButton1)))
+                            .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(241, 241, 241)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(266, 266, 266)
+                        .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jButton1)
+                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(choiceEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+                .addGap(4, 4, 4)
+                .addComponent(btnDelete)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void tblOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblOrderMouseClicked
+        String choice = this.choiceEmp.getSelectedItem().toString().trim();             //获得下拉框的内容
+         if("待做订单".equals(choice)){
+            this.btnDelete.setVisible(true);                           //只用在待做订单的情况下才能显示删除键
+        }
+        else{
+            this.btnDelete.setVisible(false);
+        }
+        int selectRow = this.tblOrder.getSelectedRow();
+        int orderId = (Integer) this.tblOrder.getValueAt(selectRow, 0);
+          
+        Vector vt = new Vector();
+        List<OrderDishes> list = new ArrayList<OrderDishes>();
+        
+        showOnTable2(list);
+        if("已取消订单".equals(choice)){
+            list = (List<OrderDishes>) orderDishesBiz.findByOid(orderId, 0);
+        }
+        else if("待做订单".equals(choice)){
+            list = (List<OrderDishes>) orderDishesBiz.findByOid(orderId, 1);
+        }
+        else if("待上菜订单".equals(choice)){
+            list = (List<OrderDishes>) orderDishesBiz.findByOid(orderId, 2);
+        }
+        else{
+            list = (List<OrderDishes>) orderDishesBiz.findByOid(orderId, 3);
+        }  
+        showOnTable2(list);
+    }//GEN-LAST:event_tblOrderMouseClicked
+
+    private void txtSearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyPressed
+       
+    }//GEN-LAST:event_txtSearchKeyPressed
+
+    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSearchActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        String s = this.txtSearch.getText();
+        List<Order> list = new ArrayList<Order>();
+        if(s.equals(new String())){
+               list = orderBiz.findAll();
+        }
+        else{
+            int orderId = Integer.parseInt(s);
+            Order order =  orderBiz.findByID(orderId);
+            list.add(order);
+        }
+        showOnTable(list);
+    }//GEN-LAST:event_jButton1ActionPerformed
+ 
+    private void tblDishesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDishesMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tblDishesMouseClicked
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+
+        int row = this.tblDishes.getSelectedRow();
+        
+        int dishId = (Integer) this.tblDishes.getValueAt(row, 1);
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, "请输入要删除的记录！");
+            return;
+        }
+ //           answer == JOptionPane.YES_OPTION
+        DefaultTableModel dtm = (DefaultTableModel) this.tblDishes.getModel();
+        dtm.removeRow(row);
+        boolean result = orderDishesBiz.delete(dishId);
+        System.out.println(result);
+        row = -1;
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void choiceEmpItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_choiceEmpItemStateChanged
+
+    }//GEN-LAST:event_choiceEmpItemStateChanged
+
+    private void choiceEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_choiceEmpActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_choiceEmpActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnDelete;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JComboBox choiceEmp;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTable tblDishes;
+    private javax.swing.JTable tblOrder;
+    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
+
+    private void showOnTable(List<Order> list) {
+         DefaultTableModel dtm = (DefaultTableModel) this.tblOrder.getModel();
+        //2.清空表格信息
+        while (dtm.getRowCount() > 0) {
+            dtm.removeRow(0);
+        }
+        //3.显示数据
+        for (Order o : list) {
+            Vector vt = new Vector();
+//            vt.add(m.getMid());
+            vt.add(o.getOid());
+            int nameId = o.getCid();
+            if(nameId == 0){
+                vt.add(null);
+            }
+            else{
+                Customer customer = customerBiz.findByID(nameId);       //通过查另外一张表来获得顾客的姓名
+                if(customer == null){
+                    System.out.println(nameId + "没有这个人。");
+                }
+                vt.add(customer.getCname());
+            }
+            vt.add(o.getOpopulation());
+            vt.add(o.getOtime());
+            vt.add(o.getEid());
+            vt.add(o.getTid());
+//            vt.add(m.getMcount());
+            dtm.addRow(vt);
+        }
+    }
+    
+    /*
+    显示某个订单的菜品信息
+    */
+    private void showOnTable2(List<OrderDishes> list) {
+        DefaultTableModel dtm = (DefaultTableModel) this.tblDishes.getModel();
+        MenuBiz menuBiz = new MenuBizImpl();
+        //2.清空表格信息
+        while (dtm.getRowCount() > 0) {
+            dtm.removeRow(0);
+        }
+        //3.显示数据
+        for(OrderDishes o : list){
+            Vector vt = new Vector();
+            vt.add(o.getOid());
+            int dishId = o.getMid();
+            vt.add(o.getOdid());
+            Menu m = menuBiz.findByMid(dishId);
+            vt.add(m.getMname());
+            vt.add(o.getOdcount());
+            vt.add(o.getOdtime());
+            dtm.addRow(vt);
+        }
+    }
 }

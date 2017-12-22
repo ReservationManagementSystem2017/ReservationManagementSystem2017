@@ -16,7 +16,7 @@ public interface OrderDishesBiz {
      // 1 增加已点的具体菜
     public boolean add(OrderDishes od);
 
-    // 2 删除已点的具体菜
+    // 2 删除已点的具体d
     public boolean delete(int odid);
 
     // 3 修改已点的具体菜
@@ -28,9 +28,11 @@ public interface OrderDishesBiz {
     // 5 查询所有已点的具体菜
     public List<OrderDishes> findAll();
     
-    //根据OID去寻找所有结果
-    public List<OrderDishes> findByOid(int oid);
+    //根据OID和相应的状态去寻找所有的菜品记录
+    public List<OrderDishes> findByOid(int oid, int state);
     
+    //根据OID和相应的状态去寻找所有的菜品记录
+    public List<OrderDishes> findByOid(int oid);
    //查找已经做好的菜
     public List<OrderDishes> findFinshed();
     //上菜

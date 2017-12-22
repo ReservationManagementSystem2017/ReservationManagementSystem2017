@@ -50,16 +50,33 @@ public class OrderDishesBizImpl implements OrderDishesBiz{
         return edao.query(sql, OrderDishes.class);
     }
     //查找已经做好的菜
-     public List<OrderDishes> findFinshed(){
-            String sql="select * from t_orderdishes where odstate=2";
-             return edao.query(sql, OrderDishes.class);
-            
-        }
+    public List<OrderDishes> findFinshed(){
+        String sql="select * from t_orderdishes where odstate=2";
+        return edao.query(sql, OrderDishes.class);
+    }
+    
+    
 
     
     public List<OrderDishes> findByOid(int oid)
     {
         String sql = "select * from t_orderdishes where oid = ?";
+        Object[] params = {oid};
+        return edao.query(sql, OrderDishes.class,params);
+        
+    }
+    
+    public List<OrderDishes> findByOid(int oid, int state)
+    {
+        String sql = "select * from t_orderdishes where oid = ? and odstate = ?";
+        Object[] params = {oid, state};
+        return edao.query(sql, OrderDishes.class,params);
+        
+    }
+    
+     public List<OrderDishes> findByOidState1(int oid)
+    {
+        String sql = "select * from t_orderdishes where oid = ? and odstate = 1";
         Object[] params = {oid};
         return edao.query(sql, OrderDishes.class,params);
         
