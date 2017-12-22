@@ -17,6 +17,7 @@ import com.view.manage.DiscountManageFrame;
 import com.view.manage.MenuManageFrame;
 import com.view.manage.RoomManageFrame;
 import com.view.manage.TableManageFrame;
+import com.view.manage.CookMenuManageFrame;
 import com.view.manage.RoomOrTableManageFrame;
 import com.view.order.BillByWaiterFrame;
 import com.view.order.OrderDishesByCookFrame;
@@ -80,6 +81,7 @@ public class MainFrame extends javax.swing.JFrame {
         itemRoomOrTableManage = new javax.swing.JMenuItem();
         itemRoomManage = new javax.swing.JMenuItem();
         itemTableManage = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
         mnuSearch = new javax.swing.JMenu();
         itemOrderDetail = new javax.swing.JMenuItem();
         itemSearchBill = new javax.swing.JMenuItem();
@@ -200,6 +202,14 @@ public class MainFrame extends javax.swing.JFrame {
         });
         mnuManager.add(itemTableManage);
 
+        jMenuItem1.setText("厨师菜品关联管理");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        mnuManager.add(jMenuItem1);
+
         jMenuBar1.add(mnuManager);
 
         mnuSearch.setText("订单查询");
@@ -305,6 +315,11 @@ public class MainFrame extends javax.swing.JFrame {
        showFrame(SearchBillFrame.class);
     }//GEN-LAST:event_itemSearchBillActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        showFrame( CookMenuManageFrame.class);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -403,6 +418,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuItem jMenuItem1;
     private com.view.MainDeskPaneDell mainDeskPaneDell;
     private javax.swing.JMenu mnuManager;
     private javax.swing.JMenu mnuOrder;

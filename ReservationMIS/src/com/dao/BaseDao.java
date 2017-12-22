@@ -27,7 +27,7 @@ public class BaseDao {
 	        String jdbcURL = "jdbc:mysql://localhost:3306/Reservation_MIS?useUnicode=true&characterEncoding=UTF8";
 	        String jdbcDriver = "com.mysql.jdbc.Driver";
 	        String user = "root";
-	        String password = "root";
+	        String password = "123";
 	        try {
 	        	//DbUtils中加载驱动的方法
 	            DbUtils.loadDriver(jdbcDriver);
