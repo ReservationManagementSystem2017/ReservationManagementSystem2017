@@ -51,5 +51,19 @@ public class BillBizImpl implements BillBiz  {
         return edao.query(sql, Bill.class);
     }
     
+    public List<Bill> findByCid(int cid)
+    {
+        String sql = "select * from t_bill where bstate = 1 and cid=?";
+        Object[] params = {cid};
+        return edao.query(sql, Bill.class, params);
+    }
+    
+   
+    public List<Bill> findByEid(int eid)
+    {
+        String sql = "select * from t_bill where bstate = 1 and eid=?";
+        Object[] params = {eid};
+        return edao.query(sql, Bill.class, params);
+    }
     
 }

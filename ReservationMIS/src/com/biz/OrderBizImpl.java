@@ -64,4 +64,10 @@ public class OrderBizImpl implements OrderBiz{
 //        Object[] params = {oid};
 //        return (Double) edao.get(sql, Double.class, params);
 //    }
+    public Order findFinishedByID(int oid)
+    {
+        String sql = "select * from t_orders where oid=?";
+        Object[] params = {oid};
+        return (Order) edao.get(sql, Order.class, params);
+    }
 }

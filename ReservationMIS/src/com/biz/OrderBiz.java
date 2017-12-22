@@ -34,4 +34,7 @@ public interface OrderBiz {
     
 //    //返回该订单价格
 //    public double getTotalPrice(int oid);
+    
+    //找到已结束的订单
+    public Order findFinishedByID(int oid);
 }
