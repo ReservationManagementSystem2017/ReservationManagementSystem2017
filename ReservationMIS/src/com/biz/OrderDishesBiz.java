@@ -30,4 +30,10 @@ public interface OrderDishesBiz {
     
     //根据OID去寻找所有结果
     public List<OrderDishes> findByOid(int oid);
+    
+   //查找已经做好的菜
+    public List<OrderDishes> findFinshed();
+    //上菜
+    public boolean Shangcai(OrderDishes od);
+    
 }
