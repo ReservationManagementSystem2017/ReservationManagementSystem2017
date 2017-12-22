@@ -192,6 +192,7 @@ public class DiscountManageFrame extends javax.swing.JInternalFrame {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         List<Discount> list = dbiz.findAll();
+        //System.out.println("测试find by id："+dbiz.findByID(8).getDmeetmoney());
         showOnTable(list);
     }//GEN-LAST:event_btnSearchActionPerformed
 
