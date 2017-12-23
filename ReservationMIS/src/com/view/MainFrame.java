@@ -17,11 +17,14 @@ import com.view.manage.DiscountManageFrame;
 import com.view.manage.MenuManageFrame;
 import com.view.manage.RoomManageFrame;
 import com.view.manage.TableManageFrame;
+import com.view.manage.CookMenuManageFrame;
 import com.view.manage.RoomOrTableManageFrame;
 import com.view.order.BillByWaiterFrame;
 import com.view.order.OrderDishesByCookFrame;
 import com.view.order.OrderByWaiterFrame;
 import com.view.order.OrderDishesByWaiterFrame;
+import com.view.search.OrderDetailFrame;
+import com.view.search.SearchBillFrame;
 import java.beans.PropertyVetoException;
 import java.util.List;
 import javax.swing.JInternalFrame;
@@ -57,6 +60,10 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenu1 = new javax.swing.JMenu();
+        jMenuBar2 = new javax.swing.JMenuBar();
+        jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
         mainDeskPaneDell = new com.view.MainDeskPaneDell();
         jMenuBar1 = new javax.swing.JMenuBar();
         mnuSystem = new javax.swing.JMenu();
@@ -74,6 +81,18 @@ public class MainFrame extends javax.swing.JFrame {
         itemRoomOrTableManage = new javax.swing.JMenuItem();
         itemRoomManage = new javax.swing.JMenuItem();
         itemTableManage = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        mnuSearch = new javax.swing.JMenu();
+        itemOrderDetail = new javax.swing.JMenuItem();
+        itemSearchBill = new javax.swing.JMenuItem();
+
+        jMenu1.setText("jMenu1");
+
+        jMenu2.setText("File");
+        jMenuBar2.add(jMenu2);
+
+        jMenu3.setText("Edit");
+        jMenuBar2.add(jMenu3);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -183,7 +202,35 @@ public class MainFrame extends javax.swing.JFrame {
         });
         mnuManager.add(itemTableManage);
 
+        jMenuItem1.setText("厨师菜品关联管理");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        mnuManager.add(jMenuItem1);
+
         jMenuBar1.add(mnuManager);
+
+        mnuSearch.setText("订单查询");
+
+        itemOrderDetail.setText("订单详细");
+        itemOrderDetail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemOrderDetailActionPerformed(evt);
+            }
+        });
+        mnuSearch.add(itemOrderDetail);
+
+        itemSearchBill.setText("历史账单查询");
+        itemSearchBill.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemSearchBillActionPerformed(evt);
+            }
+        });
+        mnuSearch.add(itemSearchBill);
+
+        jMenuBar1.add(mnuSearch);
 
         setJMenuBar(jMenuBar1);
 
@@ -259,6 +306,19 @@ public class MainFrame extends javax.swing.JFrame {
     private void itemTableManageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemTableManageActionPerformed
         showFrame(TableManageFrame.class);
     }//GEN-LAST:event_itemTableManageActionPerformed
+
+    private void itemOrderDetailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemOrderDetailActionPerformed
+        showFrame(OrderDetailFrame.class);
+    }//GEN-LAST:event_itemOrderDetailActionPerformed
+
+    private void itemSearchBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemSearchBillActionPerformed
+       showFrame(SearchBillFrame.class);
+    }//GEN-LAST:event_itemSearchBillActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        // TODO add your handling code here:
+        showFrame( CookMenuManageFrame.class);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -346,15 +406,23 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemLogin;
     private javax.swing.JMenuItem itemManuManage;
     private javax.swing.JMenuItem itemOrderByWaiter;
+    private javax.swing.JMenuItem itemOrderDetail;
     private javax.swing.JMenuItem itemOrderDishesByCook;
     private javax.swing.JMenuItem itemOrderDishesByWaiter;
     private javax.swing.JMenuItem itemRoomManage;
     private javax.swing.JMenuItem itemRoomOrTableManage;
+    private javax.swing.JMenuItem itemSearchBill;
     private javax.swing.JMenuItem itemTableManage;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuItem jMenuItem1;
     private com.view.MainDeskPaneDell mainDeskPaneDell;
     private javax.swing.JMenu mnuManager;
     private javax.swing.JMenu mnuOrder;
+    private javax.swing.JMenu mnuSearch;
     private javax.swing.JMenu mnuSystem;
     // End of variables declaration//GEN-END:variables
 }

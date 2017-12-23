@@ -5,12 +5,21 @@
  */
 package com.view.manage;
 
+import com.biz.MenuBiz;
+import com.biz.MenuBizImpl;
+import com.po.Menu;
+import com.util.StringUtil;
+import java.util.List;
+import java.util.Vector;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author Administrator
  */
-public class MenuManageFrame extends javax.swing.JInternalFrame {
 
+public class MenuManageFrame extends javax.swing.JInternalFrame {
+MenuBiz mbiz=new MenuBizImpl();
     /**
      * Creates new form MenuManageFrame
      */
@@ -27,21 +36,655 @@ public class MenuManageFrame extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnSearch = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblMenu = new javax.swing.JTable();
+        lblEmpid = new javax.swing.JPanel();
+        lblMenuID = new javax.swing.JLabel();
+        txtMenuid = new javax.swing.JTextField();
+        lblMenuname = new javax.swing.JLabel();
+        txtMenuname = new javax.swing.JTextField();
+        lblMenuam = new javax.swing.JLabel();
+        txtamt = new javax.swing.JTextField();
+        lblMenutype = new javax.swing.JLabel();
+        lblMenutime = new javax.swing.JLabel();
+        txtMenutime = new javax.swing.JTextField();
+        tlblMenuprice = new javax.swing.JLabel();
+        txtMenutype = new javax.swing.JTextField();
+        lblNotice = new javax.swing.JLabel();
+        btnLoad = new javax.swing.JButton();
+        btnAdd = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        btnCancel = new javax.swing.JButton();
+        btnExit = new javax.swing.JButton();
+        btnExport = new javax.swing.JButton();
+        txtMenuprice = new javax.swing.JTextField();
+        txtCondition = new javax.swing.JTextField();
+
+        btnSearch.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
+        btnSearch.setForeground(new java.awt.Color(51, 51, 51));
+        btnSearch.setText("Search");
+        btnSearch.setToolTipText("模糊查询：员工姓名");
+        btnSearch.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(204, 51, 255), new java.awt.Color(204, 102, 255)));
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
+
+        tblMenu.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "菜品ID", "菜品名称", "种类", "价格", "所需时间", "已售份额"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, false, false, true, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblMenu.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblMenuMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblMenu);
+
+        lblMenuID.setFont(new java.awt.Font("宋体", 1, 14)); // NOI18N
+        lblMenuID.setForeground(new java.awt.Color(204, 0, 0));
+        lblMenuID.setText("菜品ID");
+        lblMenuID.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
+
+        txtMenuid.setEditable(false);
+        txtMenuid.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
+        txtMenuid.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMenuidActionPerformed(evt);
+            }
+        });
+
+        lblMenuname.setFont(new java.awt.Font("微软雅黑 Light", 1, 14)); // NOI18N
+        lblMenuname.setForeground(new java.awt.Color(204, 0, 51));
+        lblMenuname.setText("菜品名称");
+        lblMenuname.setToolTipText("员工姓名须由2-4个中文组成");
+        lblMenuname.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
+
+        txtMenuname.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
+        txtMenuname.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtMenunameKeyPressed(evt);
+            }
+        });
+
+        lblMenuam.setFont(new java.awt.Font("微软雅黑 Light", 1, 14)); // NOI18N
+        lblMenuam.setText("已售份额");
+        lblMenuam.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
+
+        txtamt.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
+        txtamt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtamtActionPerformed(evt);
+            }
+        });
+        txtamt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtamtKeyPressed(evt);
+            }
+        });
+
+        lblMenutype.setFont(new java.awt.Font("微软雅黑 Light", 1, 14)); // NOI18N
+        lblMenutype.setText("种类");
+        lblMenutype.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
+
+        lblMenutime.setFont(new java.awt.Font("宋体", 1, 14)); // NOI18N
+        lblMenutime.setText("所需时间");
+        lblMenutime.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
+
+        txtMenutime.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
+
+        tlblMenuprice.setFont(new java.awt.Font("微软雅黑 Light", 1, 14)); // NOI18N
+        tlblMenuprice.setForeground(new java.awt.Color(204, 0, 51));
+        tlblMenuprice.setText("价格");
+        tlblMenuprice.setToolTipText("手机号须由11位数字组成");
+        tlblMenuprice.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
+
+        txtMenutype.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
+        txtMenutype.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtMenutypeKeyPressed(evt);
+            }
+        });
+
+        lblNotice.setFont(new java.awt.Font("宋体", 1, 12)); // NOI18N
+        lblNotice.setForeground(new java.awt.Color(204, 0, 0));
+        lblNotice.setText("注意：红色字体项目为必填！");
+
+        btnLoad.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        btnLoad.setText("Load");
+        btnLoad.setToolTipText("加载数据库内全部员工信息");
+        btnLoad.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
+        btnLoad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoadActionPerformed(evt);
+            }
+        });
+
+        btnAdd.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        btnAdd.setText("Add");
+        btnAdd.setToolTipText("增加新员工");
+        btnAdd.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
+
+        btnSave.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        btnSave.setText("Save");
+        btnSave.setToolTipText("保存修改");
+        btnSave.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
+
+        btnDelete.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        btnDelete.setText("Delete");
+        btnDelete.setToolTipText("删除选中员工信息");
+        btnDelete.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
+        btnCancel.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        btnCancel.setText("Cancel");
+        btnCancel.setToolTipText("取消选中");
+        btnCancel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
+        btnCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelActionPerformed(evt);
+            }
+        });
+
+        btnExit.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        btnExit.setText("Exit");
+        btnExit.setToolTipText("关闭员工管理界面");
+        btnExit.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
+
+        btnExport.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        btnExport.setText("Export");
+        btnExport.setToolTipText("导出excel表");
+        btnExport.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
+        btnExport.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExportActionPerformed(evt);
+            }
+        });
+
+        txtMenuprice.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
+        txtMenuprice.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtMenupriceKeyPressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout lblEmpidLayout = new javax.swing.GroupLayout(lblEmpid);
+        lblEmpid.setLayout(lblEmpidLayout);
+        lblEmpidLayout.setHorizontalGroup(
+            lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(lblEmpidLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(lblEmpidLayout.createSequentialGroup()
+                            .addComponent(lblMenutime, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtMenutime, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(lblMenuam))
+                        .addGroup(lblEmpidLayout.createSequentialGroup()
+                            .addComponent(lblMenuID)
+                            .addGap(18, 18, 18)
+                            .addComponent(txtMenuid, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(lblMenuname)))
+                    .addGroup(lblEmpidLayout.createSequentialGroup()
+                        .addComponent(lblNotice)
+                        .addGap(30, 30, 30)
+                        .addComponent(btnLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addGroup(lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(lblEmpidLayout.createSequentialGroup()
+                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(34, 34, 34)
+                        .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(28, 28, 28)
+                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnExport, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(lblEmpidLayout.createSequentialGroup()
+                        .addGroup(lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtMenuname, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtamt, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(29, 29, 29)
+                        .addGroup(lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblMenutype)
+                            .addComponent(tlblMenuprice))
+                        .addGap(42, 42, 42)
+                        .addGroup(lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtMenuprice, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMenutype, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+        lblEmpidLayout.setVerticalGroup(
+            lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(lblEmpidLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblMenuID)
+                    .addComponent(txtMenuid, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtMenuname, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblMenuname)
+                    .addComponent(tlblMenuprice)
+                    .addComponent(txtMenuprice, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtMenutime, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblMenutime)
+                        .addComponent(lblMenuam)
+                        .addComponent(txtamt, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblMenutype)
+                        .addComponent(txtMenutype, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(59, 59, 59)
+                .addGroup(lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNotice)
+                    .addComponent(btnExport, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        txtCondition.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
+        txtCondition.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtConditionActionPerformed(evt);
+            }
+        });
+        txtCondition.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtConditionKeyPressed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtCondition, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(271, 271, 271))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addComponent(lblEmpid, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCondition, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblEmpid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
+        //模糊查询
+        String condition = this.txtCondition.getText().trim();
+        List<Menu> list = mbiz.findByCondition(condition);
+        showOnTable(list);
+        //清空
+        clearInput();
+        this.btnSave.setEnabled(false);
+        this.btnDelete.setEnabled(false);
+        this.btnCancel.setEnabled(false);
+        this.btnAdd.setEnabled(true);
+    }//GEN-LAST:event_btnSearchActionPerformed
+
+    private void tblMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMenuMouseClicked
+        //鼠标选中某行，该行信息显示到输入面板
+        int row = this.tblMenu.getSelectedRow();
+        //根据row获取每列的值
+        this.txtMenuid.setText(this.tblMenu.getValueAt(row, 0) + "");
+        this.txtMenuname.setText(this.tblMenu.getValueAt(row, 1) + "");
+        this.txtMenutype.setText(this.tblMenu.getValueAt(row, 2) + "");
+        this.txtamt.setText(this.tblMenu.getValueAt(row, 5) + "");
+        this.txtMenutime.setText(this.tblMenu.getValueAt(row, 4) + "");
+        this.txtMenuprice.setText(this.tblMenu.getValueAt(row, 3) + "");
+ 
+        //保存，删除,取消按钮可用，添加不可用
+        this.btnSave.setEnabled(true);
+        this.btnDelete.setEnabled(true);
+        this.btnCancel.setEnabled(true);
+        this.btnAdd.setEnabled(false);
+    }//GEN-LAST:event_tblMenuMouseClicked
+
+    private void txtMenuidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMenuidActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMenuidActionPerformed
+
+    private void txtMenunameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMenunameKeyPressed
+        this.getRootPane().setDefaultButton(btnAdd);
+    }//GEN-LAST:event_txtMenunameKeyPressed
+
+    private void txtamtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtamtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtamtActionPerformed
+
+    private void txtamtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtamtKeyPressed
+        this.getRootPane().setDefaultButton(btnAdd);
+    }//GEN-LAST:event_txtamtKeyPressed
+
+    private void txtMenutypeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMenutypeKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMenutypeKeyPressed
+
+    private void btnLoadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoadActionPerformed
+        //先清空文本
+        clearInput();
+        this.txtCondition.setText("");
+        //查询数据库将数据显示到表格上
+        List<Menu> list = mbiz.findAll();
+        //显示list信息
+        showOnTable(list);
+        this.btnSave.setEnabled(false);
+        this.btnDelete.setEnabled(false);
+        this.btnCancel.setEnabled(false);
+        this.btnAdd.setEnabled(true);
+    }//GEN-LAST:event_btnLoadActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        //新增商品
+        //1获取菜品信息
+        String mname = this.txtMenuname.getText().trim();
+        String mtype = this.txtMenutype.getText().trim();  
+        int mcount=Integer.parseInt(this.txtamt.getText());
+        int mtime=Integer.parseInt(this.txtMenutime.getText());
+        double mprice = Double.parseDouble(this.txtMenuprice.getText());
+ 
+     
+        //菜品名称非空验证，中文验证
+        if (StringUtil.checkLength(mname) == false) {
+            JOptionPane.showMessageDialog(this, "菜品名称不能为空");
+            return;
+        }
+
+
+        //价格非空验证
+        if (mprice <= 0) {
+            JOptionPane.showMessageDialog(this, "价格不能为空");
+            return;
+        }
+
+
+        //组合对象
+     
+
+         Menu m = new Menu( null, mname, mtype, mprice, mtime, mcount );
+
+        //调用业务类
+        boolean result = mbiz.add(m);
+        if (result == true) {
+            JOptionPane.showMessageDialog(this, "添加成功");
+            //刷新表格
+            List<Menu> list = mbiz.findAll();
+            //显示list信息
+            showOnTable(list);
+        } else {
+            JOptionPane.showMessageDialog(this, "添加失败");
+        }
+        //清空面板信息
+        clearInput();
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        String mname = this.txtMenuname.getText().trim();
+        String mtype = this.txtMenutype.getText().trim();   
+        int mcount=Integer.parseInt(this.txtamt.getText());
+        int mtime=Integer.parseInt(this.txtMenutime.getText());
+        double mprice = Double.parseDouble(this.txtMenuprice.getText());
+ 
+     
+        //菜品名称非空验证，中文验证
+        if (StringUtil.checkLength(mname) == false) {
+            JOptionPane.showMessageDialog(this, "菜品名称不能为空");
+            return;
+        }
+
+
+        //价格非空验证
+        if (mprice <= 0) {
+            JOptionPane.showMessageDialog(this, "价格不能为空");
+            return;
+        }
+
+
+        //组合对象
+     
+
+         Menu m = new Menu( null, mname, mtype, mprice, mtime, mcount );
+ //调用业务类
+        boolean result = mbiz.update(m);
+        if (result == true) {
+            JOptionPane.showMessageDialog(this, "保存成功");
+            //刷新表格
+            List<Menu> list = mbiz.findAll();
+            //显示list信息
+            showOnTable(list);
+        } else {
+            JOptionPane.showMessageDialog(this, "保存失败");
+        }
+        //清空面板信息
+        clearInput();
+        //保存，删除,取消按钮不可用，添加可用
+        this.btnSave.setEnabled(false);
+        this.btnDelete.setEnabled(false);
+        this.btnCancel.setEnabled(false);
+        this.btnAdd.setEnabled(true);
+    }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        int answer = JOptionPane.showConfirmDialog(this, "您确定要删除吗？");
+        if (answer == JOptionPane.YES_OPTION) {
+            //删除商品
+            int mpid = Integer.parseInt(this.txtMenuid.getText());
+            //调用业务
+            boolean result = mbiz.delete(mpid);
+            if (result == true) {
+                JOptionPane.showMessageDialog(this, "删除成功");
+                //刷新表格
+                List<Menu> list = mbiz.findAll();
+                //显示list信息
+                showOnTable(list);//
+            } else {
+                JOptionPane.showMessageDialog(this, "删除失败");
+            }
+            //清空面板信息
+            clearInput();
+            //保存，删除,取消按钮不可用，添加可用
+            this.btnSave.setEnabled(false);
+            this.btnDelete.setEnabled(false);
+            this.btnCancel.setEnabled(false);
+            this.btnAdd.setEnabled(true);
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelActionPerformed
+        //界面恢复到最初状态
+        clearInput();
+        this.btnSave.setEnabled(false);
+        this.btnDelete.setEnabled(false);
+        this.btnCancel.setEnabled(false);
+        this.btnAdd.setEnabled(true);
+    }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        int answer = JOptionPane.showConfirmDialog(this, "您确定要关闭吗？");
+        if (answer == JOptionPane.YES_OPTION) {
+            //界面恢复到最初状态
+            clearInput();
+            this.txtCondition.setText("");
+            this.btnSave.setEnabled(false);
+            this.btnDelete.setEnabled(false);
+            this.btnCancel.setEnabled(false);
+            this.btnAdd.setEnabled(true);
+            //获取表格模型,清空表格信息
+            DefaultTableModel dtm = (DefaultTableModel) this.tblMenu.getModel();
+            while (dtm.getRowCount() > 0) {
+                dtm.removeRow(0);
+            }
+            //关闭
+            this.dispose();
+        }
+    }//GEN-LAST:event_btnExitActionPerformed
+
+    private void btnExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportActionPerformed
+        //        List<ProductManager> pmlist = new ArrayList<>();
+        //        // 显示list中的信息
+        //        int row = this.tblProduct.getRowCount();
+        //        for (int i = 0; i < row; i++) {
+            //            ProductManager pm = new ProductManager(
+                //                (Integer)this.tblProduct.getValueAt(i, 0),(String)this.tblProduct.getValueAt(i, 1),(String)this.tblProduct.getValueAt(i, 2),
+                //                (Integer)this.tblProduct.getValueAt(i, 3),(Integer)this.tblProduct.getValueAt(i, 4),(BigDecimal)this.tblProduct.getValueAt(i, 5),
+                //                (BigDecimal)this.tblProduct.getValueAt(i, 6),(String)this.tblProduct.getValueAt(i, 7),(String)this.tblProduct.getValueAt(i, 8));
+            //            pmlist.add(pm);
+            //        }
+        //        JFileChooser savefile = new JFileChooser();//文件选择对话框
+        //        FileFilter filter = new FileNameExtensionFilter("Excel文件(*.xls)", "xls");
+        //        savefile.addChoosableFileFilter(filter);//添加过滤器
+        //        savefile.setFileFilter(filter);
+        //        //打开文件选择对话框，showSaveDialog是保存，showOpenDialog是打开
+        //        int flag = savefile.showSaveDialog(this);
+        //        File file = null;
+        //        //如果点击了保存按钮
+        //        if (flag == JFileChooser.APPROVE_OPTION) {
+            //            file = savefile.getSelectedFile();//所选择的文件名（手写或选择）
+            //            System.out.println("文件名：" + file.getAbsolutePath());
+            //            String filename = file.getAbsolutePath();
+            //            //截取文件扩展名（文件名长度后4位）
+            //            String ftype = filename.substring(filename.length() - 4);
+            //            if (!ftype.equals(".xls")) {
+                //                //如果用户没有填写扩展名，自动添加扩展名.xls
+                //                file = new File(filename + ".xls");
+                //            }
+            //            //集合获取数据，输出到文件：ExportExcel类的printSale方法
+            //            ExportExcel.printProductManager(pmlist, file); //psalelist是要导出到excel的数据集合，来自有数据库查询
+            //        }
+    }//GEN-LAST:event_btnExportActionPerformed
+
+    private void txtConditionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtConditionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtConditionActionPerformed
+
+    private void txtConditionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtConditionKeyPressed
+        this.getRootPane().setDefaultButton(btnSearch);
+    }//GEN-LAST:event_txtConditionKeyPressed
+
+    private void txtMenupriceKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMenupriceKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMenupriceKeyPressed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnCancel;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnExit;
+    private javax.swing.JButton btnExport;
+    private javax.swing.JButton btnLoad;
+    private javax.swing.JButton btnSave;
+    private javax.swing.JButton btnSearch;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel lblEmpid;
+    private javax.swing.JLabel lblMenuID;
+    private javax.swing.JLabel lblMenuam;
+    private javax.swing.JLabel lblMenuname;
+    private javax.swing.JLabel lblMenutime;
+    private javax.swing.JLabel lblMenutype;
+    private javax.swing.JLabel lblNotice;
+    private javax.swing.JTable tblMenu;
+    private javax.swing.JLabel tlblMenuprice;
+    private javax.swing.JTextField txtCondition;
+    private javax.swing.JTextField txtMenuid;
+    private javax.swing.JTextField txtMenuname;
+    private javax.swing.JTextField txtMenuprice;
+    private javax.swing.JTextField txtMenutime;
+    private javax.swing.JTextField txtMenutype;
+    private javax.swing.JTextField txtamt;
     // End of variables declaration//GEN-END:variables
+
+     private void clearInput() {
+        this.txtMenuid.setText("");
+        this.txtMenuname.setText("");
+        this.txtMenutime.setText("");
+        this.txtMenutype.setText("");
+        this.txtamt.setText("");
+        this.txtMenuprice.setText("");
+        tblMenu.clearSelection();
+    } 
+        public void showOnTable(List<Menu> list) {
+        //1.获取表格模型
+        DefaultTableModel dtm = (DefaultTableModel) this.tblMenu.getModel();
+        //2.清空表格信息
+        while (dtm.getRowCount() > 0) {
+            dtm.removeRow(0);
+        }
+        //3.显示数据
+        for (Menu m : list) {
+            Vector vt = new Vector();
+            vt.add(m.getMid());
+            vt.add(m.getMname());
+            vt.add(m.getMtype());
+            vt.add(m.getMprice());
+            vt.add(m.getMcooktime());
+            vt.add(m.getMcount());
+            dtm.addRow(vt);
+        }
+    } 
 }

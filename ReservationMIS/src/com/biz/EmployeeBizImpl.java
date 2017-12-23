@@ -59,4 +59,11 @@ public class EmployeeBizImpl implements EmployeeBiz{
         }
         return edao.query(sql, Employee.class);
     }
+    
+     public List<Employee> findByCook( ){
+         String sql = "select * from t_employee where estate = 1 and etype='厨师'";
+        return edao.query(sql, Employee.class);
+     }
+         
+     
 }

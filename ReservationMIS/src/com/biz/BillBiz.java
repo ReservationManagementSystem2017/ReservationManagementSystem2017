@@ -28,5 +28,9 @@ public interface BillBiz {
     // 5 查询所有账单
     public List<Bill> findAll();
 
-
+    //根据顾客ID寻找账单
+    public List<Bill> findByCid(int cid);
+    
+    //根据员工ID寻找账单
+    public List<Bill> findByEid(int eid);
 }

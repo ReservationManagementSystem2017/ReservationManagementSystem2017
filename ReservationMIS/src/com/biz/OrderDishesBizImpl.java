@@ -55,7 +55,25 @@ public class OrderDishesBizImpl implements OrderDishesBiz{
              return edao.query(sql, OrderDishes.class);
             
         }
-
+     public List<OrderDishes> findByEid(int state ,int eid)
+    {
+        
+        
+        String sql = "SELECT *\n" +
+        "FROM t_orderdishes\n" +
+        "WHERE odstate = ? AND\n" +
+        "EXISTS\n" +
+        "(\n" +
+        "\n" +
+        "		SELECT * \n" +
+        "		FROM t_cook_menu\n" +
+        "		WHERE eid = ? AND t_orderdishes.mid=t_cook_menu.mid\n" +
+        ")";
+        Object[] params = {state,eid};
+        
+       return edao.query(sql, OrderDishes.class,params);
+        
+    }
     
     public List<OrderDishes> findByOid(int oid)
     {
@@ -70,6 +88,22 @@ public class OrderDishesBizImpl implements OrderDishesBiz{
          String sql = "update t_orderdishes set odstate = 3 where odid =  ?";
         //params中的参数是按顺序逐个给？赋值，所以需要注意数据表顺序
         Object[] params = {od.getOdid()};
+       return edao.update(sql, params);
+        
+    }
+    public boolean Zuocai(int odid){
+        
+         String sql = "update t_orderdishes set odstate = 2 where odid =  ?";
+        //params中的参数是按顺序逐个给？赋值，所以需要注意数据表顺序
+        Object[] params = {odid};
+       return edao.update(sql, params);
+        
+    }
+       public boolean Wanchengcai(int odid){
+        
+         String sql = "update t_orderdishes set odstate = 3 where odid =  ?";
+        //params中的参数是按顺序逐个给？赋值，所以需要注意数据表顺序
+        Object[] params = {odid};
        return edao.update(sql, params);
         
     }

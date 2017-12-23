@@ -32,5 +32,4 @@ public interface MenuBiz {
     // 6 菜单姓名模糊查询
     public List<Menu> findByCondition(String condition);
     public Menu findByMid(int mid);
-
 }

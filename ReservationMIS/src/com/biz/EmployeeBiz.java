@@ -32,5 +32,6 @@ public interface EmployeeBiz {
 
     // 6 职工姓名模糊查询
     public List<Employee> findByCondition(String condition);
+     public List<Employee> findByCook( );
 
 }

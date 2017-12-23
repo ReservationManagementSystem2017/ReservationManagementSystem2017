@@ -35,5 +35,7 @@ public interface OrderDishesBiz {
     public List<OrderDishes> findFinshed();
     //上菜
     public boolean Shangcai(OrderDishes od);
-    
+    public boolean Zuocai(int odid);
+    public boolean Wanchengcai(int odid);
+    public List<OrderDishes> findByEid(int state ,int eid);
 }
