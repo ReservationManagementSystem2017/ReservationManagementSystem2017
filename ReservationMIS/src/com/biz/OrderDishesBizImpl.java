@@ -50,12 +50,38 @@ public class OrderDishesBizImpl implements OrderDishesBiz{
         return edao.query(sql, OrderDishes.class);
     }
     //查找已经做好的菜
-     public List<OrderDishes> findFinshed(){
-            String sql="select * from t_orderdishes where odstate=2";
-             return edao.query(sql, OrderDishes.class);
-            
-        }
-     public List<OrderDishes> findByEid(int state ,int eid)
+    public List<OrderDishes> findFinshed(){
+        String sql="select * from t_orderdishes where odstate=2";
+        return edao.query(sql, OrderDishes.class);
+    }
+    
+    
+
+    
+    public List<OrderDishes> findByOid(int oid)
+    {
+        String sql = "select * from t_orderdishes where oid = ?";
+        Object[] params = {oid};
+        return edao.query(sql, OrderDishes.class,params);
+        
+    }
+    
+    public List<OrderDishes> findByOid(int oid, int state)
+    {
+        String sql = "select * from t_orderdishes where oid = ? and odstate = ?";
+        Object[] params = {oid, state};
+        return edao.query(sql, OrderDishes.class,params);
+        
+    }
+    
+     public List<OrderDishes> findByOidState1(int oid)
+    {
+        String sql = "select * from t_orderdishes where oid = ? and odstate = 1";
+        Object[] params = {oid};
+        return edao.query(sql, OrderDishes.class,params);
+        
+    }
+         public List<OrderDishes> findByEid(int state ,int eid)
     {
         
         
@@ -75,13 +101,6 @@ public class OrderDishesBizImpl implements OrderDishesBiz{
         
     }
     
-    public List<OrderDishes> findByOid(int oid)
-    {
-        String sql = "select * from t_orderdishes where oid = ?";
-        Object[] params = {oid};
-        return edao.query(sql, OrderDishes.class,params);
-        
-    }
      //上菜
     public boolean Shangcai(OrderDishes od){
         
@@ -91,7 +110,7 @@ public class OrderDishesBizImpl implements OrderDishesBiz{
        return edao.update(sql, params);
         
     }
-    public boolean Zuocai(int odid){
+       public boolean Zuocai(int odid){
         
          String sql = "update t_orderdishes set odstate = 2 where odid =  ?";
         //params中的参数是按顺序逐个给？赋值，所以需要注意数据表顺序
@@ -108,5 +127,6 @@ public class OrderDishesBizImpl implements OrderDishesBiz{
         
     }
             
+           
     
 }

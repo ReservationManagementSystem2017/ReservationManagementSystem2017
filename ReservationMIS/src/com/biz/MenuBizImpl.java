@@ -61,8 +61,7 @@ public class MenuBizImpl implements MenuBiz{
         }
         return edao.query(sql, Menu.class);
     }
-
-    public Menu findByMid(int mid)
+     public Menu findByMid(int mid)
     {
         String sql = "select * from t_menu where mid = ?";
         Object[] params = {mid};
