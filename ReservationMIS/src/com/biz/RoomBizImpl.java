@@ -54,7 +54,7 @@ public class RoomBizImpl implements RoomBiz{
     public List<Room> findByCondition(String conditions) {
         String sql = "select * from t_room where rstate=1 ";
         if(conditions !=null && conditions.length()>0){
-            sql +=" and rname) like '%"+conditions+"%'";
+            sql +=" and rname like '%"+conditions+"%'";
         }
         return rdao.query(sql, Room.class);
     }

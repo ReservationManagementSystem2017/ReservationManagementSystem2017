@@ -69,6 +69,7 @@ public class CookMenuManageFrame extends javax.swing.JInternalFrame {
         lblMenuname = new javax.swing.JLabel();
         txtEmpname1 = new javax.swing.JTextField();
         btnAdd = new javax.swing.JButton();
+        btnExit = new javax.swing.JButton();
 
         btnSearch.setText("查询");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -224,6 +225,16 @@ public class CookMenuManageFrame extends javax.swing.JInternalFrame {
             }
         });
 
+        btnExit.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        btnExit.setText("Exit");
+        btnExit.setToolTipText("关闭员工管理界面");
+        btnExit.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -246,11 +257,12 @@ public class CookMenuManageFrame extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtMenuname, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblMenuname)
-                                .addGap(90, 90, 90)
-                                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lblMenuname)
+                            .addComponent(txtMenuname, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(90, 90, 90)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -292,18 +304,20 @@ public class CookMenuManageFrame extends javax.swing.JInternalFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(lblMenuname)
                                     .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addComponent(txtMenuname, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(25, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtMenuname, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(34, 34, 34)
+                                        .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(19, 19, 19)
-                                .addComponent(lblEmpname)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(lblEmpname)))
+                .addContainerGap(29, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(49, 49, 49)
@@ -343,6 +357,9 @@ public class CookMenuManageFrame extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(this, "删除失败");
         }
+         this.btnDelete.setEnabled(false);
+          List<CookMenu> list =  cmbiz.findAll();
+          showOnTable(list);
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void tblRelationMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblRelationMouseClicked
@@ -421,8 +438,36 @@ public class CookMenuManageFrame extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(this, "添加失败");
         }
+        //获取表格模型,清空表格信息
+            DefaultTableModel dtm = (DefaultTableModel) this.tblEmployee.getModel();
+            while (dtm.getRowCount() > 0) {
+                dtm.removeRow(0);
+            }
+             DefaultTableModel dtm2 = (DefaultTableModel) this.tblmenu.getModel();
+            while (dtm2.getRowCount() > 0) {
+                dtm2.removeRow(0);
+            }
+            this.txtEmpname1.setText("");
+            this.txtMenuname.setText("");
     
     }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        int answer = JOptionPane.showConfirmDialog(this, "您确定要关闭吗？");
+        if (answer == JOptionPane.YES_OPTION) {
+            //界面恢复到最初状态
+            clearInput();
+            
+             
+            //获取表格模型,清空表格信息
+            DefaultTableModel dtm = (DefaultTableModel) this.tblEmployee.getModel();
+            while (dtm.getRowCount() > 0) {
+                dtm.removeRow(0);
+            }
+            //关闭
+            this.dispose();
+        }
+    }//GEN-LAST:event_btnExitActionPerformed
     private void showOnTable(List<CookMenu> list) {
         //1.获取指定表格模型
         DefaultTableModel dtm = (DefaultTableModel) this.tblRelation.getModel();
@@ -483,11 +528,16 @@ public class CookMenuManageFrame extends javax.swing.JInternalFrame {
             dtm.addRow(vt);
         }   
     }
+    private void clearInput() {
+       
+          tblRelation.clearSelection();
+    } 
          
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnExit;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnSearch1;
     private javax.swing.JButton btnSearchmenu;

@@ -63,24 +63,13 @@ public class OrderDishesByWaiterFrame extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         lblDish = new javax.swing.JLabel();
-        txtSearch = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblMenu = new javax.swing.JTable();
         btnShangcai = new javax.swing.JButton();
+        btnExit1 = new javax.swing.JButton();
 
         lblDish.setText("待上菜");
-
-        txtSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSearchActionPerformed(evt);
-            }
-        });
-        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtSearchKeyPressed(evt);
-            }
-        });
 
         btnSearch.setText("查询");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -119,23 +108,35 @@ public class OrderDishesByWaiterFrame extends javax.swing.JInternalFrame {
             }
         });
 
+        btnExit1.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
+        btnExit1.setText("Exit");
+        btnExit1.setToolTipText("关闭员工管理界面");
+        btnExit1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
+        btnExit1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExit1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(btnShangcai)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(lblDish)
-                            .addGap(41, 41, 41)
-                            .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(42, 42, 42)
-                            .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(lblDish)
+                        .addGap(320, 320, 320)
+                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(btnExit1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnShangcai, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                .addContainerGap(79, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,28 +144,21 @@ public class OrderDishesByWaiterFrame extends javax.swing.JInternalFrame {
                 .addGap(34, 34, 34)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblDish)
-                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSearch))
                 .addGap(30, 30, 30)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnShangcai)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnExit1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchActionPerformed
-
-    private void txtSearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyPressed
-        this.getRootPane().setDefaultButton(btnSearch);
-    }//GEN-LAST:event_txtSearchKeyPressed
-
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        String condition = txtSearch.getText().trim();
+        
         List<OrderDishes> list = odbiz.findFinshed();
         showOnTable(list);
     }//GEN-LAST:event_btnSearchActionPerformed
@@ -189,13 +183,32 @@ public class OrderDishesByWaiterFrame extends javax.swing.JInternalFrame {
         if (result == true) {
             JOptionPane.showMessageDialog(this, "上菜成功");
             //刷新表格
-            // List<OrderDishes> list = odbiz.findFinshed();
+            List<OrderDishes> list = odbiz.findFinshed();
             //显示list信息
-            // showOnTable(list);
+            showOnTable(list);
         } else {
             JOptionPane.showMessageDialog(this, "上菜失败");
         }
     }//GEN-LAST:event_btnShangcaiActionPerformed
+
+    private void btnExit1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExit1ActionPerformed
+        // TODO add your handling code here:
+          int answer = JOptionPane.showConfirmDialog(this, "您确定要关闭吗？");
+        if (answer == JOptionPane.YES_OPTION) {
+            //界面恢复到最初状态
+            clearInput();
+            
+            this.btnShangcai.setEnabled(false);
+             
+            //获取表格模型,清空表格信息
+            DefaultTableModel dtm = (DefaultTableModel) this.tblMenu.getModel();
+            while (dtm.getRowCount() > 0) {
+                dtm.removeRow(0);
+            }
+            //关闭
+            this.dispose();
+        }
+    }//GEN-LAST:event_btnExit1ActionPerformed
     private void showOnTable(List<OrderDishes> list) {
         //1.获取指定表格模型
         DefaultTableModel dtm = (DefaultTableModel) this.tblMenu.getModel();
@@ -217,13 +230,17 @@ public class OrderDishesByWaiterFrame extends javax.swing.JInternalFrame {
             dtm.addRow(vt);
         }   
     }
+     private void clearInput() {
+       
+          tblMenu.clearSelection();
+    } 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnExit1;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnShangcai;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblDish;
     private javax.swing.JTable tblMenu;
-    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 }
