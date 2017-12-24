@@ -90,6 +90,8 @@ public class EmployeeManageFrame extends javax.swing.JInternalFrame {
         btnExport = new javax.swing.JButton();
         txtCondition = new javax.swing.JTextField();
 
+        setClosable(true);
+
         btnSearch.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         btnSearch.setForeground(new java.awt.Color(51, 51, 51));
         btnSearch.setText("Search");

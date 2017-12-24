@@ -17,21 +17,23 @@ public class Menu {
     private String mtype;//菜种类型
     private double mprice;//菜种价格
     private Integer mcooktime;//做菜时间
+    private Integer mstorage;//库存量
     private Integer mcount;//点菜次数
     //state，0销毁，1存在
 
     public Menu() {
     }
 
-    public Menu(Integer mid, String mname, String mtype, double mprice, Integer mcooktime, Integer mcount) {
+    public Menu(Integer mid, String mname, String mtype, double mprice, Integer mcooktime, Integer mstorage, Integer mcount) {
         this.mid = mid;
         this.mname = mname;
         this.mtype = mtype;
         this.mprice = mprice;
         this.mcooktime = mcooktime;
+        this.mstorage = mstorage;
         this.mcount = mcount;
     }
-
+    
     public Integer getMid() {
         return mid;
     }
@@ -72,6 +74,14 @@ public class Menu {
         this.mcooktime = mcooktime;
     }
 
+    public Integer getMstorage() {
+        return mstorage;
+    }
+
+    public void setMstorage(Integer mstorage) {
+        this.mstorage = mstorage;
+    }
+    
     public Integer getMcount() {
         return mcount;
     }

@@ -62,6 +62,8 @@ MenuBiz mbiz=new MenuBizImpl();
         txtMenuprice = new javax.swing.JTextField();
         txtCondition = new javax.swing.JTextField();
 
+        setClosable(true);
+
         btnSearch.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         btnSearch.setForeground(new java.awt.Color(51, 51, 51));
         btnSearch.setText("Search");
@@ -78,11 +80,11 @@ MenuBiz mbiz=new MenuBizImpl();
 
             },
             new String [] {
-                "菜品ID", "菜品名称", "种类", "价格", "所需时间", "已售份额"
+                "菜品ID", "菜品名称", "种类", "价格", "所需时间", "已售份额", "库存量"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, false, false, true, true, true
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -95,6 +97,15 @@ MenuBiz mbiz=new MenuBizImpl();
             }
         });
         jScrollPane1.setViewportView(tblMenu);
+        if (tblMenu.getColumnModel().getColumnCount() > 0) {
+            tblMenu.getColumnModel().getColumn(0).setResizable(false);
+            tblMenu.getColumnModel().getColumn(1).setResizable(false);
+            tblMenu.getColumnModel().getColumn(2).setResizable(false);
+            tblMenu.getColumnModel().getColumn(3).setResizable(false);
+            tblMenu.getColumnModel().getColumn(4).setResizable(false);
+            tblMenu.getColumnModel().getColumn(5).setResizable(false);
+            tblMenu.getColumnModel().getColumn(6).setResizable(false);
+        }
 
         lblMenuID.setFont(new java.awt.Font("宋体", 1, 14)); // NOI18N
         lblMenuID.setForeground(new java.awt.Color(204, 0, 0));
@@ -464,9 +475,9 @@ MenuBiz mbiz=new MenuBizImpl();
 
 
         //组合对象
-     
+        int mstorage = 0;//新增的时候库存为0
 
-         Menu m = new Menu( null, mname, mtype, mprice, mtime, mcount );
+         Menu m = new Menu( null, mname, mtype, mprice, mtime,mstorage, mcount );
 
         //调用业务类
         boolean result = mbiz.add(m);
@@ -489,7 +500,7 @@ MenuBiz mbiz=new MenuBizImpl();
         int mcount=Integer.parseInt(this.txtamt.getText());
         int mtime=Integer.parseInt(this.txtMenutime.getText());
         double mprice = Double.parseDouble(this.txtMenuprice.getText());
- 
+        int mid = Integer.parseInt(this.txtMenuid.getText());
      
         //菜品名称非空验证，中文验证
         if (StringUtil.checkLength(mname) == false) {
@@ -506,9 +517,9 @@ MenuBiz mbiz=new MenuBizImpl();
 
 
         //组合对象
-     
-
-         Menu m = new Menu( null, mname, mtype, mprice, mtime, mcount );
+         Menu mTemp = mbiz.findByID(mid);
+         int mstorage = mTemp.getMstorage();//待定
+         Menu m = new Menu( mid, mname, mtype, mprice, mtime,mstorage,mcount );
  //调用业务类
         boolean result = mbiz.update(m);
         if (result == true) {
@@ -684,6 +695,7 @@ MenuBiz mbiz=new MenuBizImpl();
             vt.add(m.getMprice());
             vt.add(m.getMcooktime());
             vt.add(m.getMcount());
+            vt.add(m.getMstorage());
             dtm.addRow(vt);
         }
     } 

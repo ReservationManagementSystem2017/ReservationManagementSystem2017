@@ -20,9 +20,9 @@ public class MenuBizImpl implements MenuBiz{
     
     
     public boolean add(Menu m) {
-        String sql = "insert into t_menu values(?,?,?,?,?,?,1)";
+        String sql = "insert into t_menu values(?,?,?,?,?,?,?,1)";
         //params中的参数是按顺序逐个给？赋值，所以需要注意数据表顺序
-        Object[] params = {null, m.getMname(), m.getMtype(), m.getMprice(), m.getMcooktime(),
+        Object[] params = {null, m.getMname(), m.getMtype(), m.getMprice(), m.getMcooktime(),m.getMstorage(),
             m.getMcount()};
         return edao.update(sql, params);
     }
@@ -35,9 +35,9 @@ public class MenuBizImpl implements MenuBiz{
     }
 
     public boolean update(Menu m) {
-         String sql = "update t_menu set mname=?,mtype=?,mprice=?,mcooktime=?,mcount=? where mid = ?";
+         String sql = "update t_menu set mname=?,mtype=?,mprice=?,mcooktime=?,mstorage=?,mcount=? where mid = ?";
         //params中的参数是按顺序逐个给？赋值，所以需要注意数据表顺序
-        Object[] params = {m.getMname(), m.getMtype(), m.getMprice(), m.getMcooktime(),
+        Object[] params = {m.getMname(), m.getMtype(), m.getMprice(), m.getMcooktime(),m.getMstorage(),
             m.getMcount(), m.getMid()};
         return edao.update(sql, params);
     }

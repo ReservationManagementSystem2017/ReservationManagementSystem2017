@@ -71,6 +71,8 @@ public class CookMenuManageFrame extends javax.swing.JInternalFrame {
         btnAdd = new javax.swing.JButton();
         btnExit = new javax.swing.JButton();
 
+        setClosable(true);
+
         btnSearch.setText("查询");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

@@ -18,7 +18,6 @@ import com.view.manage.MenuManageFrame;
 import com.view.manage.RoomManageFrame;
 import com.view.manage.TableManageFrame;
 import com.view.manage.CookMenuManageFrame;
-import com.view.manage.RoomOrTableManageFrame;
 import com.view.order.BillByWaiterFrame;
 import com.view.order.OrderDishesByCookFrame;
 import com.view.order.OrderByWaiterFrame;
@@ -78,7 +77,6 @@ public class MainFrame extends javax.swing.JFrame {
         itemCustomerManage = new javax.swing.JMenuItem();
         itemDiscountManage = new javax.swing.JMenuItem();
         itemManuManage = new javax.swing.JMenuItem();
-        itemRoomOrTableManage = new javax.swing.JMenuItem();
         itemRoomManage = new javax.swing.JMenuItem();
         itemTableManage = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -178,14 +176,6 @@ public class MainFrame extends javax.swing.JFrame {
         });
         mnuManager.add(itemManuManage);
 
-        itemRoomOrTableManage.setText("房间与餐桌管理");
-        itemRoomOrTableManage.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemRoomOrTableManageActionPerformed(evt);
-            }
-        });
-        mnuManager.add(itemRoomOrTableManage);
-
         itemRoomManage.setText("房间管理");
         itemRoomManage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -267,10 +257,6 @@ public class MainFrame extends javax.swing.JFrame {
     private void itemDiscountManageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemDiscountManageActionPerformed
         showFrame(DiscountManageFrame.class);
     }//GEN-LAST:event_itemDiscountManageActionPerformed
-
-    private void itemRoomOrTableManageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemRoomOrTableManageActionPerformed
-      showFrame(RoomOrTableManageFrame.class);
-    }//GEN-LAST:event_itemRoomOrTableManageActionPerformed
 
     private void itemOrderByWaiterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemOrderByWaiterActionPerformed
        showFrame(OrderByWaiterFrame.class);
@@ -410,7 +396,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemOrderDishesByCook;
     private javax.swing.JMenuItem itemOrderDishesByWaiter;
     private javax.swing.JMenuItem itemRoomManage;
-    private javax.swing.JMenuItem itemRoomOrTableManage;
     private javax.swing.JMenuItem itemSearchBill;
     private javax.swing.JMenuItem itemTableManage;
     private javax.swing.JMenu jMenu1;

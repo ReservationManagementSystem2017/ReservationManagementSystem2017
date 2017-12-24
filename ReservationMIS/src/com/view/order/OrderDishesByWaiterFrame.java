@@ -69,6 +69,8 @@ public class OrderDishesByWaiterFrame extends javax.swing.JInternalFrame {
         btnShangcai = new javax.swing.JButton();
         btnExit1 = new javax.swing.JButton();
 
+        setClosable(true);
+
         lblDish.setText("待上菜");
 
         btnSearch.setText("查询");
