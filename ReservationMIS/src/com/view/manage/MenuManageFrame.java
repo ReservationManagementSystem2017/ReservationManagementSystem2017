@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
  */
 
 public class MenuManageFrame extends javax.swing.JInternalFrame {
-MenuBiz mbiz=new MenuBizImpl();
+    MenuBiz mbiz=new MenuBizImpl();
     /**
      * Creates new form MenuManageFrame
      */

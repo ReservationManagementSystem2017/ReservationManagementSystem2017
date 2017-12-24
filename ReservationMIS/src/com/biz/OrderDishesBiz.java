@@ -33,11 +33,21 @@ public interface OrderDishesBiz {
     
     //根据OID和相应的状态去寻找所有的菜品记录
     public List<OrderDishes> findByOid(int oid);
+    
    //查找已经做好的菜
     public List<OrderDishes> findFinshed();
+    
     //上菜
     public boolean Shangcai(OrderDishes od);
+    
+    
     public boolean Zuocai(int odid);
+    
     public boolean Wanchengcai(int odid);
+    
     public List<OrderDishes> findByEid(int state ,int eid);
+    
+    //根据菜单编号查找昨天的所有点的菜
+    public List<OrderDishes> findYesterdayByMid(String time,int mid);
+    
 }

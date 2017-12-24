@@ -67,6 +67,22 @@ public class MenuBizImpl implements MenuBiz{
         Object[] params = {mid};
         
         return (Menu) edao.get(sql, Menu.class, params);
-        
     }
+     
+
+    public boolean addMstorage(int mid,int number)
+    {
+        String sql = "update t_menu set mstorage = mstorage + ?  where mid = ?";
+        Object[] params = {number,mid};
+        return edao.update(sql, params);
+    }
+    
+
+    public boolean reduceMstorage(int mid,int number)
+    {
+       String sql = "update t_menu set mstorage = mstorage - ?  where mid = ?";
+        Object[] params = {number,mid};
+        return edao.update(sql, params);
+    }
+     
 }

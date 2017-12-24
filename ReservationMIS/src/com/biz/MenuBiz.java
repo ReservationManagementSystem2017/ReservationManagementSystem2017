@@ -31,6 +31,14 @@ public interface MenuBiz {
 
     // 6 菜单姓名模糊查询
     public List<Menu> findByCondition(String condition);
+    
+    //根据mid查找菜单
     public Menu findByMid(int mid);
+    
+    // 增加库存数量
+    public boolean addMstorage(int mid,int number);
+    
+    //减少库存数量
+    public boolean reduceMstorage(int mid,int number);
 
 }

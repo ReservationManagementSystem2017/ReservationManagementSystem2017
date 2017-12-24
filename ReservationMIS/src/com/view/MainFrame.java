@@ -18,6 +18,7 @@ import com.view.manage.MenuManageFrame;
 import com.view.manage.RoomManageFrame;
 import com.view.manage.TableManageFrame;
 import com.view.manage.CookMenuManageFrame;
+import com.view.manage.PurchaseManageFrame;
 import com.view.order.BillByWaiterFrame;
 import com.view.order.OrderDishesByCookFrame;
 import com.view.order.OrderByWaiterFrame;
@@ -34,8 +35,10 @@ import javax.swing.JOptionPane;
  * @author Administrator
  */
 public class MainFrame extends javax.swing.JFrame {
-     public User user = null;//设置静态值对象，供界面传值用
+
+    public User user = null;//设置静态值对象，供界面传值用
     public static String permission = null;
+
     /**
      * Createsd new form MainFrame
      */
@@ -46,10 +49,11 @@ public class MainFrame extends javax.swing.JFrame {
 //        初始化按键
         initButton(permission);
     }
-    
- private void initButton(String permission) {
-     
+
+    private void initButton(String permission) {
+
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -79,7 +83,8 @@ public class MainFrame extends javax.swing.JFrame {
         itemManuManage = new javax.swing.JMenuItem();
         itemRoomManage = new javax.swing.JMenuItem();
         itemTableManage = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        itemCookMenu = new javax.swing.JMenuItem();
+        itemPurchase = new javax.swing.JMenuItem();
         mnuSearch = new javax.swing.JMenu();
         itemOrderDetail = new javax.swing.JMenuItem();
         itemSearchBill = new javax.swing.JMenuItem();
@@ -192,13 +197,21 @@ public class MainFrame extends javax.swing.JFrame {
         });
         mnuManager.add(itemTableManage);
 
-        jMenuItem1.setText("厨师菜品关联管理");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        itemCookMenu.setText("厨师菜品关联管理");
+        itemCookMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                itemCookMenuActionPerformed(evt);
             }
         });
-        mnuManager.add(jMenuItem1);
+        mnuManager.add(itemCookMenu);
+
+        itemPurchase.setText("采购管理");
+        itemPurchase.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemPurchaseActionPerformed(evt);
+            }
+        });
+        mnuManager.add(itemPurchase);
 
         jMenuBar1.add(mnuManager);
 
@@ -251,7 +264,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_itemCustomerManageActionPerformed
 
     private void itemManuManageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemManuManageActionPerformed
-       showFrame(MenuManageFrame.class);
+        showFrame(MenuManageFrame.class);
     }//GEN-LAST:event_itemManuManageActionPerformed
 
     private void itemDiscountManageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemDiscountManageActionPerformed
@@ -259,11 +272,11 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_itemDiscountManageActionPerformed
 
     private void itemOrderByWaiterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemOrderByWaiterActionPerformed
-       showFrame(OrderByWaiterFrame.class);
+        showFrame(OrderByWaiterFrame.class);
     }//GEN-LAST:event_itemOrderByWaiterActionPerformed
 
     private void itemBillByWaiterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemBillByWaiterActionPerformed
-         showFrame(BillByWaiterFrame.class);
+        showFrame(BillByWaiterFrame.class);
     }//GEN-LAST:event_itemBillByWaiterActionPerformed
 
     private void itemOrderDishesByCookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemOrderDishesByCookActionPerformed
@@ -282,7 +295,7 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_itemLoginActionPerformed
 
     private void itemOrderDishesByWaiterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemOrderDishesByWaiterActionPerformed
-     showFrame(OrderDishesByWaiterFrame.class);
+        showFrame(OrderDishesByWaiterFrame.class);
     }//GEN-LAST:event_itemOrderDishesByWaiterActionPerformed
 
     private void itemRoomManageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemRoomManageActionPerformed
@@ -298,13 +311,16 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_itemOrderDetailActionPerformed
 
     private void itemSearchBillActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemSearchBillActionPerformed
-       showFrame(SearchBillFrame.class);
+        showFrame(SearchBillFrame.class);
     }//GEN-LAST:event_itemSearchBillActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        // TODO add your handling code here:
-        showFrame( CookMenuManageFrame.class);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    private void itemCookMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemCookMenuActionPerformed
+        showFrame(CookMenuManageFrame.class);
+    }//GEN-LAST:event_itemCookMenuActionPerformed
+
+    private void itemPurchaseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemPurchaseActionPerformed
+        showFrame(PurchaseManageFrame.class);
+    }//GEN-LAST:event_itemPurchaseActionPerformed
 
     /**
      * @param args the command line arguments
@@ -340,8 +356,8 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
     }
-    
-     //显示内部窗体的公共方法
+
+    //显示内部窗体的公共方法
     public void showFrame(Class clazz) {
         try {
             //打开商品管理内部窗体
@@ -352,7 +368,7 @@ public class MainFrame extends javax.swing.JFrame {
             //3桌面容器再添加
             this.mainDeskPaneDell.add(frame);
             //4显示
-            LocationUtil.setParentCenter(this,frame);
+            LocationUtil.setParentCenter(this, frame);
             frame.setVisible(true);
             //5显示在最前
             frame.toFront();
@@ -362,19 +378,19 @@ public class MainFrame extends javax.swing.JFrame {
             ex.printStackTrace();
         }
     }
-    
-     //显示内部窗体的公共方法
-    public void showFrame(Class clazz,User user) {
+
+    //显示内部窗体的公共方法
+    public void showFrame(Class clazz, User user) {
         try {
             //打开商品管理内部窗体
             //1new对象
-            JInternalFrame frame = FrameUtil.buildFrame(clazz,user);
+            JInternalFrame frame = FrameUtil.buildFrame(clazz, user);
             //2桌面容器先删除
             this.mainDeskPaneDell.remove(frame);
             //3桌面容器再添加
             this.mainDeskPaneDell.add(frame);
             //4显示
-           LocationUtil.setParentCenter(this,frame);
+            LocationUtil.setParentCenter(this, frame);
             frame.setVisible(true);
             //5显示在最前
             frame.toFront();
@@ -386,6 +402,7 @@ public class MainFrame extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem itemBillByWaiter;
+    private javax.swing.JMenuItem itemCookMenu;
     private javax.swing.JMenuItem itemCustomerManage;
     private javax.swing.JMenuItem itemDiscountManage;
     private javax.swing.JMenuItem itemEmployeeManage;
@@ -395,6 +412,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem itemOrderDetail;
     private javax.swing.JMenuItem itemOrderDishesByCook;
     private javax.swing.JMenuItem itemOrderDishesByWaiter;
+    private javax.swing.JMenuItem itemPurchase;
     private javax.swing.JMenuItem itemRoomManage;
     private javax.swing.JMenuItem itemSearchBill;
     private javax.swing.JMenuItem itemTableManage;
@@ -403,7 +421,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
-    private javax.swing.JMenuItem jMenuItem1;
     private com.view.MainDeskPaneDell mainDeskPaneDell;
     private javax.swing.JMenu mnuManager;
     private javax.swing.JMenu mnuOrder;
