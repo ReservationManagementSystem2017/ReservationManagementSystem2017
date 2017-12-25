@@ -4,9 +4,10 @@
  * and open the template in the editor.
  */
 package com.view.manage;
+
 import com.biz.CustomerBiz;
 import com.biz.CustomerBizImpl;
-import com.po.Customer; 
+import com.po.Customer;
 import com.util.StringUtil;
 import java.util.List;
 import java.util.Vector;
@@ -18,7 +19,9 @@ import javax.swing.table.DefaultTableModel;
  * @author Administrator
  */
 public class CustomerManageFrame extends javax.swing.JInternalFrame {
-    CustomerBiz cbiz=new CustomerBizImpl();
+
+    CustomerBiz cbiz = new CustomerBizImpl();
+
     /**
      * Creates new form CustomerManageFrame
      */
@@ -29,7 +32,7 @@ public class CustomerManageFrame extends javax.swing.JInternalFrame {
         this.btnSave.setEnabled(false);
         this.btnDelete.setEnabled(false);
         this.btnCancel.setEnabled(false);
-        
+
     }
 
     /**
@@ -60,7 +63,6 @@ public class CustomerManageFrame extends javax.swing.JInternalFrame {
         btnDelete = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         btnExit = new javax.swing.JButton();
-        btnExport = new javax.swing.JButton();
         txtCondition = new javax.swing.JTextField();
 
         setClosable(true);
@@ -81,11 +83,11 @@ public class CustomerManageFrame extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "顾客ID", "顾客姓名", "积分", "联系方式"
+                "顾客编号", "顾客姓名", "积分", "联系方式"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, false, true, true
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -98,10 +100,16 @@ public class CustomerManageFrame extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane1.setViewportView(tblCustomer);
+        if (tblCustomer.getColumnModel().getColumnCount() > 0) {
+            tblCustomer.getColumnModel().getColumn(0).setResizable(false);
+            tblCustomer.getColumnModel().getColumn(1).setResizable(false);
+            tblCustomer.getColumnModel().getColumn(2).setResizable(false);
+            tblCustomer.getColumnModel().getColumn(3).setResizable(false);
+        }
 
         lblCID.setFont(new java.awt.Font("宋体", 1, 14)); // NOI18N
         lblCID.setForeground(new java.awt.Color(204, 0, 0));
-        lblCID.setText("顾客ID");
+        lblCID.setText("顾客编号");
         lblCID.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
 
         txtCid.setEditable(false);
@@ -129,6 +137,7 @@ public class CustomerManageFrame extends javax.swing.JInternalFrame {
         lblscore.setText("积分");
         lblscore.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
 
+        txtscorce.setEditable(false);
         txtscorce.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
 
         lblCtel.setFont(new java.awt.Font("微软雅黑 Light", 1, 14)); // NOI18N
@@ -208,16 +217,6 @@ public class CustomerManageFrame extends javax.swing.JInternalFrame {
             }
         });
 
-        btnExport.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
-        btnExport.setText("Export");
-        btnExport.setToolTipText("导出excel表");
-        btnExport.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
-        btnExport.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExportActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout lblEmpidLayout = new javax.swing.GroupLayout(lblEmpid);
         lblEmpid.setLayout(lblEmpidLayout);
         lblEmpidLayout.setHorizontalGroup(
@@ -238,13 +237,12 @@ public class CustomerManageFrame extends javax.swing.JInternalFrame {
                             .addComponent(txtCid, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
                             .addComponent(lblCname)))
-                    .addGroup(lblEmpidLayout.createSequentialGroup()
-                        .addComponent(lblNotice)
-                        .addGap(30, 30, 30)
-                        .addComponent(btnLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(lblNotice))
                 .addGap(18, 18, 18)
                 .addGroup(lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(lblEmpidLayout.createSequentialGroup()
+                        .addComponent(btnLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(34, 34, 34)
                         .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -252,9 +250,7 @@ public class CustomerManageFrame extends javax.swing.JInternalFrame {
                         .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnExport, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(31, 31, 31)
                         .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txtCname, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCtel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -283,8 +279,7 @@ public class CustomerManageFrame extends javax.swing.JInternalFrame {
                     .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNotice)
-                    .addComponent(btnExport, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblNotice))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -393,10 +388,8 @@ public class CustomerManageFrame extends javax.swing.JInternalFrame {
         //新增商品
         //1获取员工信息
         String cname = this.txtCname.getText().trim();
-        double scorce=Double.parseDouble(this.txtscorce.getText());
-        
         String ctel = this.txtCtel.getText().trim();
-       
+
         //员工名称非空验证，中文验证
         if (StringUtil.checkLength(cname) == false) {
             JOptionPane.showMessageDialog(this, "员工名称不能为空");
@@ -406,7 +399,6 @@ public class CustomerManageFrame extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "姓名须由2-4个中文组成");
             return;
         }
-        
         //手机非空验证,数字验证
         if (StringUtil.checkLength(ctel) == false) {
             JOptionPane.showMessageDialog(this, "手机号不能为空");
@@ -416,9 +408,9 @@ public class CustomerManageFrame extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "手机号须由11位数字组成");
             return;
         }
-  
+        double cscore = 0;//新注册用户积分为0
 
-        Customer c = new Customer( null, cname,scorce,ctel  );
+        Customer c = new Customer(null, cname, cscore, ctel);
         //调用业务类
         boolean result = cbiz.add(c);
         if (result == true) {
@@ -435,13 +427,18 @@ public class CustomerManageFrame extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        //修改员工
-        //1获取员工信息
+        if (StringUtil.checkLength(this.txtCid.getText().trim()) == false) {
+            JOptionPane.showMessageDialog(this, "请在表格中进行选择");
+            return;
+        }
+        //修改顾客
+        //1获取顾客信息
+        //顾客编号非空验证
         int cid = Integer.parseInt(this.txtCid.getText());
         String cname = this.txtCname.getText().trim();
-        double scorce=Double.parseDouble(this.txtscorce.getText());
+        double scorce = Double.parseDouble(this.txtscorce.getText());
         String ctel = this.txtCtel.getText().trim();
-       
+
         //员工名称非空验证，中文验证
         if (StringUtil.checkLength(cname) == false) {
             JOptionPane.showMessageDialog(this, "员工名称不能为空");
@@ -451,7 +448,7 @@ public class CustomerManageFrame extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "姓名须由2-4个中文组成");
             return;
         }
-       
+
         //手机非空验证,数字验证
         if (StringUtil.checkLength(ctel) == false) {
             JOptionPane.showMessageDialog(this, "手机号不能为空");
@@ -461,8 +458,9 @@ public class CustomerManageFrame extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "手机号须由11位数字组成");
             return;
         }
+
         //组合对象
-       Customer c = new Customer(cid, cname,scorce, ctel );
+        Customer c = new Customer(cid, cname, scorce, ctel);
         //调用业务类
         boolean result = cbiz.update(c);
         if (result == true) {
@@ -538,40 +536,6 @@ public class CustomerManageFrame extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnExitActionPerformed
 
-    private void btnExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportActionPerformed
-        //        List<ProductManager> pmlist = new ArrayList<>();
-        //        // 显示list中的信息
-        //        int row = this.tblProduct.getRowCount();
-        //        for (int i = 0; i < row; i++) {
-            //            ProductManager pm = new ProductManager(
-                //                (Integer)this.tblProduct.getValueAt(i, 0),(String)this.tblProduct.getValueAt(i, 1),(String)this.tblProduct.getValueAt(i, 2),
-                //                (Integer)this.tblProduct.getValueAt(i, 3),(Integer)this.tblProduct.getValueAt(i, 4),(BigDecimal)this.tblProduct.getValueAt(i, 5),
-                //                (BigDecimal)this.tblProduct.getValueAt(i, 6),(String)this.tblProduct.getValueAt(i, 7),(String)this.tblProduct.getValueAt(i, 8));
-            //            pmlist.add(pm);
-            //        }
-        //        JFileChooser savefile = new JFileChooser();//文件选择对话框
-        //        FileFilter filter = new FileNameExtensionFilter("Excel文件(*.xls)", "xls");
-        //        savefile.addChoosableFileFilter(filter);//添加过滤器
-        //        savefile.setFileFilter(filter);
-        //        //打开文件选择对话框，showSaveDialog是保存，showOpenDialog是打开
-        //        int flag = savefile.showSaveDialog(this);
-        //        File file = null;
-        //        //如果点击了保存按钮
-        //        if (flag == JFileChooser.APPROVE_OPTION) {
-            //            file = savefile.getSelectedFile();//所选择的文件名（手写或选择）
-            //            System.out.println("文件名：" + file.getAbsolutePath());
-            //            String filename = file.getAbsolutePath();
-            //            //截取文件扩展名（文件名长度后4位）
-            //            String ftype = filename.substring(filename.length() - 4);
-            //            if (!ftype.equals(".xls")) {
-                //                //如果用户没有填写扩展名，自动添加扩展名.xls
-                //                file = new File(filename + ".xls");
-                //            }
-            //            //集合获取数据，输出到文件：ExportExcel类的printSale方法
-            //            ExportExcel.printProductManager(pmlist, file); //psalelist是要导出到excel的数据集合，来自有数据库查询
-            //        }
-    }//GEN-LAST:event_btnExportActionPerformed
-
     private void txtConditionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtConditionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtConditionActionPerformed
@@ -579,15 +543,16 @@ public class CustomerManageFrame extends javax.swing.JInternalFrame {
     private void txtConditionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtConditionKeyPressed
         this.getRootPane().setDefaultButton(btnSearch);
     }//GEN-LAST:event_txtConditionKeyPressed
-   private void clearInput() {
+    private void clearInput() {
         this.txtCid.setText("");
         this.txtCname.setText("");
-         this.txtscorce.setText("");
+        this.txtscorce.setText("");
         this.txtCtel.setText("");
-         
+
         tblCustomer.clearSelection();
-    }  
-     public void showOnTable(List<Customer> list) {
+    }
+
+    public void showOnTable(List<Customer> list) {
         //1.获取表格模型
         DefaultTableModel dtm = (DefaultTableModel) this.tblCustomer.getModel();
         //2.清空表格信息
@@ -597,21 +562,20 @@ public class CustomerManageFrame extends javax.swing.JInternalFrame {
         //3.显示数据
         for (Customer c : list) {
             Vector vt = new Vector();
-            vt.add( c.getCid());
+            vt.add(c.getCid());
             vt.add(c.getCname());
             vt.add(c.getCscore());
-            vt.add( c.getCphone());
-            
+            vt.add(c.getCphone());
+
             dtm.addRow(vt);
         }
-    } 
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnExit;
-    private javax.swing.JButton btnExport;
     private javax.swing.JButton btnLoad;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSearch;

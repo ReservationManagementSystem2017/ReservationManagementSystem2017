@@ -92,11 +92,11 @@ public class CookMenuManageFrame extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "厨师姓名", "菜品名称", "Cmid"
+                "编号", "厨师姓名", "菜品名称", "菜品种类"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -110,7 +110,10 @@ public class CookMenuManageFrame extends javax.swing.JInternalFrame {
         });
         jScrollPane2.setViewportView(tblRelation);
         if (tblRelation.getColumnModel().getColumnCount() > 0) {
-            tblRelation.getColumnModel().getColumn(1).setHeaderValue("菜品名称");
+            tblRelation.getColumnModel().getColumn(0).setResizable(false);
+            tblRelation.getColumnModel().getColumn(1).setResizable(false);
+            tblRelation.getColumnModel().getColumn(2).setResizable(false);
+            tblRelation.getColumnModel().getColumn(3).setResizable(false);
         }
 
         btnSearch1.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
@@ -153,6 +156,7 @@ public class CookMenuManageFrame extends javax.swing.JInternalFrame {
         lblEmpname.setToolTipText("员工姓名须由2-4个中文组成");
         lblEmpname.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
 
+        txtMenuname.setEditable(false);
         txtMenuname.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
         txtMenuname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -181,11 +185,11 @@ public class CookMenuManageFrame extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "菜品ID", "菜品姓名"
+                "菜品ID", "菜品姓名", "菜品种类"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, false
+                false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -198,6 +202,11 @@ public class CookMenuManageFrame extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane3.setViewportView(tblmenu);
+        if (tblmenu.getColumnModel().getColumnCount() > 0) {
+            tblmenu.getColumnModel().getColumn(0).setResizable(false);
+            tblmenu.getColumnModel().getColumn(1).setResizable(false);
+            tblmenu.getColumnModel().getColumn(2).setResizable(false);
+        }
 
         lblMenuname.setFont(new java.awt.Font("微软雅黑 Light", 1, 14)); // NOI18N
         lblMenuname.setForeground(new java.awt.Color(204, 0, 51));
@@ -205,6 +214,7 @@ public class CookMenuManageFrame extends javax.swing.JInternalFrame {
         lblMenuname.setToolTipText("员工姓名须由2-4个中文组成");
         lblMenuname.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
 
+        txtEmpname1.setEditable(false);
         txtEmpname1.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
         txtEmpname1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -244,17 +254,16 @@ public class CookMenuManageFrame extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(218, 218, 218)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(112, 112, 112)
-                                .addComponent(btnSearchmenu, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(330, 330, 330)
+                        .addComponent(btnSearchmenu, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(24, 24, 24)
                         .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(39, 39, 39)
-                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(115, 115, 115)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(31, 31, 31)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -319,7 +328,7 @@ public class CookMenuManageFrame extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(19, 19, 19)
                         .addComponent(lblEmpname)))
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(49, 49, 49)
@@ -336,7 +345,7 @@ public class CookMenuManageFrame extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-         
+        
         List<CookMenu> list =  cmbiz.findAll();
         showOnTable(list);
     }//GEN-LAST:event_btnSearchActionPerformed
@@ -371,12 +380,8 @@ public class CookMenuManageFrame extends javax.swing.JInternalFrame {
 
     private void btnSearch1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearch1ActionPerformed
         //模糊查询
-       
         List<Employee> list = ebiz.findByCook( );
         showOnTableCook(list);
-    
-      
-        
     }//GEN-LAST:event_btnSearch1ActionPerformed
 
     private void tblEmployeeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblEmployeeMouseClicked
@@ -420,16 +425,20 @@ public class CookMenuManageFrame extends javax.swing.JInternalFrame {
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         
         //1获取员工信息
-        //String ename=this.txtEmpname1.getText().trim();
-        //String mname=this.txtMenuname.getText().trim();
         int row1 = this.tblEmployee.getSelectedRow();
         int row2 = this.tblmenu.getSelectedRow();
         
         int eid =  Integer.parseInt(this.tblEmployee.getValueAt(row1, 0).toString());
         int mid= Integer.parseInt(this.tblmenu.getValueAt(row2, 0).toString());
         CookMenu cm = new CookMenu( null, eid, mid );
-        //int cid = Integer.parseInt(this.txtCid.getText());
         //调用业务类
+        List<CookMenu> cmlist  = cmbiz.isRepetion(eid, mid);
+        if(cmlist.isEmpty()==false)
+        {
+            JOptionPane.showMessageDialog(this, "请不要进行重复操作");
+            return;
+        }
+            
         boolean result = cmbiz.add(cm);
         if (result == true) {
             JOptionPane.showMessageDialog(this, "添加成功");
@@ -480,6 +489,7 @@ public class CookMenuManageFrame extends javax.swing.JInternalFrame {
         //3.显示数据
         for(CookMenu cm : list){
             Vector vt=new Vector();
+            vt.add(cm.getCmid());
             Integer eid=cm.getEid();
             Employee e=ebiz.findByID(eid);
             String ename=e.getEname();
@@ -487,8 +497,9 @@ public class CookMenuManageFrame extends javax.swing.JInternalFrame {
             Integer mid=cm.getMid();
             Menu m=mbiz.findByID(mid);
             String mname=m.getMname();
+            String mtype=m.getMtype();
             vt.add(mname);
-            vt.add(cm.getCmid());
+            vt.add(mtype);
             dtm.addRow(vt);
         }   
     }
@@ -525,7 +536,9 @@ public class CookMenuManageFrame extends javax.swing.JInternalFrame {
             Integer mid=m.getMid();
             vt.add(mid);
             String mname=m.getMname();
+            String mtype=m.getMtype();
             vt.add(mname);
+            vt.add(mtype);
             
             dtm.addRow(vt);
         }   

@@ -93,30 +93,30 @@
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
               <Table columnCount="4" rowCount="0">
-                <Column editable="true" title="&#x987e;&#x5ba2;ID" type="java.lang.Object"/>
+                <Column editable="false" title="&#x987e;&#x5ba2;&#x7f16;&#x53f7;" type="java.lang.Object"/>
                 <Column editable="false" title="&#x987e;&#x5ba2;&#x59d3;&#x540d;" type="java.lang.Object"/>
-                <Column editable="true" title="&#x79ef;&#x5206;" type="java.lang.Object"/>
-                <Column editable="true" title="&#x8054;&#x7cfb;&#x65b9;&#x5f0f;" type="java.lang.Object"/>
+                <Column editable="false" title="&#x79ef;&#x5206;" type="java.lang.Object"/>
+                <Column editable="false" title="&#x8054;&#x7cfb;&#x65b9;&#x5f0f;" type="java.lang.Object"/>
               </Table>
             </Property>
             <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
               <TableColumnModel selectionModel="0">
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                   <Title/>
                   <Editor/>
                   <Renderer/>
                 </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                   <Title/>
                   <Editor/>
                   <Renderer/>
                 </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                   <Title/>
                   <Editor/>
                   <Renderer/>
                 </Column>
-                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
+                <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="false">
                   <Title/>
                   <Editor/>
                   <Renderer/>
@@ -157,15 +157,13 @@
                               <Component id="lblCname" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="lblNotice" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="btnLoad" min="-2" pref="70" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="lblNotice" alignment="0" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
+                          <Component id="btnLoad" min="-2" pref="70" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="btnAdd" min="-2" pref="70" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                           <Component id="btnSave" min="-2" pref="70" max="-2" attributes="0"/>
@@ -173,9 +171,7 @@
                           <Component id="btnDelete" min="-2" pref="70" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="btnCancel" min="-2" pref="70" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="btnExport" min="-2" pref="70" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                           <Component id="btnExit" min="-2" pref="70" max="-2" attributes="0"/>
                       </Group>
                       <Component id="txtCname" alignment="0" min="-2" pref="130" max="-2" attributes="0"/>
@@ -211,7 +207,6 @@
                       <Component id="btnDelete" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="btnAdd" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       <Component id="lblNotice" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnExport" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -227,7 +222,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="cc" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="&#x987e;&#x5ba2;ID"/>
+            <Property name="text" type="java.lang.String" value="&#x987e;&#x5ba2;&#x7f16;&#x53f7;"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.SoftBevelBorderInfo">
                 <BevelBorder>
@@ -313,6 +308,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtscorce">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                 <EtchetBorder>
@@ -501,28 +497,6 @@
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExitActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="btnExport">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Arial Black" size="14" style="0"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="Export"/>
-            <Property name="toolTipText" type="java.lang.String" value="&#x5bfc;&#x51fa;excel&#x8868;"/>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.SoftBevelBorderInfo">
-                <BevelBorder>
-                  <Color PropertyName="highlightOuter" blue="ff" green="66" red="66" type="rgb"/>
-                  <Color PropertyName="highlightInner" blue="ff" green="99" red="99" type="rgb"/>
-                  <Color PropertyName="shadowOuter" blue="ff" green="33" red="ff" type="rgb"/>
-                  <Color PropertyName="shadowInner" blue="ff" green="66" red="cc" type="rgb"/>
-                </BevelBorder>
-              </Border>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExportActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

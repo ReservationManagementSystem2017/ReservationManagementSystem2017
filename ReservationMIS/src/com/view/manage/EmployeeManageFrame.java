@@ -13,14 +13,15 @@ import java.util.List;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
- 
 
 /**
  *
  * @author Administrator
  */
 public class EmployeeManageFrame extends javax.swing.JInternalFrame {
-    EmployeeBiz ebiz=new EmployeeBizImpl(); 
+
+    EmployeeBiz ebiz = new EmployeeBizImpl();
+
     /**
      * Creates new form EmployeeManageFrame
      */
@@ -36,7 +37,8 @@ public class EmployeeManageFrame extends javax.swing.JInternalFrame {
         //初始化Type
         initEmpType();
     }
-     private void initEmpSex() {
+
+    private void initEmpSex() {
         //模拟从数据库中获取Title并填充到组合框
         String[] sex = {"男", "女"};
         for (String s : sex) {
@@ -44,15 +46,16 @@ public class EmployeeManageFrame extends javax.swing.JInternalFrame {
         }
 
     }
-     private void initEmpType() {
+
+    private void initEmpType() {
         //工作性质
-         //服务员，厨师，采购员
-         String [] type = {"服务员","厨师","采购员" };
+        //服务员，厨师，采购员
+        String[] type = {"服务员", "厨师", "采购员"};
         for (String s : type) {
             this.cobEmptitle.addItem(s);
         }
     }
-     
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -87,7 +90,6 @@ public class EmployeeManageFrame extends javax.swing.JInternalFrame {
         btnDelete = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         btnExit = new javax.swing.JButton();
-        btnExport = new javax.swing.JButton();
         txtCondition = new javax.swing.JTextField();
 
         setClosable(true);
@@ -108,11 +110,11 @@ public class EmployeeManageFrame extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "员工ID", "员工姓名", "性别", "年龄", "工资", "联系方式", "身份"
+                "员工编号", "员工姓名", "性别", "年龄", "工资", "联系方式", "身份"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, false, false, true, true, true, true
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -125,10 +127,19 @@ public class EmployeeManageFrame extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane1.setViewportView(tblEmployee);
+        if (tblEmployee.getColumnModel().getColumnCount() > 0) {
+            tblEmployee.getColumnModel().getColumn(0).setResizable(false);
+            tblEmployee.getColumnModel().getColumn(1).setResizable(false);
+            tblEmployee.getColumnModel().getColumn(2).setResizable(false);
+            tblEmployee.getColumnModel().getColumn(3).setResizable(false);
+            tblEmployee.getColumnModel().getColumn(4).setResizable(false);
+            tblEmployee.getColumnModel().getColumn(5).setResizable(false);
+            tblEmployee.getColumnModel().getColumn(6).setResizable(false);
+        }
 
         lblEmpID.setFont(new java.awt.Font("宋体", 1, 14)); // NOI18N
         lblEmpID.setForeground(new java.awt.Color(204, 0, 0));
-        lblEmpID.setText("员工ID");
+        lblEmpID.setText("员工编号");
         lblEmpID.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
 
         txtEmpid.setEditable(false);
@@ -282,16 +293,6 @@ public class EmployeeManageFrame extends javax.swing.JInternalFrame {
             }
         });
 
-        btnExport.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
-        btnExport.setText("Export");
-        btnExport.setToolTipText("导出excel表");
-        btnExport.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
-        btnExport.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExportActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout lblEmpidLayout = new javax.swing.GroupLayout(lblEmpid);
         lblEmpid.setLayout(lblEmpidLayout);
         lblEmpidLayout.setHorizontalGroup(
@@ -312,12 +313,27 @@ public class EmployeeManageFrame extends javax.swing.JInternalFrame {
                             .addComponent(txtEmpid, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
                             .addComponent(lblEmpname)))
-                    .addGroup(lblEmpidLayout.createSequentialGroup()
-                        .addComponent(lblNotice)
-                        .addGap(30, 30, 30)
-                        .addComponent(btnLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(lblNotice))
                 .addGap(18, 18, 18)
                 .addGroup(lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(lblEmpidLayout.createSequentialGroup()
+                        .addGroup(lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(lblEmpidLayout.createSequentialGroup()
+                                .addComponent(lblEmptype)
+                                .addGap(36, 36, 36)
+                                .addComponent(cobEmptitle, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(lblEmpidLayout.createSequentialGroup()
+                                .addComponent(btnLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(34, 34, 34)
+                                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28)
+                                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(40, 40, 40)
+                        .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(lblEmpidLayout.createSequentialGroup()
                         .addComponent(txtEmpname, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(32, 32, 32)
@@ -328,28 +344,8 @@ public class EmployeeManageFrame extends javax.swing.JInternalFrame {
                         .addComponent(lblEmpage)
                         .addGap(18, 18, 18)
                         .addComponent(txtage, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtEmptel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(lblEmpidLayout.createSequentialGroup()
-                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
-                        .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(lblEmpidLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(lblEmptype)
-                                .addGap(160, 160, 160)
-                                .addComponent(cobEmptitle, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(lblEmpidLayout.createSequentialGroup()
-                                .addGap(28, 28, 28)
-                                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnExport, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addContainerGap())
+                    .addComponent(txtEmptel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         lblEmpidLayout.setVerticalGroup(
             lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -380,9 +376,8 @@ public class EmployeeManageFrame extends javax.swing.JInternalFrame {
                     .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNotice)
-                    .addComponent(btnExport, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(99, Short.MAX_VALUE))
+                    .addComponent(lblNotice))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
 
         txtCondition.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
@@ -423,7 +418,7 @@ public class EmployeeManageFrame extends javax.swing.JInternalFrame {
                     .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(lblEmpid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -502,25 +497,41 @@ public class EmployeeManageFrame extends javax.swing.JInternalFrame {
         //1获取员工信息
         String empname = this.txtEmpname.getText().trim();
         String empsex = this.cobEmpsex.getSelectedItem().toString().trim();
-        //String empage=this.txtage.getText().trim(); 
-        int empage=Integer.parseInt(this.txtage.getText());
-        double empwage=Double.parseDouble(this.txtEmpwage.getText());
-        //String empwage = this.txtEmpwage.getText().trim();
         String emptel = this.txtEmptel.getText().trim();
-        String emptype= this.cobEmptitle.getSelectedItem().toString().trim();
-       // int emptype=Integer.parseInt(this.cobEmptitle.getSelectedItem().toString().trim() );
+        String emptype = this.cobEmptitle.getSelectedItem().toString().trim();
+
         //员工名称非空验证，中文验证
         if (StringUtil.checkLength(empname) == false) {
             JOptionPane.showMessageDialog(this, "员工名称不能为空");
             return;
         }
-        /*if (StringUtil.checkName(empname) == false) {
+        if (StringUtil.checkName(empname) == false) {
             JOptionPane.showMessageDialog(this, "姓名须由2-4个中文组成");
             return;
-        }*/
+        }
         //性别非空验证
         if (StringUtil.checkLength(empsex) == false) {
             JOptionPane.showMessageDialog(this, "员工性别不能为空");
+            return;
+        }
+        //年龄非空验证
+        if (StringUtil.checkLength(this.txtage.getText().trim()) == false) {
+            JOptionPane.showMessageDialog(this, "员工年龄不能为空");
+            return;
+        }
+        //年数字验证
+        if (StringUtil.checkDigit(this.txtage.getText().trim()) == false) {
+            JOptionPane.showMessageDialog(this, "员工年龄只能为数字");
+            return;
+        }
+        //工资非空验证
+        if (StringUtil.checkLength(this.txtEmpwage.getText().trim()) == false) {
+            JOptionPane.showMessageDialog(this, "员工工资不能为空");
+            return;
+        }
+        //工资数字验证
+        if (StringUtil.checkDecimal(this.txtEmpwage.getText().trim()) == false) {
+            JOptionPane.showMessageDialog(this, "员工工资只能为数字");
             return;
         }
         //手机非空验证,数字验证
@@ -532,16 +543,17 @@ public class EmployeeManageFrame extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "手机号须由11位数字组成");
             return;
         }
-       
         //工作性质非空验证
         if (StringUtil.checkLength(emptype) == false) {
             JOptionPane.showMessageDialog(this, "工作性质不能为空");
             return;
         }
+
+        int empage = Integer.parseInt(this.txtage.getText().trim());
+        double empwage = Double.parseDouble(this.txtEmpwage.getText().trim());
+
         //组合对象
-       // Employee e = new Employee( empid, empname, empsex, empage, empwage, emptel , emptype);
-       
-        Employee e = new Employee( null, empname, empsex, empage, empwage, emptel , emptype);       
+        Employee e = new Employee(null, empname, empsex, empage, empwage, emptel, emptype);
         //调用业务类
         boolean result = ebiz.add(e);
         if (result == true) {
@@ -558,19 +570,21 @@ public class EmployeeManageFrame extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        //员工编号非空验证
+        if (StringUtil.checkLength(this.txtEmpid.getText().trim()) == false) {
+            JOptionPane.showMessageDialog(this, "请在表格中进行选择");
+            return;
+        }
         //修改员工
         //1获取员工信息
+       
         int empid = Integer.parseInt(this.txtEmpid.getText());
         String empname = this.txtEmpname.getText().trim();
         String empsex = this.cobEmpsex.getSelectedItem().toString().trim();
-        //String empage = this.txtage.getText().trim();
-        int empage=Integer.parseInt(this.txtage.getText());
-        //String empwage = this.txtEmpwage.getText().trim();
-        double empwage=Double.parseDouble(this.txtEmpwage.getText());
+
         String emptel = this.txtEmptel.getText().trim();
         String emptype = this.cobEmptitle.getSelectedItem().toString().trim();
-       // Integer emptype=Integer.parseInt(emptype1);
-        
+
         //员工名称非空验证，中文验证
         if (StringUtil.checkLength(empname) == false) {
             JOptionPane.showMessageDialog(this, "员工名称不能为空");
@@ -585,6 +599,26 @@ public class EmployeeManageFrame extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "员工性别不能为空");
             return;
         }
+        //年龄非空验证
+        if (StringUtil.checkLength(this.txtage.getText().trim()) == false) {
+            JOptionPane.showMessageDialog(this, "员工年龄不能为空");
+            return;
+        }
+        //年数字验证
+        if (StringUtil.checkDigit(this.txtage.getText().trim()) == false) {
+            JOptionPane.showMessageDialog(this, "员工年龄只能为数字");
+            return;
+        }
+        //工资非空验证
+        if (StringUtil.checkLength(this.txtEmpwage.getText().trim()) == false) {
+            JOptionPane.showMessageDialog(this, "员工工资不能为空");
+            return;
+        }
+        //工资数字验证
+        if (StringUtil.checkDecimal(this.txtEmpwage.getText().trim()) == false) {
+            JOptionPane.showMessageDialog(this, "员工工资只能为数字");
+            return;
+        }
         //手机非空验证,数字验证
         if (StringUtil.checkLength(emptel) == false) {
             JOptionPane.showMessageDialog(this, "手机号不能为空");
@@ -594,15 +628,16 @@ public class EmployeeManageFrame extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "手机号须由11位数字组成");
             return;
         }
-        //QQ数字验证
-       
         //工作性质非空验证
         if (StringUtil.checkLength(emptype) == false) {
             JOptionPane.showMessageDialog(this, "工作性质不能为空");
             return;
         }
+
+        int empage = Integer.parseInt(this.txtage.getText());
+        double empwage = Double.parseDouble(this.txtEmpwage.getText());
         //组合对象
-        Employee e = new Employee(empid, empname, empsex, empage, empwage, emptel,   emptype);
+        Employee e = new Employee(empid, empname, empsex, empage, empwage, emptel, emptype);
         //调用业务类
         boolean result = ebiz.update(e);
         if (result == true) {
@@ -678,40 +713,6 @@ public class EmployeeManageFrame extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnExitActionPerformed
 
-    private void btnExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportActionPerformed
-        //        List<ProductManager> pmlist = new ArrayList<>();
-        //        // 显示list中的信息
-        //        int row = this.tblProduct.getRowCount();
-        //        for (int i = 0; i < row; i++) {
-            //            ProductManager pm = new ProductManager(
-                //                (Integer)this.tblProduct.getValueAt(i, 0),(String)this.tblProduct.getValueAt(i, 1),(String)this.tblProduct.getValueAt(i, 2),
-                //                (Integer)this.tblProduct.getValueAt(i, 3),(Integer)this.tblProduct.getValueAt(i, 4),(BigDecimal)this.tblProduct.getValueAt(i, 5),
-                //                (BigDecimal)this.tblProduct.getValueAt(i, 6),(String)this.tblProduct.getValueAt(i, 7),(String)this.tblProduct.getValueAt(i, 8));
-            //            pmlist.add(pm);
-            //        }
-        //        JFileChooser savefile = new JFileChooser();//文件选择对话框
-        //        FileFilter filter = new FileNameExtensionFilter("Excel文件(*.xls)", "xls");
-        //        savefile.addChoosableFileFilter(filter);//添加过滤器
-        //        savefile.setFileFilter(filter);
-        //        //打开文件选择对话框，showSaveDialog是保存，showOpenDialog是打开
-        //        int flag = savefile.showSaveDialog(this);
-        //        File file = null;
-        //        //如果点击了保存按钮
-        //        if (flag == JFileChooser.APPROVE_OPTION) {
-            //            file = savefile.getSelectedFile();//所选择的文件名（手写或选择）
-            //            System.out.println("文件名：" + file.getAbsolutePath());
-            //            String filename = file.getAbsolutePath();
-            //            //截取文件扩展名（文件名长度后4位）
-            //            String ftype = filename.substring(filename.length() - 4);
-            //            if (!ftype.equals(".xls")) {
-                //                //如果用户没有填写扩展名，自动添加扩展名.xls
-                //                file = new File(filename + ".xls");
-                //            }
-            //            //集合获取数据，输出到文件：ExportExcel类的printSale方法
-            //            ExportExcel.printProductManager(pmlist, file); //psalelist是要导出到excel的数据集合，来自有数据库查询
-            //        }
-    }//GEN-LAST:event_btnExportActionPerformed
-
     private void txtConditionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtConditionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtConditionActionPerformed
@@ -731,9 +732,8 @@ public class EmployeeManageFrame extends javax.swing.JInternalFrame {
     private void txtageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtageActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtageActionPerformed
-     
-    
-     private void clearInput() {
+
+    private void clearInput() {
         this.txtEmpid.setText("");
         this.txtEmpname.setText("");
         this.txtage.setText("");
@@ -742,7 +742,7 @@ public class EmployeeManageFrame extends javax.swing.JInternalFrame {
         this.cobEmpsex.setSelectedIndex(0);
         this.cobEmptitle.setSelectedIndex(0);
         tblEmployee.clearSelection();
-    }           
+    }
 
     public void showOnTable(List<Employee> list) {
         //1.获取表格模型
@@ -763,14 +763,13 @@ public class EmployeeManageFrame extends javax.swing.JInternalFrame {
             vt.add(e.getEtype());
             dtm.addRow(vt);
         }
-    } 
-   
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnExit;
-    private javax.swing.JButton btnExport;
     private javax.swing.JButton btnLoad;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSearch;

@@ -12,7 +12,7 @@ import java.util.List;
  * 厨师和菜单的联系
  * @author Administrator
  */
-public interface CookMenuBiz {
+    public interface CookMenuBiz {
     // 1 增加厨师和菜单的联系
     public boolean add(CookMenu cm);
 
@@ -27,4 +27,7 @@ public interface CookMenuBiz {
 
     // 5 查询所有厨师和菜单的联系
     public List<CookMenu> findAll();
+    
+    // 6 查询是否有重复的初始和菜单的联系
+    public List<CookMenu>  isRepetion(int eid, int mid);
 }

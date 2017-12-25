@@ -50,4 +50,11 @@ public class CookMenuBizImpl implements CookMenuBiz{
         return edao.query(sql, CookMenu.class);
     }
     
+   public List<CookMenu> isRepetion(int eid, int mid)
+   {
+        String sql = "select * from t_cook_menu where eid=? and mid = ? and cmstate = 1";
+        //params中的参数是按顺序逐个给？赋值，所以需要注意数据表顺序
+        Object[] params = {eid,mid};
+        return edao.query(sql, CookMenu.class,params);
+   }
 }

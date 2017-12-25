@@ -13,13 +13,15 @@ import java.util.List;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Administrator
  */
-
 public class MenuManageFrame extends javax.swing.JInternalFrame {
-    MenuBiz mbiz=new MenuBizImpl();
+
+    MenuBiz mbiz = new MenuBizImpl();
+
     /**
      * Creates new form MenuManageFrame
      */
@@ -58,7 +60,6 @@ public class MenuManageFrame extends javax.swing.JInternalFrame {
         btnDelete = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         btnExit = new javax.swing.JButton();
-        btnExport = new javax.swing.JButton();
         txtMenuprice = new javax.swing.JTextField();
         txtCondition = new javax.swing.JTextField();
 
@@ -67,7 +68,7 @@ public class MenuManageFrame extends javax.swing.JInternalFrame {
         btnSearch.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         btnSearch.setForeground(new java.awt.Color(51, 51, 51));
         btnSearch.setText("Search");
-        btnSearch.setToolTipText("模糊查询：员工姓名");
+        btnSearch.setToolTipText("");
         btnSearch.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(204, 51, 255), new java.awt.Color(204, 102, 255)));
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,7 +81,7 @@ public class MenuManageFrame extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "菜品ID", "菜品名称", "种类", "价格", "所需时间", "已售份额", "库存量"
+                "菜品编号", "菜品名称", "菜品种类", "菜品价格", "所需时间", "已售份额", "库存量"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -107,23 +108,24 @@ public class MenuManageFrame extends javax.swing.JInternalFrame {
             tblMenu.getColumnModel().getColumn(6).setResizable(false);
         }
 
-        lblMenuID.setFont(new java.awt.Font("宋体", 1, 14)); // NOI18N
-        lblMenuID.setForeground(new java.awt.Color(204, 0, 0));
-        lblMenuID.setText("菜品ID");
+        lblMenuID.setFont(new java.awt.Font("方正兰亭超细黑简体", 1, 18)); // NOI18N
+        lblMenuID.setForeground(new java.awt.Color(153, 153, 153));
+        lblMenuID.setText("菜品编号");
         lblMenuID.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
 
         txtMenuid.setEditable(false);
         txtMenuid.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
+        txtMenuid.setSelectedTextColor(new java.awt.Color(153, 153, 153));
         txtMenuid.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtMenuidActionPerformed(evt);
             }
         });
 
-        lblMenuname.setFont(new java.awt.Font("微软雅黑 Light", 1, 14)); // NOI18N
-        lblMenuname.setForeground(new java.awt.Color(204, 0, 51));
+        lblMenuname.setFont(new java.awt.Font("方正兰亭超细黑简体", 1, 18)); // NOI18N
+        lblMenuname.setForeground(new java.awt.Color(255, 51, 51));
         lblMenuname.setText("菜品名称");
-        lblMenuname.setToolTipText("员工姓名须由2-4个中文组成");
+        lblMenuname.setToolTipText("");
         lblMenuname.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
 
         txtMenuname.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
@@ -133,10 +135,12 @@ public class MenuManageFrame extends javax.swing.JInternalFrame {
             }
         });
 
-        lblMenuam.setFont(new java.awt.Font("微软雅黑 Light", 1, 14)); // NOI18N
+        lblMenuam.setFont(new java.awt.Font("方正兰亭超细黑简体", 1, 18)); // NOI18N
+        lblMenuam.setForeground(new java.awt.Color(102, 102, 102));
         lblMenuam.setText("已售份额");
         lblMenuam.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
 
+        txtamt.setEditable(false);
         txtamt.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
         txtamt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -149,20 +153,22 @@ public class MenuManageFrame extends javax.swing.JInternalFrame {
             }
         });
 
-        lblMenutype.setFont(new java.awt.Font("微软雅黑 Light", 1, 14)); // NOI18N
-        lblMenutype.setText("种类");
+        lblMenutype.setFont(new java.awt.Font("方正兰亭超细黑简体", 1, 18)); // NOI18N
+        lblMenutype.setForeground(new java.awt.Color(255, 51, 51));
+        lblMenutype.setText("菜品种类");
         lblMenutype.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
 
-        lblMenutime.setFont(new java.awt.Font("宋体", 1, 14)); // NOI18N
+        lblMenutime.setFont(new java.awt.Font("方正兰亭超细黑简体", 1, 18)); // NOI18N
+        lblMenutime.setForeground(new java.awt.Color(255, 51, 51));
         lblMenutime.setText("所需时间");
         lblMenutime.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
 
         txtMenutime.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
 
-        tlblMenuprice.setFont(new java.awt.Font("微软雅黑 Light", 1, 14)); // NOI18N
-        tlblMenuprice.setForeground(new java.awt.Color(204, 0, 51));
-        tlblMenuprice.setText("价格");
-        tlblMenuprice.setToolTipText("手机号须由11位数字组成");
+        tlblMenuprice.setFont(new java.awt.Font("方正兰亭超细黑简体", 1, 18)); // NOI18N
+        tlblMenuprice.setForeground(new java.awt.Color(255, 51, 51));
+        tlblMenuprice.setText("菜品价格");
+        tlblMenuprice.setToolTipText("");
         tlblMenuprice.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
 
         txtMenutype.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
@@ -173,12 +179,12 @@ public class MenuManageFrame extends javax.swing.JInternalFrame {
         });
 
         lblNotice.setFont(new java.awt.Font("宋体", 1, 12)); // NOI18N
-        lblNotice.setForeground(new java.awt.Color(204, 0, 0));
+        lblNotice.setForeground(new java.awt.Color(255, 51, 51));
         lblNotice.setText("注意：红色字体项目为必填！");
 
         btnLoad.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         btnLoad.setText("Load");
-        btnLoad.setToolTipText("加载数据库内全部员工信息");
+        btnLoad.setToolTipText("加载全部菜品信息");
         btnLoad.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
         btnLoad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -188,7 +194,7 @@ public class MenuManageFrame extends javax.swing.JInternalFrame {
 
         btnAdd.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         btnAdd.setText("Add");
-        btnAdd.setToolTipText("增加新员工");
+        btnAdd.setToolTipText("增加新菜品");
         btnAdd.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -208,7 +214,7 @@ public class MenuManageFrame extends javax.swing.JInternalFrame {
 
         btnDelete.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         btnDelete.setText("Delete");
-        btnDelete.setToolTipText("删除选中员工信息");
+        btnDelete.setToolTipText("删除选中菜品信息");
         btnDelete.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -228,21 +234,11 @@ public class MenuManageFrame extends javax.swing.JInternalFrame {
 
         btnExit.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
         btnExit.setText("Exit");
-        btnExit.setToolTipText("关闭员工管理界面");
+        btnExit.setToolTipText("关闭菜单管理界面");
         btnExit.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExitActionPerformed(evt);
-            }
-        });
-
-        btnExport.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
-        btnExport.setText("Export");
-        btnExport.setToolTipText("导出excel表");
-        btnExport.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
-        btnExport.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnExportActionPerformed(evt);
             }
         });
 
@@ -260,24 +256,25 @@ public class MenuManageFrame extends javax.swing.JInternalFrame {
             .addGroup(lblEmpidLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(lblEmpidLayout.createSequentialGroup()
-                            .addComponent(lblMenutime, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(txtMenutime, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(lblMenuam))
-                        .addGroup(lblEmpidLayout.createSequentialGroup()
-                            .addComponent(lblMenuID)
-                            .addGap(18, 18, 18)
-                            .addComponent(txtMenuid, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(lblMenuname)))
                     .addGroup(lblEmpidLayout.createSequentialGroup()
                         .addComponent(lblNotice)
-                        .addGap(30, 30, 30)
-                        .addComponent(btnLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(18, 18, 18)
+                        .addGap(109, 109, 109)
+                        .addComponent(btnLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(lblEmpidLayout.createSequentialGroup()
+                        .addGroup(lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(lblEmpidLayout.createSequentialGroup()
+                                .addComponent(lblMenuID, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtMenuid, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(lblEmpidLayout.createSequentialGroup()
+                                .addComponent(tlblMenuprice)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtMenuprice, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(22, 22, 22)
+                        .addGroup(lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblMenutime)
+                            .addComponent(lblMenuname))))
+                .addGap(34, 34, 34)
                 .addGroup(lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(lblEmpidLayout.createSequentialGroup()
                         .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -288,22 +285,22 @@ public class MenuManageFrame extends javax.swing.JInternalFrame {
                         .addGap(18, 18, 18)
                         .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnExport, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
                         .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(lblEmpidLayout.createSequentialGroup()
+                        .addGroup(lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(lblEmpidLayout.createSequentialGroup()
+                                .addComponent(txtMenutime, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(31, 31, 31)
+                                .addComponent(lblMenuam))
+                            .addGroup(lblEmpidLayout.createSequentialGroup()
+                                .addComponent(txtMenuname, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(29, 29, 29)
+                                .addComponent(lblMenutype)))
+                        .addGap(18, 18, 18)
                         .addGroup(lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtMenuname, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtamt, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(29, 29, 29)
-                        .addGroup(lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblMenutype)
-                            .addComponent(tlblMenuprice))
-                        .addGap(42, 42, 42)
-                        .addGroup(lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtMenuprice, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtamt, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txtMenutype, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
         lblEmpidLayout.setVerticalGroup(
             lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -314,19 +311,21 @@ public class MenuManageFrame extends javax.swing.JInternalFrame {
                     .addComponent(txtMenuid, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtMenuname, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblMenuname)
-                    .addComponent(tlblMenuprice)
-                    .addComponent(txtMenuprice, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(lblMenutype)
+                    .addComponent(txtMenutype, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtMenutime, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(lblMenutime)
-                        .addComponent(lblMenuam)
-                        .addComponent(txtamt, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(lblMenutype)
-                        .addComponent(txtMenutype, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(59, 59, 59)
+                    .addGroup(lblEmpidLayout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addGroup(lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(tlblMenuprice)
+                            .addComponent(txtMenuprice, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblMenutime)
+                            .addComponent(txtMenutime, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblMenuam)))
+                    .addGroup(lblEmpidLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtamt, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(31, 31, 31)
                 .addGroup(lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -334,8 +333,7 @@ public class MenuManageFrame extends javax.swing.JInternalFrame {
                     .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNotice)
-                    .addComponent(btnExport, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(lblNotice))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -358,14 +356,16 @@ public class MenuManageFrame extends javax.swing.JInternalFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(txtCondition, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addGap(52, 52, 52)
                 .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(271, 271, 271))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addComponent(lblEmpid, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(lblEmpid, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 852, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -377,9 +377,9 @@ public class MenuManageFrame extends javax.swing.JInternalFrame {
                     .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(lblEmpid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -408,7 +408,7 @@ public class MenuManageFrame extends javax.swing.JInternalFrame {
         this.txtamt.setText(this.tblMenu.getValueAt(row, 5) + "");
         this.txtMenutime.setText(this.tblMenu.getValueAt(row, 4) + "");
         this.txtMenuprice.setText(this.tblMenu.getValueAt(row, 3) + "");
- 
+
         //保存，删除,取消按钮可用，添加不可用
         this.btnSave.setEnabled(true);
         this.btnDelete.setEnabled(true);
@@ -451,33 +451,49 @@ public class MenuManageFrame extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnLoadActionPerformed
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        //新增商品
-        //1获取菜品信息
-        String mname = this.txtMenuname.getText().trim();
-        String mtype = this.txtMenutype.getText().trim();  
-        int mcount=Integer.parseInt(this.txtamt.getText());
-        int mtime=Integer.parseInt(this.txtMenutime.getText());
-        double mprice = Double.parseDouble(this.txtMenuprice.getText());
- 
-     
-        //菜品名称非空验证，中文验证
-        if (StringUtil.checkLength(mname) == false) {
+
+        //菜品名称非空验证
+        if (StringUtil.checkLength(this.txtMenuname.getText().trim()) == false) {
             JOptionPane.showMessageDialog(this, "菜品名称不能为空");
             return;
         }
-
-
-        //价格非空验证
-        if (mprice <= 0) {
-            JOptionPane.showMessageDialog(this, "价格不能为空");
+        //菜品种类非空验证
+        if (StringUtil.checkLength(this.txtMenutype.getText().trim()) == false) {
+            JOptionPane.showMessageDialog(this, "菜品种类不能为空");
+            return;
+        }
+        //菜品价格非空验证
+        if (StringUtil.checkLength(this.txtMenuprice.getText().trim()) == false) {
+            JOptionPane.showMessageDialog(this, "菜品价格不能为空");
+            return;
+        }
+        //菜品价格非小数验证
+        if (StringUtil.checkDecimal(this.txtMenuprice.getText().trim()) == false) {
+            JOptionPane.showMessageDialog(this, "菜品价格必须为数字");
+            return;
+        }
+        //所需时间非空验证
+        if (StringUtil.checkLength(this.txtMenutime.getText().trim()) == false) {
+            JOptionPane.showMessageDialog(this, "所需时间不能为空");
+            return;
+        }
+        //所需时间整数验证
+        if (StringUtil.checkDigit(this.txtMenutime.getText().trim()) == false) {
+            JOptionPane.showMessageDialog(this, "所需时间必须为整数");
             return;
         }
 
-
-        //组合对象
+        //新增商品
+        //1获取菜品信息
+        String mname = this.txtMenuname.getText().trim();
+        String mtype = this.txtMenutype.getText().trim();
+        double mprice = Double.parseDouble(this.txtMenuprice.getText().trim());
+        int mtime = Integer.parseInt(this.txtMenutime.getText().trim());
+        int mcount = 0;//新增推荐为0
         int mstorage = 0;//新增的时候库存为0
-
-         Menu m = new Menu( null, mname, mtype, mprice, mtime,mstorage, mcount );
+        
+        //组合对象
+        Menu m = new Menu(null, mname, mtype, mprice, mtime, mstorage, mcount);
 
         //调用业务类
         boolean result = mbiz.add(m);
@@ -495,32 +511,56 @@ public class MenuManageFrame extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-        String mname = this.txtMenuname.getText().trim();
-        String mtype = this.txtMenutype.getText().trim();   
-        int mcount=Integer.parseInt(this.txtamt.getText());
-        int mtime=Integer.parseInt(this.txtMenutime.getText());
-        double mprice = Double.parseDouble(this.txtMenuprice.getText());
-        int mid = Integer.parseInt(this.txtMenuid.getText());
-     
-        //菜品名称非空验证，中文验证
-        if (StringUtil.checkLength(mname) == false) {
+
+        //菜品编号非空验证
+        if (StringUtil.checkLength(this.txtMenuid.getText().trim()) == false) {
+            JOptionPane.showMessageDialog(this, "请在表格中进行选择");
+            return;
+        }
+        //菜品名称非空验证
+        if (StringUtil.checkLength(this.txtMenuname.getText().trim()) == false) {
             JOptionPane.showMessageDialog(this, "菜品名称不能为空");
             return;
         }
-
-
-        //价格非空验证
-        if (mprice <= 0) {
-            JOptionPane.showMessageDialog(this, "价格不能为空");
+        //菜品种类非空验证
+        if (StringUtil.checkLength(this.txtMenutype.getText().trim()) == false) {
+            JOptionPane.showMessageDialog(this, "菜品种类不能为空");
+            return;
+        }
+        //菜品价格非空验证
+        if (StringUtil.checkLength(this.txtMenuprice.getText().trim()) == false) {
+            JOptionPane.showMessageDialog(this, "菜品价格不能为空");
+            return;
+        }
+        //菜品价格非小数验证
+        if (StringUtil.checkDecimal(this.txtMenuprice.getText().trim()) == false) {
+            JOptionPane.showMessageDialog(this, "菜品价格必须为数字");
+            return;
+        }
+        //所需时间非空验证
+        if (StringUtil.checkLength(this.txtMenutime.getText().trim()) == false) {
+            JOptionPane.showMessageDialog(this, "所需时间不能为空");
+            return;
+        }
+        //所需时间整数验证
+        if (StringUtil.checkDigit(this.txtMenutime.getText().trim()) == false) {
+            JOptionPane.showMessageDialog(this, "所需时间必须为整数");
             return;
         }
 
+        int mid = Integer.parseInt(this.txtMenuid.getText());
+        String mname = this.txtMenuname.getText().trim();
+        String mtype = this.txtMenutype.getText().trim();
+        double mprice = Double.parseDouble(this.txtMenuprice.getText());
+        int mtime = Integer.parseInt(this.txtMenutime.getText());
+        int mcount = Integer.parseInt(this.txtamt.getText());
+        //库存
+        Menu mTemp = mbiz.findByID(mid);
+        int mstorage = mTemp.getMstorage();
 
         //组合对象
-         Menu mTemp = mbiz.findByID(mid);
-         int mstorage = mTemp.getMstorage();//待定
-         Menu m = new Menu( mid, mname, mtype, mprice, mtime,mstorage,mcount );
- //调用业务类
+        Menu m = new Menu(mid, mname, mtype, mprice, mtime, mstorage, mcount);
+        //调用业务类
         boolean result = mbiz.update(m);
         if (result == true) {
             JOptionPane.showMessageDialog(this, "保存成功");
@@ -595,40 +635,6 @@ public class MenuManageFrame extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnExitActionPerformed
 
-    private void btnExportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExportActionPerformed
-        //        List<ProductManager> pmlist = new ArrayList<>();
-        //        // 显示list中的信息
-        //        int row = this.tblProduct.getRowCount();
-        //        for (int i = 0; i < row; i++) {
-            //            ProductManager pm = new ProductManager(
-                //                (Integer)this.tblProduct.getValueAt(i, 0),(String)this.tblProduct.getValueAt(i, 1),(String)this.tblProduct.getValueAt(i, 2),
-                //                (Integer)this.tblProduct.getValueAt(i, 3),(Integer)this.tblProduct.getValueAt(i, 4),(BigDecimal)this.tblProduct.getValueAt(i, 5),
-                //                (BigDecimal)this.tblProduct.getValueAt(i, 6),(String)this.tblProduct.getValueAt(i, 7),(String)this.tblProduct.getValueAt(i, 8));
-            //            pmlist.add(pm);
-            //        }
-        //        JFileChooser savefile = new JFileChooser();//文件选择对话框
-        //        FileFilter filter = new FileNameExtensionFilter("Excel文件(*.xls)", "xls");
-        //        savefile.addChoosableFileFilter(filter);//添加过滤器
-        //        savefile.setFileFilter(filter);
-        //        //打开文件选择对话框，showSaveDialog是保存，showOpenDialog是打开
-        //        int flag = savefile.showSaveDialog(this);
-        //        File file = null;
-        //        //如果点击了保存按钮
-        //        if (flag == JFileChooser.APPROVE_OPTION) {
-            //            file = savefile.getSelectedFile();//所选择的文件名（手写或选择）
-            //            System.out.println("文件名：" + file.getAbsolutePath());
-            //            String filename = file.getAbsolutePath();
-            //            //截取文件扩展名（文件名长度后4位）
-            //            String ftype = filename.substring(filename.length() - 4);
-            //            if (!ftype.equals(".xls")) {
-                //                //如果用户没有填写扩展名，自动添加扩展名.xls
-                //                file = new File(filename + ".xls");
-                //            }
-            //            //集合获取数据，输出到文件：ExportExcel类的printSale方法
-            //            ExportExcel.printProductManager(pmlist, file); //psalelist是要导出到excel的数据集合，来自有数据库查询
-            //        }
-    }//GEN-LAST:event_btnExportActionPerformed
-
     private void txtConditionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtConditionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtConditionActionPerformed
@@ -647,7 +653,6 @@ public class MenuManageFrame extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnExit;
-    private javax.swing.JButton btnExport;
     private javax.swing.JButton btnLoad;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSearch;
@@ -670,7 +675,7 @@ public class MenuManageFrame extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtamt;
     // End of variables declaration//GEN-END:variables
 
-     private void clearInput() {
+    private void clearInput() {
         this.txtMenuid.setText("");
         this.txtMenuname.setText("");
         this.txtMenutime.setText("");
@@ -678,8 +683,9 @@ public class MenuManageFrame extends javax.swing.JInternalFrame {
         this.txtamt.setText("");
         this.txtMenuprice.setText("");
         tblMenu.clearSelection();
-    } 
-        public void showOnTable(List<Menu> list) {
+    }
+
+    public void showOnTable(List<Menu> list) {
         //1.获取表格模型
         DefaultTableModel dtm = (DefaultTableModel) this.tblMenu.getModel();
         //2.清空表格信息
@@ -698,5 +704,5 @@ public class MenuManageFrame extends javax.swing.JInternalFrame {
             vt.add(m.getMstorage());
             dtm.addRow(vt);
         }
-    } 
+    }
 }

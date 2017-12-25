@@ -58,16 +58,20 @@ public class PurchaseManageFrame extends javax.swing.JInternalFrame {
         tblMenu = new javax.swing.JTable();
         btnSearch = new javax.swing.JButton();
         txtCondition = new javax.swing.JTextField();
-        lblStorage = new javax.swing.JLabel();
         txtStorage = new javax.swing.JTextField();
         lblMenuID = new javax.swing.JLabel();
         txtMenuid = new javax.swing.JTextField();
         lblMenuname = new javax.swing.JLabel();
         txtMenuname = new javax.swing.JTextField();
-        jLabel1 = new javax.swing.JLabel();
         txtNumber = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnComfirm = new javax.swing.JButton();
         cobNumber = new javax.swing.JComboBox();
+        lblMstorage = new javax.swing.JLabel();
+        lblNumber = new javax.swing.JLabel();
+        lblNotice = new javax.swing.JLabel();
+        btnExit = new javax.swing.JButton();
+
+        setClosable(true);
 
         tblMenu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -123,14 +127,12 @@ public class PurchaseManageFrame extends javax.swing.JInternalFrame {
             }
         });
 
-        lblStorage.setText("库存数量");
-
         txtStorage.setEditable(false);
         txtStorage.setText(" ");
 
-        lblMenuID.setFont(new java.awt.Font("宋体", 1, 14)); // NOI18N
-        lblMenuID.setForeground(new java.awt.Color(204, 0, 0));
-        lblMenuID.setText("菜品ID");
+        lblMenuID.setFont(new java.awt.Font("方正兰亭超细黑简体", 1, 18)); // NOI18N
+        lblMenuID.setForeground(new java.awt.Color(102, 102, 102));
+        lblMenuID.setText("菜品编号");
         lblMenuID.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
 
         txtMenuid.setEditable(false);
@@ -141,8 +143,8 @@ public class PurchaseManageFrame extends javax.swing.JInternalFrame {
             }
         });
 
-        lblMenuname.setFont(new java.awt.Font("微软雅黑 Light", 1, 14)); // NOI18N
-        lblMenuname.setForeground(new java.awt.Color(204, 0, 51));
+        lblMenuname.setFont(new java.awt.Font("方正兰亭超细黑简体", 1, 18)); // NOI18N
+        lblMenuname.setForeground(new java.awt.Color(255, 51, 51));
         lblMenuname.setText("菜品名称");
         lblMenuname.setToolTipText("员工姓名须由2-4个中文组成");
         lblMenuname.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
@@ -155,12 +157,10 @@ public class PurchaseManageFrame extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel1.setText("修改数量");
-
-        jButton1.setText("确认");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnComfirm.setText("确认");
+        btnComfirm.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnComfirmActionPerformed(evt);
             }
         });
 
@@ -172,44 +172,73 @@ public class PurchaseManageFrame extends javax.swing.JInternalFrame {
             }
         });
 
+        lblMstorage.setFont(new java.awt.Font("方正兰亭超细黑简体", 1, 18)); // NOI18N
+        lblMstorage.setForeground(new java.awt.Color(102, 102, 102));
+        lblMstorage.setText("库存数量");
+        lblMstorage.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
+
+        lblNumber.setFont(new java.awt.Font("方正兰亭超细黑简体", 1, 18)); // NOI18N
+        lblNumber.setForeground(new java.awt.Color(255, 51, 51));
+        lblNumber.setText("修改数量");
+        lblNumber.setToolTipText("员工姓名须由2-4个中文组成");
+        lblNumber.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
+
+        lblNotice.setFont(new java.awt.Font("宋体", 1, 12)); // NOI18N
+        lblNotice.setForeground(new java.awt.Color(255, 51, 51));
+        lblNotice.setText("注意：红色字体项目为必填！");
+
+        btnExit.setText("退出");
+        btnExit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExitActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(192, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(txtCondition, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
+                .addGap(41, 41, 41)
                 .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(328, 328, 328))
+                .addGap(244, 244, 244))
             .addGroup(layout.createSequentialGroup()
-                .addGap(63, 63, 63)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGap(51, 51, 51)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblMenuID)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtMenuid, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 722, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(56, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(lblStorage)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtStorage, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(77, 77, 77)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblMenuname)
-                    .addComponent(jLabel1))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtMenuname, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(cobNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(74, 74, 74)
-                        .addComponent(jButton1)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(96, 96, 96)
+                                .addComponent(txtMenuid, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblMenuID)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblMstorage)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtStorage, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblMenuname)
+                            .addComponent(lblNumber))
+                        .addGap(29, 29, 29)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(cobNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(29, 29, 29)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(btnComfirm)
+                                    .addComponent(txtNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(32, 32, 32)
+                                .addComponent(btnExit))
+                            .addComponent(txtMenuname, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18))))
             .addGroup(layout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 716, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(lblNotice)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -219,9 +248,9 @@ public class PurchaseManageFrame extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCondition, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(26, 26, 26)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblMenuID)
                     .addComponent(txtMenuid, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -229,13 +258,17 @@ public class PurchaseManageFrame extends javax.swing.JInternalFrame {
                     .addComponent(lblMenuname))
                 .addGap(25, 25, 25)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(lblStorage)
                     .addComponent(txtStorage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cobNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
-                .addContainerGap(37, Short.MAX_VALUE))
+                    .addComponent(lblMstorage)
+                    .addComponent(lblNumber))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNotice)
+                    .addComponent(btnComfirm)
+                    .addComponent(btnExit))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -280,20 +313,28 @@ public class PurchaseManageFrame extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_cobNumberItemStateChanged
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnComfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComfirmActionPerformed
 
+        //菜品编号非空验证
         if (StringUtil.checkLength(this.txtMenuid.getText()) == false) {
-            JOptionPane.showMessageDialog(this, "请选择要采购的菜");
+            JOptionPane.showMessageDialog(this, "请在表格中进行选择");
             return;
         }
+        //菜品名称非空验证
+        if (StringUtil.checkLength(this.txtMenuname.getText().trim()) == false) {
+            JOptionPane.showMessageDialog(this, "菜品名称不能为空");
+            return;
+        }
+        
         Integer mid = Integer.parseInt(this.txtMenuid.getText());
         Integer mstorage = Integer.parseInt(this.txtStorage.getText());
-
         String content = this.cobNumber.getSelectedItem().toString().trim();
+        //下拉框非空验证
         if (StringUtil.checkLength(content) == false) {
-            JOptionPane.showMessageDialog(this, "选项不能为空");
+            JOptionPane.showMessageDialog(this, "请选择需要采购或是退货");
             return;
         }
+
         if (content.equals("采购数量")) {
             String number = this.txtNumber.getText().trim();
             if (StringUtil.checkLength(number) == false) {
@@ -329,7 +370,7 @@ public class PurchaseManageFrame extends javax.swing.JInternalFrame {
             int number_int = Integer.parseInt(number);
             if (mstorage < number_int) {
                 JOptionPane.showMessageDialog(this, "退货数量不能大于库存数量");
-                return; 
+                return;
             }
             boolean result = mbiz.reduceMstorage(mid, number_int);
             if (result == true) {
@@ -342,9 +383,25 @@ public class PurchaseManageFrame extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "退货失败");
             }
         }
+        clearInput();
 
+    }//GEN-LAST:event_btnComfirmActionPerformed
 
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
+        int answer = JOptionPane.showConfirmDialog(this, "您确定要关闭吗？");
+        if (answer == JOptionPane.YES_OPTION) {
+            //界面恢复到最初状态
+            this.txtCondition.setText("");
+            clearInput();
+            //获取表格模型,清空表格信息
+            DefaultTableModel dtm = (DefaultTableModel) this.tblMenu.getModel();
+            while (dtm.getRowCount() > 0) {
+                dtm.removeRow(0);
+            }
+            //关闭
+            this.dispose();
+        }
+    }//GEN-LAST:event_btnExitActionPerformed
 
     public void showOnTable(List<Menu> list) {
         //1.获取表格模型
@@ -362,37 +419,33 @@ public class PurchaseManageFrame extends javax.swing.JInternalFrame {
             vt.add(m.getMprice());
             vt.add(m.getMcount());
             vt.add(m.getMstorage());
-            
+
             Date today = new Date();
             Date yesterday = new Date(today.getTime() - 86400000L);//86400000L，它的意思是说1天的时间=24小时 x 60分钟 x 60秒 x 1000毫秒 单位是L。
             DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             String yesterdayTime = format.format(yesterday);
             List<OrderDishes> odlist = odbiz.findYesterdayByMid(yesterdayTime, m.getMid());
-            int yesterdayStorage =0;
-            for (OrderDishes od: odlist){
-                yesterdayStorage+=od.getOdcount();
-                System.out.println(yesterdayStorage);
+            int yesterdayStorage = 0;
+            for (OrderDishes od : odlist) {
+                yesterdayStorage += od.getOdcount();
             }
-            
+
             vt.add(yesterdayStorage);
             dtm.addRow(vt);
         }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnComfirm;
+    private javax.swing.JButton btnExit;
     private javax.swing.JButton btnSearch;
-    private javax.swing.JComboBox cobEmpsex;
-    private javax.swing.JComboBox cobEmpsex1;
-    private javax.swing.JComboBox cobEmpsex2;
-    private javax.swing.JComboBox cobEmpsex3;
-    private javax.swing.JComboBox cobEmpsex4;
     private javax.swing.JComboBox cobNumber;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblMenuID;
     private javax.swing.JLabel lblMenuname;
-    private javax.swing.JLabel lblStorage;
+    private javax.swing.JLabel lblMstorage;
+    private javax.swing.JLabel lblNotice;
+    private javax.swing.JLabel lblNumber;
     private javax.swing.JTable tblMenu;
     private javax.swing.JTextField txtCondition;
     private javax.swing.JTextField txtMenuid;
@@ -400,5 +453,14 @@ public class PurchaseManageFrame extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtNumber;
     private javax.swing.JTextField txtStorage;
     // End of variables declaration//GEN-END:variables
+
+    private void clearInput() {
+        this.txtMenuid.setText("");
+        this.txtMenuname.setText("");
+        this.txtStorage.setText("");
+        this.txtNumber.setText("");
+        this.cobNumber.setSelectedIndex(0);
+        tblMenu.clearSelection();
+    }
 
 }
