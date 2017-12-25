@@ -79,8 +79,6 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
         jScrollPane5 = new javax.swing.JScrollPane();
         tblTable = new javax.swing.JTable();
         btnUpdate = new javax.swing.JButton();
-        lblCid = new javax.swing.JLabel();
-        txtCid = new javax.swing.JTextField();
         lblCusNumber = new javax.swing.JLabel();
         txtCusNumber = new javax.swing.JTextField();
         lblTable = new javax.swing.JLabel();
@@ -212,19 +210,6 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
             }
         });
 
-        lblCid.setFont(new java.awt.Font("微软雅黑 Light", 1, 14)); // NOI18N
-        lblCid.setForeground(new java.awt.Color(204, 0, 51));
-        lblCid.setText("顾客编号");
-        lblCid.setToolTipText("员工姓名须由2-4个中文组成");
-        lblCid.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
-
-        txtCid.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
-        txtCid.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtCidKeyPressed(evt);
-            }
-        });
-
         lblCusNumber.setFont(new java.awt.Font("微软雅黑 Light", 1, 14)); // NOI18N
         lblCusNumber.setForeground(new java.awt.Color(204, 0, 51));
         lblCusNumber.setText("顾客人数");
@@ -301,10 +286,6 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(txtCusNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblCid)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtCid, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(lblTable)
                                 .addGap(18, 18, 18)
                                 .addComponent(txtTable, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -318,7 +299,7 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(88, Short.MAX_VALUE)
+                .addContainerGap(90, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -333,11 +314,7 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnDelete)
-                        .addGap(21, 21, 21)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtCid, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblCid))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(60, 60, 60)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtCusNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblCusNumber))
@@ -349,7 +326,7 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(txtRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblRoom))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
@@ -372,7 +349,7 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         String condition = txtSearch.getText().trim();
-        List<Menu> list = mbiz.findAll();
+        List<Menu> list = mbiz.findByCondition(condition);
         showOnTable(list);
     }//GEN-LAST:event_btnSearchActionPerformed
 
@@ -416,17 +393,15 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "请选择份数！");
                 return;
             }
-        }
-        Boolean cidFlag = false;
-        String cid = this.txtCid.getText().trim();
-        String cusNumber = this.txtCusNumber.getText().trim();
-        if (StringUtil.checkLength(cid) == true) {
-            cidFlag = true;
-            if (StringUtil.checkDigit(cid) == false) {
-                JOptionPane.showMessageDialog(this, "顾客账号只能为数字");
+            Menu m = mbiz.findByID(Integer.parseInt(this.tblOrder.getValueAt(row, 0).toString()));
+            int mstorage = m.getMstorage();
+            if (Integer.parseInt(this.tblOrder.getValueAt(row, 5).toString()) > mstorage) {
+                JOptionPane.showMessageDialog(this, "份数超过了库存!");
                 return;
             }
         }
+       
+        String cusNumber = this.txtCusNumber.getText().trim();
         if (StringUtil.checkLength(cusNumber) == false) {
             JOptionPane.showMessageDialog(this, "顾客人数不能为空");
             return;
@@ -445,10 +420,6 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
         }
         int tid = Integer.parseInt(this.txtTable.getText());
         int rid = Integer.parseInt(this.txtRoom.getText());
-        int cid_int = 0;
-        if (cidFlag == true) {
-            cid_int = Integer.parseInt(cid);
-        }
         int cusNumber_int = Integer.parseInt(cusNumber);
 
         Table t = tbiz.findByID(tid);
@@ -462,12 +433,7 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String time = format.format(date);
 
-        Order o = new Order();
-        if (cidFlag == true) {
-            o = new Order(null, cid_int, cusNumber_int, time, 1, tid, rid);
-        } else {
-            o = new Order(null, null, cusNumber_int, time, 1, tid, rid);
-        }
+        Order o = new Order(null, cusNumber_int, time, 1, tid, rid);
         //生成订单，并获取订单对象
         boolean result_order = obiz.add(o);
         Order newOrder = obiz.findLastOne();
@@ -487,8 +453,10 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
             Integer oid = newOrder.getOid();
             Integer mid = (Integer) this.tblOrder.getValueAt(row, 0);
             Integer odcount = (Integer) this.tblOrder.getValueAt(row, 5);
-            OrderDishes od = new OrderDishes(null, oid, mid, odcount, time);
+            OrderDishes od = new OrderDishes(null, oid, mid, odcount, time,1);
             odbiz.add(od);
+            Menu m = mbiz.findByID(mid);
+            mbiz.reduceMstorage(mid, odcount);
         }
 
         if (result_order == true) {
@@ -499,10 +467,6 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
         clearUp();    
 
     }//GEN-LAST:event_btnCreateOrderActionPerformed
-
-    private void txtCidKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCidKeyPressed
-
-    }//GEN-LAST:event_txtCidKeyPressed
 
     private void txtCusNumberKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCusNumberKeyPressed
         // TODO add your handling code here:
@@ -615,7 +579,6 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
     }
 
     private void clearUp() {
-        this.txtCid.setText("");
         this.txtCusNumber.setText("");
         this.txtTable.setText("");
         this.txtRoom.setText("");
@@ -641,7 +604,6 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JLabel lblCid;
     private javax.swing.JLabel lblCusNumber;
     private javax.swing.JLabel lblMenu;
     private javax.swing.JLabel lblMenu1;
@@ -650,7 +612,6 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
     private javax.swing.JTable tblMenu;
     private javax.swing.JTable tblOrder;
     private javax.swing.JTable tblTable;
-    private javax.swing.JTextField txtCid;
     private javax.swing.JTextField txtCusNumber;
     private javax.swing.JTextField txtRoom;
     private javax.swing.JTextField txtSearch;

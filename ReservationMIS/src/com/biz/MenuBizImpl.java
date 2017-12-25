@@ -13,16 +13,16 @@ import java.util.List;
  *
  * @author Administrator
  */
-public class MenuBizImpl implements MenuBiz{
-       //引入dao
+public class MenuBizImpl implements MenuBiz {
+
+    //引入dao
+
     BaseDao edao = new BaseDao();
-    
-    
-    
+
     public boolean add(Menu m) {
         String sql = "insert into t_menu values(?,?,?,?,?,?,?,1)";
         //params中的参数是按顺序逐个给？赋值，所以需要注意数据表顺序
-        Object[] params = {null, m.getMname(), m.getMtype(), m.getMprice(), m.getMcooktime(),m.getMstorage(),
+        Object[] params = {null, m.getMname(), m.getMtype(), m.getMprice(), m.getMcooktime(), m.getMstorage(),
             m.getMcount()};
         return edao.update(sql, params);
     }
@@ -35,9 +35,9 @@ public class MenuBizImpl implements MenuBiz{
     }
 
     public boolean update(Menu m) {
-         String sql = "update t_menu set mname=?,mtype=?,mprice=?,mcooktime=?,mstorage=?,mcount=? where mid = ?";
+        String sql = "update t_menu set mname=?,mtype=?,mprice=?,mcooktime=?,mstorage=?,mcount=? where mid = ?";
         //params中的参数是按顺序逐个给？赋值，所以需要注意数据表顺序
-        Object[] params = {m.getMname(), m.getMtype(), m.getMprice(), m.getMcooktime(),m.getMstorage(),
+        Object[] params = {m.getMname(), m.getMtype(), m.getMprice(), m.getMcooktime(), m.getMstorage(),
             m.getMcount(), m.getMid()};
         return edao.update(sql, params);
     }
@@ -61,28 +61,33 @@ public class MenuBizImpl implements MenuBiz{
         }
         return edao.query(sql, Menu.class);
     }
-     public Menu findByMid(int mid)
-    {
+
+    public Menu findByMid(int mid) {
         String sql = "select * from t_menu where mid = ?";
         Object[] params = {mid};
-        
+
         return (Menu) edao.get(sql, Menu.class, params);
     }
-     
 
-    public boolean addMstorage(int mid,int number)
-    {
+    public boolean addMstorage(int mid, int number) {
         String sql = "update t_menu set mstorage = mstorage + ?  where mid = ?";
-        Object[] params = {number,mid};
+        Object[] params = {number, mid};
         return edao.update(sql, params);
+    }
+
+    public boolean reduceMstorage(int mid, int number) {
+        String sql = "update t_menu set mstorage = mstorage - ?  where mid = ?";
+        Object[] params = {number, mid};
+        return edao.update(sql, params);
+    }
+
+    public List<Menu> findByConditionBaseStorage(String condition) {
+        String sql = "select * from t_menu where mstate = 1 and mstorage!=0";
+        if (condition.length() > 0) {
+            sql += " and concat(mname,mtype) like '%" + condition + "%'";
+        }
+        return edao.query(sql, Menu.class);
     }
     
-
-    public boolean reduceMstorage(int mid,int number)
-    {
-       String sql = "update t_menu set mstorage = mstorage - ?  where mid = ?";
-        Object[] params = {number,mid};
-        return edao.update(sql, params);
-    }
-     
+   
 }

@@ -16,7 +16,6 @@ import java.util.List;
 public class OrderDishesBizImpl implements OrderDishesBiz {
 
     //引入dao
-
     BaseDao edao = new BaseDao();
 
     public boolean add(OrderDishes od) {
@@ -47,13 +46,18 @@ public class OrderDishesBizImpl implements OrderDishesBiz {
 
     }
 
+    public OrderDishes findAllByID(int odid) {
+        String sql = "select * from t_orderdishes where odid=?";
+        Object[] params = {odid};
+        return (OrderDishes) edao.get(sql, OrderDishes.class, params);
+    }
+
     public List<OrderDishes> findAll() {
         String sql = "select * from t_orderdishes where odstate = 1";
         return edao.query(sql, OrderDishes.class);
     }
 
     //查找已经做好的菜
-
     public List<OrderDishes> findFinshed() {
         String sql = "select * from t_orderdishes where odstate=2";
         return edao.query(sql, OrderDishes.class);
@@ -73,27 +77,9 @@ public class OrderDishesBizImpl implements OrderDishesBiz {
 
     }
 
-    public List<OrderDishes> findByOidState1(int oid) {
-        String sql = "select * from t_orderdishes where oid = ? and odstate = 1";
+    public List<OrderDishes> findByOidNot0(int oid) {
+        String sql = "select * from t_orderdishes where oid = ? and odstate !=0";
         Object[] params = {oid};
-        return edao.query(sql, OrderDishes.class, params);
-
-    }
-
-    public List<OrderDishes> findByEid(int state, int eid) {
-
-        String sql = "SELECT *\n"
-                + "FROM t_orderdishes\n"
-                + "WHERE odstate = ? AND\n"
-                + "EXISTS\n"
-                + "(\n"
-                + "\n"
-                + "		SELECT * \n"
-                + "		FROM t_cook_menu\n"
-                + "		WHERE eid = ? AND t_orderdishes.mid=t_cook_menu.mid\n"
-                + ")";
-        Object[] params = {state, eid};
-
         return edao.query(sql, OrderDishes.class, params);
 
     }
@@ -101,20 +87,24 @@ public class OrderDishesBizImpl implements OrderDishesBiz {
     //上菜
     public boolean Shangcai(OrderDishes od) {
 
-        String sql = "update t_orderdishes set odstate = 3 where odid =  ?";
+        String sql = "update t_orderdishes set odstate = 4 where odid =  ?";
         //params中的参数是按顺序逐个给？赋值，所以需要注意数据表顺序
         Object[] params = {od.getOdid()};
         return edao.update(sql, params);
+    }
 
+    public boolean Quxiaocai(int odid) {
+        String sql = "update t_orderdishes set odstate = 1 where odid =  ?";
+        //params中的参数是按顺序逐个给？赋值，所以需要注意数据表顺序
+        Object[] params = {odid};
+        return edao.update(sql, params);
     }
 
     public boolean Zuocai(int odid) {
-
         String sql = "update t_orderdishes set odstate = 2 where odid =  ?";
         //params中的参数是按顺序逐个给？赋值，所以需要注意数据表顺序
         Object[] params = {odid};
         return edao.update(sql, params);
-
     }
 
     public boolean Wanchengcai(int odid) {
@@ -125,16 +115,28 @@ public class OrderDishesBizImpl implements OrderDishesBiz {
         return edao.update(sql, params);
 
     }
-    
-    
-    public List<OrderDishes> findYesterdayByMid(String time,int mid)
-    {
+
+    public List<OrderDishes> toCookByEid(int eid) {
+
+        String sql = "SELECT * FROM t_orderdishes WHERE odstate = 1 AND EXISTS(SELECT * FROM t_cook_menu WHERE eid = ? AND t_orderdishes.mid=t_cook_menu.mid)";
+        Object[] params = {eid};
+        return edao.query(sql, OrderDishes.class, params);
+    }
+
+    public List<OrderDishes> cookingByEid(int eid) {
+
+        String sql = "SELECT * FROM t_orderdishes WHERE odstate = 2 AND EXISTS(SELECT * FROM t_cook_menu WHERE eid = ? AND t_orderdishes.mid=t_cook_menu.mid)";
+        Object[] params = {eid};
+        return edao.query(sql, OrderDishes.class, params);
+    }
+
+    public List<OrderDishes> findYesterdayByMid(String time, int mid) {
         String sql = "select * from t_orderdishes where odstate = 1 and mid = ?";
         if (time.length() > 0) {
             sql += " and concat(odtime) like '%" + time + "%'";
         }
         Object[] params = {mid};
-        return edao.query(sql, OrderDishes.class,params);
+        return edao.query(sql, OrderDishes.class, params);
     }
-    
+
 }

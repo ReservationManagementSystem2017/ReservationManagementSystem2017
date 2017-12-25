@@ -19,9 +19,9 @@ public class OrderBizImpl implements OrderBiz{
     
     
     public boolean add(Order o) {
-        String sql = "insert into t_orders values(?,?,?,?,?,?,?,1)";
+        String sql = "insert into t_orders values(?,?,?,?,?,?,1)";
         //params中的参数是按顺序逐个给？赋值，所以需要注意数据表顺序
-        Object[] params = {null, o.getCid(),o.getOpopulation(),o.getOtime(),o.getEid(),o.getTid(),o.getRid()};
+        Object[] params = {null,o.getOpopulation(),o.getOtime(),o.getEid(),o.getTid(),o.getRid()};
         return edao.update(sql, params);
     }
 
@@ -33,9 +33,9 @@ public class OrderBizImpl implements OrderBiz{
     }
 
     public boolean update(Order o) {
-         String sql = "update t_orders set cid=?,opopulation=?,otime=?,eid=?,tid=?,rid=? where oid = ?";
+         String sql = "update t_orders set opopulation=?,otime=?,eid=?,tid=?,rid=? where oid = ?";
         //params中的参数是按顺序逐个给？赋值，所以需要注意数据表顺序
-        Object[] params = {o.getCid(),o.getOpopulation(),o.getOtime(),o.getEid(),o.getTid(),o.getRid(),o.getOid()};
+        Object[] params = {o.getOpopulation(),o.getOtime(),o.getEid(),o.getTid(),o.getRid(),o.getOid()};
         return edao.update(sql, params);
     }
 
@@ -58,16 +58,33 @@ public class OrderBizImpl implements OrderBiz{
          return (Order) edao.get(sql, Order.class, params);
     }
     
-//    public double getTotalPrice(int oid)
-//    {
-//        String sql = "select sum(odcount*mprice) from t_orderdishes INNER JOIN t_menu on t_orderdishes.mid = t_menu.mid where oid =? ";
-//        Object[] params = {oid};
-//        return (Double) edao.get(sql, Double.class, params);
-//    }
+
     public Order findFinishedByID(int oid)
     {
         String sql = "select * from t_orders where oid=?";
         Object[] params = {oid};
         return (Order) edao.get(sql, Order.class, params);
     }
+    
+    public List<Order> findByOdstate(int odstate)
+    {
+          String sql = "SELECT * FROM t_orders WHERE ostate = 1 AND EXISTS(SELECT * FROM t_orderdishes WHERE odstate=? AND t_orders.oid=t_orderdishes.oid)";
+           Object[] params = {odstate};
+          return edao.query(sql, Order.class,params);
+    }
+    
+    public List<Order> findFinishedOrder()
+    {
+        String sql = "select * from t_orders where ostate = 0";
+         return edao.query(sql, Order.class);
+    }
+    
+    public List<Order> findIsFinish(int oid)
+    {
+          String sql = "SELECT * FROM t_orders WHERE ostate = 1 and oid= ? AND EXISTS(SELECT * FROM t_orderdishes WHERE (odstate=1 or odstate=2 or odstate=3) AND t_orders.oid=t_orderdishes.oid)";
+           Object[] params = {oid};
+          return edao.query(sql, Order.class,params);
+    }
+    
+     
 }

@@ -180,7 +180,7 @@ public class OrderDishesByWaiterFrame extends javax.swing.JInternalFrame {
         Integer ntable = (Integer) this.tblMenu.getValueAt(selectrow, 2);
         Integer odid=(Integer)this.tblMenu.getValueAt(selectrow, 3);
         //Integer odid=(Integer)this.tblMenu.getValueAt(selectrow, 3);
-        OrderDishes od=new OrderDishes(odid,null,null,odcount,null);
+        OrderDishes od=new OrderDishes(odid,null,null,odcount,null,4);
         boolean result=odbiz.Shangcai(od);
         if (result == true) {
             JOptionPane.showMessageDialog(this, "上菜成功");

@@ -43,6 +43,16 @@ public class StringUtil {
         }
     }
 
+    //打折验证
+    public static boolean checkDiscount(String s) {
+        String regex = "(0.[0-9]+)";
+        if (s.matches(regex)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
     //电话验证
     public static boolean checkPhone(String s) {
         String regex = "[0-9]{8}";

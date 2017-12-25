@@ -60,7 +60,7 @@ public class Discount {
     }
 
     public double getDreducemoney() {
-        //System.out.println("my decreasemoney = "+dreducemoney);
+//        System.out.println("my decreasemoney = "+dreducemoney);
         return dreducemoney;
     }
 

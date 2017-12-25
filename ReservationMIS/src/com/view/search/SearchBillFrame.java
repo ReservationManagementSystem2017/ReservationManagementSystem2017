@@ -210,15 +210,17 @@ public class SearchBillFrame extends javax.swing.JInternalFrame {
             int cid_int = Integer.parseInt(cid);
             List<Bill> blist = bbiz.findByCid(cid_int);
             showOnTable(blist);
-            
+
         } else if (content.equals("服务员编号搜索")) {
             String eid = this.txtSearch.getText().trim();
+            System.out.println(eid);
             if (StringUtil.checkLength(eid) == false) {
                 JOptionPane.showMessageDialog(this, "服务员编号不能为空");
                 return;
-            }    
+            }
             int eid_int = Integer.parseInt(eid);
-            List<Bill> blist = bbiz.findByCid(eid_int);
+            System.out.println(eid_int);
+            List<Bill> blist = bbiz.findByEid(eid_int);
             showOnTable(blist);
         }
     }//GEN-LAST:event_btnSearchActionPerformed
@@ -244,7 +246,6 @@ public class SearchBillFrame extends javax.swing.JInternalFrame {
             Vector vt = new Vector();
             Order o = obiz.findFinishedByID(b.getBid());
             vt.add(o.getOid());
-            vt.add(o.getCid());
             vt.add(o.getOpopulation());
             vt.add(o.getOtime());
             vt.add(o.getEid());
@@ -254,6 +255,7 @@ public class SearchBillFrame extends javax.swing.JInternalFrame {
             vt.add(b.getBtime());
             dtm.addRow(vt);
         }
+
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -37,4 +37,14 @@ public interface OrderBiz {
     
     //找到已结束的订单
     public Order findFinishedByID(int oid);
+    
+    //找到odstate满足要求的所有订单
+    public List<Order> findByOdstate(int odstate);
+    
+    //找到已结账的订单
+    public List<Order> findFinishedOrder();
+    
+    //找到该订单是否还有菜没有上
+    public List<Order> findIsFinish(int oid);
+    
 }

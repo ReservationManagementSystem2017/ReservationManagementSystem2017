@@ -50,7 +50,7 @@ public class TableManageFrame extends javax.swing.JInternalFrame {
         btnEmpty = new javax.swing.JButton();
 
         setClosable(true);
-        setTitle("商品资料管理");
+        setTitle("桌子管理");
         setMinimumSize(new java.awt.Dimension(100, 34));
         addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
             public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {

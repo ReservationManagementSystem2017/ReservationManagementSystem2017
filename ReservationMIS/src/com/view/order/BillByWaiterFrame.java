@@ -43,6 +43,7 @@ import javax.swing.table.DefaultTableModel;
  * @author Administrator
  */
 public class BillByWaiterFrame extends javax.swing.JInternalFrame {
+
     OrderBiz obiz = new OrderBizImpl();
     OrderDishesBiz odbiz = new OrderDishesBizImpl();
     MenuBiz mbiz = new MenuBizImpl();
@@ -51,7 +52,7 @@ public class BillByWaiterFrame extends javax.swing.JInternalFrame {
     BillBiz bbiz = new BillBizImpl();
     TableBiz tbiz = new TableBizImpl();
     RoomBiz rbiz = new RoomBizImpl();
-    
+
     /**
      * Creates new form BillByWaiterFrame
      */
@@ -112,11 +113,11 @@ public class BillByWaiterFrame extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "订单编号", "顾客编号", "顾客人数", "订单时间", "服务员编号", "餐桌编号", "房间编号", "合计金额"
+                "订单编号", "顾客人数", "订单时间", "服务员编号", "餐桌编号", "房间编号", "合计金额"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, true
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -277,8 +278,7 @@ public class BillByWaiterFrame extends javax.swing.JInternalFrame {
                             .addComponent(lblDiscount)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(lblDiscount2)
-                            .addGap(300, 300, 300)
-                            .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(370, 370, 370))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 784, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -316,7 +316,10 @@ public class BillByWaiterFrame extends javax.swing.JInternalFrame {
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(lblRid)
                                             .addGap(18, 18, 18)
-                                            .addComponent(txtRid, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))))))
+                                            .addComponent(txtRid, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(31, 31, 31))))
                 .addContainerGap(89, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -324,10 +327,11 @@ public class BillByWaiterFrame extends javax.swing.JInternalFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(22, 22, 22)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblDiscount)
                     .addComponent(lblDiscount2))
-                .addGap(18, 18, 18)
+                .addGap(8, 8, 8)
+                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -355,7 +359,7 @@ public class BillByWaiterFrame extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnPay)
                     .addComponent(btnCountPrice))
-                .addContainerGap(58, Short.MAX_VALUE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         pack();
@@ -373,14 +377,13 @@ public class BillByWaiterFrame extends javax.swing.JInternalFrame {
         int row = this.tblOrder.getSelectedRow();
 //        //根据row获取每列的值
         this.txtOid.setText(this.tblOrder.getValueAt(row, 0) + "");
-        this.txtCid.setText(this.tblOrder.getValueAt(row, 1) + "");
-        this.txtCusNumber.setText(this.tblOrder.getValueAt(row, 2) + "");
-        this.txtOtime.setText(this.tblOrder.getValueAt(row, 3) + "");
-        this.txtTid.setText(this.tblOrder.getValueAt(row, 5) + "");
-        this.txtRid.setText(this.tblOrder.getValueAt(row, 6) + "");
-        this.txtTotalPrice.setText(this.tblOrder.getValueAt(row, 7) + "");
+        this.txtCusNumber.setText(this.tblOrder.getValueAt(row, 1) + "");
+        this.txtOtime.setText(this.tblOrder.getValueAt(row, 2) + "");
+        this.txtTid.setText(this.tblOrder.getValueAt(row, 4) + "");
+        this.txtRid.setText(this.tblOrder.getValueAt(row, 5) + "");
+        this.txtTotalPrice.setText(this.tblOrder.getValueAt(row, 6) + "");
 
-       
+
     }//GEN-LAST:event_tblOrderMouseClicked
 
     private void txtOidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtOidActionPerformed
@@ -396,7 +399,7 @@ public class BillByWaiterFrame extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txtCusNumberActionPerformed
 
     private void txtCusNumberKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCusNumberKeyPressed
-   
+
     }//GEN-LAST:event_txtCusNumberKeyPressed
 
     private void txtTidActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtTidActionPerformed
@@ -421,33 +424,32 @@ public class BillByWaiterFrame extends javax.swing.JInternalFrame {
 
     private void btnCountPriceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCountPriceActionPerformed
         Double totalPrice = Double.parseDouble(this.txtTotalPrice.getText().trim());
-        Double actualPrice1=totalPrice;
-        Double actualPrice2=totalPrice;
+        Double actualPrice1 = totalPrice;
+        Double actualPrice2 = totalPrice;
         List<Discount> dlist = dbiz.findAll();
-        for(Discount d:dlist)
-        {
-            if(d.getDtype()==1)
-                actualPrice1*=d.getDiscountrate();
-            else if(d.getDtype()==2)
-                if(actualPrice2>d.getDmeetmoney())
-                    actualPrice2-=d.getDreducemoney();
+        for (Discount d : dlist) {
+            if (d.getDtype() == 1) {
+                actualPrice1 *= d.getDiscountrate();
+            } else if (d.getDtype() == 2) {
+                if (actualPrice2 > d.getDmeetmoney()) {
+                    actualPrice2 -= d.getDreducemoney();
+                }
+            }
         }
-        
-        if(actualPrice1>actualPrice2)
+
+        if (actualPrice1 > actualPrice2) {
             this.txtActualPrice.setText(actualPrice2.toString());
-        else
+        } else {
             this.txtActualPrice.setText(actualPrice1.toString());
+        }
     }//GEN-LAST:event_btnCountPriceActionPerformed
 
     private void btnPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayActionPerformed
-       if (StringUtil.checkLength(this.txtActualPrice.getText().trim()) == false) {
+        if (StringUtil.checkLength(this.txtActualPrice.getText().trim()) == false) {
             JOptionPane.showMessageDialog(this, "请先计算实际价格");
             return;
         }
-        if (StringUtil.checkLength(this.txtCid.getText().trim()) == false) {
-            JOptionPane.showMessageDialog(this, "请先计算实际价格");
-            return;
-        }
+        
         Boolean cidFlag = false;
         String cid = this.txtCid.getText().trim();
         if (StringUtil.checkLength(cid) == true) {
@@ -457,39 +459,51 @@ public class BillByWaiterFrame extends javax.swing.JInternalFrame {
                 return;
             }
         }
+
+        
         int cid_int = 0;
         if (cidFlag == true) {
             cid_int = Integer.parseInt(cid);
         }
-          //当前时间
+        //当前时间
         Date date = new Date();
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String time = format.format(date);
-        
+
         double actualPrice = Double.parseDouble(this.txtActualPrice.getText().trim());
         Integer oid = Integer.parseInt(this.txtOid.getText().trim());
+        
+        List<Order> olist  = obiz.findIsFinish(oid);
+        if(olist.isEmpty()==false)
+        {
+             JOptionPane.showMessageDialog(this, "还有菜没有上");
+                return;
+        }
+        //
         Bill b = new Bill();
         if (cidFlag == true) {
-             b = new Bill(oid,actualPrice,cid_int,1,time,false);
+            b = new Bill(oid, actualPrice, cid_int, 1, time, false);
+            cbiz.addScore(cid_int, actualPrice/10);//积分
+            
         } else {
-            b = new Bill(oid,actualPrice,null,1,time,false);
+            b = new Bill(oid, actualPrice, null, 1, time, false);
         }
         //生成订单，并获取订单对象
         boolean result = bbiz.add(b);
-        
+
         //删除订单
         obiz.delete(oid);
-        
+
         //恢复桌子
         int tid = Integer.parseInt(this.txtTid.getText().trim());
         Table t = tbiz.findByID(tid);
         t.setTcondition(1);
         tbiz.update(t);
-        
+
         //房间中可用桌子数增加1
         Room room = rbiz.findByID(tid);
         int curcondition = room.getRcondition();
-        room.setRcondition(curcondition-1);
+        room.setRcondition(curcondition - 1);
         boolean result_room = rbiz.update(room);
         
         
@@ -498,11 +512,11 @@ public class BillByWaiterFrame extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(this, "创建账单失败");
         }
-        
+
         clearUp();
-        
+
     }//GEN-LAST:event_btnPayActionPerformed
-    
+
     private void showOnTable(List<Order> list) {
         //1.获取指定表格（tblProduct）模型
         DefaultTableModel dtm = (DefaultTableModel) this.tblOrder.getModel();
@@ -514,17 +528,16 @@ public class BillByWaiterFrame extends javax.swing.JInternalFrame {
         for (Order o : list) {
             Vector vt = new Vector();
             vt.add(o.getOid());
-            vt.add(o.getCid());
             vt.add(o.getOpopulation());
             vt.add(o.getOtime());
             vt.add(o.getEid());
             vt.add(o.getTid());
             vt.add(o.getRid());
-            double totalPrice=0;
-            List<OrderDishes> odlist = odbiz.findByOid(o.getOid());
-            for (OrderDishes od:odlist){
+            double totalPrice = 0;
+            List<OrderDishes> odlist = odbiz.findByOidNot0(o.getOid());
+            for (OrderDishes od : odlist) {
                 Menu m = mbiz.findByID(od.getMid());
-                totalPrice+=od.getOdcount()*m.getMprice();
+                totalPrice += od.getOdcount() * m.getMprice();
             }
             vt.add(totalPrice);
             dtm.addRow(vt);
@@ -559,12 +572,12 @@ public class BillByWaiterFrame extends javax.swing.JInternalFrame {
 
     private void initDiscount() {
         List<Discount> dlist = dbiz.findAll();
-        for(Discount d:dlist)
-        {
-            if(d.getDtype()==1)
-                this.lblDiscount.setText("打折规则：实际金额仅为原价的"+d.getDiscountrate()+"倍");
-            else if(d.getDtype()==2)
-                this.lblDiscount2.setText("打折规则：满"+d.getDmeetmoney()+"元减"+d.getDreducemoney()+"元");
+        for (Discount d : dlist) {
+            if (d.getDtype() == 1) {
+                this.lblDiscount.setText("打折规则：实际金额仅为原价的" + d.getDiscountrate() + "倍");
+            } else if (d.getDtype() == 2) {
+                this.lblDiscount2.setText("打折规则：满" + d.getDmeetmoney() + "元减" + d.getDreducemoney() + "元");
+            }
         }
     }
 
@@ -574,11 +587,11 @@ public class BillByWaiterFrame extends javax.swing.JInternalFrame {
         this.txtCusNumber.setText("");
         this.txtTid.setText("");
         this.txtRid.setText("");
-         this.txtOtime.setText("");
+        this.txtOtime.setText("");
         this.txtTotalPrice.setText("");
         this.txtActualPrice.setText("");
         DefaultTableModel dtm = (DefaultTableModel) this.tblOrder.getModel();
-       
+
         while (dtm.getRowCount() > 0) {
             dtm.removeRow(0);
         }

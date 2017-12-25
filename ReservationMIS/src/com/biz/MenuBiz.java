@@ -40,5 +40,10 @@ public interface MenuBiz {
     
     //减少库存数量
     public boolean reduceMstorage(int mid,int number);
+    
+    //找到库存不为0的模糊查找
+    public List<Menu> findByConditionBaseStorage(String condition);
+    
+    
 
 }

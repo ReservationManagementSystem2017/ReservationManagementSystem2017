@@ -73,9 +73,9 @@ public class MainFrame extends javax.swing.JFrame {
         itemLogin = new javax.swing.JMenuItem();
         mnuOrder = new javax.swing.JMenu();
         itemOrderByWaiter = new javax.swing.JMenuItem();
-        itemBillByWaiter = new javax.swing.JMenuItem();
         itemOrderDishesByCook = new javax.swing.JMenuItem();
         itemOrderDishesByWaiter = new javax.swing.JMenuItem();
+        itemBillByWaiter = new javax.swing.JMenuItem();
         mnuManager = new javax.swing.JMenu();
         itemEmployeeManage = new javax.swing.JMenuItem();
         itemCustomerManage = new javax.swing.JMenuItem();
@@ -121,14 +121,6 @@ public class MainFrame extends javax.swing.JFrame {
         });
         mnuOrder.add(itemOrderByWaiter);
 
-        itemBillByWaiter.setText("顾客结账");
-        itemBillByWaiter.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                itemBillByWaiterActionPerformed(evt);
-            }
-        });
-        mnuOrder.add(itemBillByWaiter);
-
         itemOrderDishesByCook.setText("厨师做菜");
         itemOrderDishesByCook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -144,6 +136,14 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         mnuOrder.add(itemOrderDishesByWaiter);
+
+        itemBillByWaiter.setText("顾客结账");
+        itemBillByWaiter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemBillByWaiterActionPerformed(evt);
+            }
+        });
+        mnuOrder.add(itemBillByWaiter);
 
         jMenuBar1.add(mnuOrder);
 

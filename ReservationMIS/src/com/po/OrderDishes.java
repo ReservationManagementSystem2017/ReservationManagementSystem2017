@@ -15,17 +15,21 @@ public class OrderDishes {
     private Integer mid;//菜单id
     private Integer odcount;//菜品数量
     private String odtime;//点餐时间
+    private Integer odstate;//状态
 
     public OrderDishes() {
     }
 
-    public OrderDishes(Integer odid, Integer oid, Integer mid, Integer odcount, String odtime) {
+    public OrderDishes(Integer odid, Integer oid, Integer mid, Integer odcount, String odtime, Integer odstate) {
         this.odid = odid;
         this.oid = oid;
         this.mid = mid;
         this.odcount = odcount;
         this.odtime = odtime;
+        this.odstate = odstate;
     }
+
+    
 
     public Integer getOdid() {
         return odid;
@@ -65,6 +69,14 @@ public class OrderDishes {
 
     public void setOdtime(String odtime) {
         this.odtime = odtime;
+    }
+
+    public Integer getOdstate() {
+        return odstate;
+    }
+
+    public void setOdstate(Integer odstate) {
+        this.odstate = odstate;
     }
     
     

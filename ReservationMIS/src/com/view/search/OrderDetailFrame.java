@@ -20,6 +20,7 @@ import com.po.OrderDishes;
 import com.util.StringUtil;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -36,17 +37,20 @@ public class OrderDetailFrame extends javax.swing.JInternalFrame {
     OrderBiz orderBiz = new OrderBizImpl();
     OrderDishesBiz orderDishesBiz = new OrderDishesBizImpl();
     CustomerBizImpl customerBiz = new CustomerBizImpl();
+
     public OrderDetailFrame() {
         initComponents();
-        initEmpSex();
+        this.btnDelete.setEnabled(false);
+//        initSelect();
     }
-    private void initEmpSex() {
-        //模拟从数据库中获取Title并填充到组合框
-            String[] sex = {"已取消订单", "待做订单","待上菜订单","已上菜订单"};
-            for (String s : sex) {
-                this.choiceEmp.addItem(s);
-            }
-        }
+
+//    private void initSelect() {
+//        //模拟从数据库中获取Title并填充到组合框
+//        String[] select = {"还有未煮的菜的订单", "有正在煮的菜的订单", "有等待上菜的订单", "已上菜的订单", "已结束的订单"};
+//        for (String s : select) {
+//            this.choiceEmp.addItem(s);
+//        }
+//    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -60,8 +64,6 @@ public class OrderDetailFrame extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblOrder = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
-        txtSearch = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblDishes = new javax.swing.JTable();
         btnDelete = new javax.swing.JButton();
@@ -76,11 +78,11 @@ public class OrderDetailFrame extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "订单编号", "顾客姓名", "用餐人数", "下单时间", "服务员编号", "餐桌编号"
+                "订单编号", "用餐人数", "下单时间", "服务员编号", "餐桌编号"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, false, true, true
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -94,8 +96,11 @@ public class OrderDetailFrame extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tblOrder);
         if (tblOrder.getColumnModel().getColumnCount() > 0) {
-            tblOrder.getColumnModel().getColumn(4).setHeaderValue("服务员编号");
-            tblOrder.getColumnModel().getColumn(5).setHeaderValue("餐桌编号");
+            tblOrder.getColumnModel().getColumn(0).setResizable(false);
+            tblOrder.getColumnModel().getColumn(1).setResizable(false);
+            tblOrder.getColumnModel().getColumn(2).setResizable(false);
+            tblOrder.getColumnModel().getColumn(3).setResizable(false);
+            tblOrder.getColumnModel().getColumn(4).setResizable(false);
         }
 
         jButton1.setForeground(new java.awt.Color(204, 0, 0));
@@ -106,29 +111,16 @@ public class OrderDetailFrame extends javax.swing.JInternalFrame {
             }
         });
 
-        txtSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtSearchActionPerformed(evt);
-            }
-        });
-        txtSearch.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtSearchKeyPressed(evt);
-            }
-        });
-
-        jTextField2.setText("订单号");
-
         tblDishes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "订单编号", "订菜品编号", "菜品名称", "菜品数量", "下单时间"
+                "订单编号", "订菜品编号", "菜品名称", "菜品数量", "下单时间", "菜品状态", "菜品单价"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, false, true, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -141,6 +133,15 @@ public class OrderDetailFrame extends javax.swing.JInternalFrame {
             }
         });
         jScrollPane2.setViewportView(tblDishes);
+        if (tblDishes.getColumnModel().getColumnCount() > 0) {
+            tblDishes.getColumnModel().getColumn(0).setResizable(false);
+            tblDishes.getColumnModel().getColumn(1).setResizable(false);
+            tblDishes.getColumnModel().getColumn(2).setResizable(false);
+            tblDishes.getColumnModel().getColumn(3).setResizable(false);
+            tblDishes.getColumnModel().getColumn(4).setResizable(false);
+            tblDishes.getColumnModel().getColumn(5).setResizable(false);
+            tblDishes.getColumnModel().getColumn(6).setResizable(false);
+        }
 
         btnDelete.setText("删除");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
@@ -149,7 +150,7 @@ public class OrderDetailFrame extends javax.swing.JInternalFrame {
             }
         });
 
-        choiceEmp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
+        choiceEmp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "当前订单", "还有未煮的菜的订单", "有正在煮的菜的订单", "有等待上菜的订单", "已上菜的订单", "历史订单" }));
         choiceEmp.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
         choiceEmp.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -176,23 +177,19 @@ public class OrderDetailFrame extends javax.swing.JInternalFrame {
                         .addGap(25, 25, 25)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 646, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 646, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(choiceEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jButton1)))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 646, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(300, 300, 300)
                         .addComponent(lblOrderDetail))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(290, 290, 290)
-                        .addComponent(lblMenuDetail)))
+                        .addComponent(lblMenuDetail))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(231, 231, 231)
+                        .addComponent(choiceEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButton1)))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -201,19 +198,16 @@ public class OrderDetailFrame extends javax.swing.JInternalFrame {
                 .addGap(6, 6, 6)
                 .addComponent(lblOrderDetail)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton1)
-                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(choiceEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(choiceEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addComponent(lblMenuDetail)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
-                .addGap(4, 4, 4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                .addGap(43, 43, 43)
                 .addComponent(btnDelete)
                 .addContainerGap())
         );
@@ -223,75 +217,94 @@ public class OrderDetailFrame extends javax.swing.JInternalFrame {
 
     private void tblOrderMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblOrderMouseClicked
         String choice = this.choiceEmp.getSelectedItem().toString().trim();             //获得下拉框的内容
-         if("待做订单".equals(choice)){
-            this.btnDelete.setVisible(true);                           //只用在待做订单的情况下才能显示删除键
-        }
-        else{
-            this.btnDelete.setVisible(false);
-        }
+
         int selectRow = this.tblOrder.getSelectedRow();
         int orderId = (Integer) this.tblOrder.getValueAt(selectRow, 0);
-          
+
         Vector vt = new Vector();
         List<OrderDishes> list = new ArrayList<OrderDishes>();
-        
+
         showOnTable2(list);
-        if("已取消订单".equals(choice)){
-            list = (List<OrderDishes>) orderDishesBiz.findByOid(orderId, 0);
+        if ("当前订单".equals(choice)) {
+            list = (List<OrderDishes>) orderDishesBiz.findByOid(orderId);
+        } else if ("还有未煮的菜的订单".equals(choice)) {//状态为1
+            list = (List<OrderDishes>) orderDishesBiz.findByOid(orderId);
+        } else if ("有正在煮的菜的订单".equals(choice)) {//状态为2
+            list = (List<OrderDishes>) orderDishesBiz.findByOid(orderId);
+        } else if ("有等待上菜的订单".equals(choice)) {//状态为3
+            list = (List<OrderDishes>) orderDishesBiz.findByOid(orderId);
+        } else if ("已上菜的订单".equals(choice)) {//状态为4
+            list = (List<OrderDishes>) orderDishesBiz.findByOid(orderId);
+        } else if ("历史订单".equals(choice)) {//order状态为0
+            list = (List<OrderDishes>) orderDishesBiz.findByOid(orderId);
         }
-        else if("待做订单".equals(choice)){
-            list = (List<OrderDishes>) orderDishesBiz.findByOid(orderId, 1);
-        }
-        else if("待上菜订单".equals(choice)){
-            list = (List<OrderDishes>) orderDishesBiz.findByOid(orderId, 2);
-        }
-        else{
-            list = (List<OrderDishes>) orderDishesBiz.findByOid(orderId, 3);
-        }  
         showOnTable2(list);
     }//GEN-LAST:event_tblOrderMouseClicked
 
-    private void txtSearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtSearchKeyPressed
-       
-    }//GEN-LAST:event_txtSearchKeyPressed
-
-    private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtSearchActionPerformed
-
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        String s = this.txtSearch.getText();
-        List<Order> list = new ArrayList<Order>();
-        if(s.equals(new String())){
-               list = orderBiz.findAll();
+        String choice = this.choiceEmp.getSelectedItem().toString().trim();             //获得下拉框的内容
+
+        if (choice.equals("当前订单")) {
+            List<Order> olist = orderBiz.findAll();
+            showOnTable(olist);
+        } else if (choice.equals("还有未煮的菜的订单")) {//状态为1
+            List<Order> olist = orderBiz.findByOdstate(1);
+            showOnTable(olist);
+        } else if (choice.equals("有正在煮的菜的订单")) {//状态为2
+            List<Order> olist = orderBiz.findByOdstate(2);
+            showOnTable(olist);
+        } else if (choice.equals("有等待上菜的订单")) {//状态为3
+            List<Order> olist = orderBiz.findByOdstate(3);
+            showOnTable(olist);
+        } else if (choice.equals("已上菜的订单")) {//状态为4
+            List<Order> olist = orderBiz.findByOdstate(4);
+            showOnTable(olist);
+        } else if (choice.equals("历史订单")) {//order状态为0
+            List<Order> olist = orderBiz.findFinishedOrder();
+            showOnTable(olist);
         }
-        else{
-            int orderId = Integer.parseInt(s);
-            Order order =  orderBiz.findByID(orderId);
-            list.add(order);
-        }
-        showOnTable(list);
+
     }//GEN-LAST:event_jButton1ActionPerformed
- 
+
     private void tblDishesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDishesMouseClicked
-        // TODO add your handling code here:
+        int selectRow = this.tblDishes.getSelectedRow();
+        int odid = (Integer) this.tblDishes.getValueAt(selectRow, 1);
+        System.out.println(odid);
+        OrderDishes od = orderDishesBiz.findAllByID(odid);
+        System.out.println(od.getOdstate());
+        if (od.getOdstate() == 1) {
+            this.btnDelete.setEnabled(true);
+        } else {
+            this.btnDelete.setEnabled(false);
+        }
     }//GEN-LAST:event_tblDishesMouseClicked
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
 
         int row = this.tblDishes.getSelectedRow();
-        
-        int dishId = (Integer) this.tblDishes.getValueAt(row, 1);
         if (row == -1) {
             JOptionPane.showMessageDialog(this, "请输入要删除的记录！");
             return;
         }
- //           answer == JOptionPane.YES_OPTION
-        DefaultTableModel dtm = (DefaultTableModel) this.tblDishes.getModel();
-        dtm.removeRow(row);
-        boolean result = orderDishesBiz.delete(dishId);
-        System.out.println(result);
-        row = -1;
+        int dishId = (Integer) this.tblDishes.getValueAt(row, 1);
+        int answer = JOptionPane.showConfirmDialog(this, "您确定要退菜吗？");
+        if (answer == JOptionPane.YES_OPTION) {
+            //调用业务
+            boolean result = orderDishesBiz.delete(dishId);
+            if (result == true) {
+                JOptionPane.showMessageDialog(this, "删除成功");
+                //刷新表格
+                DefaultTableModel dtm = (DefaultTableModel) this.tblDishes.getModel();
+                while (dtm.getRowCount() > 0) {
+                    dtm.removeRow(0);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "删除失败");
+            }
+            row = -1;
+        }
+        this.btnDelete.setEnabled(false);
+
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void choiceEmpItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_choiceEmpItemStateChanged
@@ -299,7 +312,21 @@ public class OrderDetailFrame extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_choiceEmpItemStateChanged
 
     private void choiceEmpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_choiceEmpActionPerformed
-        // TODO add your handling code here:
+
+//        String choice = this.choiceEmp.getSelectedItem().toString().trim();             //获得下拉框的内容
+//        if (choice.equals("当前订单")) {
+//            this.btnDelete.setEnabled(false);
+//        } else if (choice.equals("还有未煮的菜的订单")) {
+//            this.btnDelete.setEnabled(true);
+//        } else if (choice.equals("有正在煮的菜的订单")) {
+//            this.btnDelete.setEnabled(false);
+//        } else if (choice.equals("有等待上菜的订单")) {
+//            this.btnDelete.setEnabled(false);
+//        } else if (choice.equals("已上菜的订单")) {
+//            this.btnDelete.setEnabled(false);
+//        } else if (choice.equals("历史订单")) {
+//            this.btnDelete.setEnabled(false);
+//        }
     }//GEN-LAST:event_choiceEmpActionPerformed
 
 
@@ -310,16 +337,14 @@ public class OrderDetailFrame extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JLabel lblMenuDetail;
     private javax.swing.JLabel lblOrderDetail;
     private javax.swing.JTable tblDishes;
     private javax.swing.JTable tblOrder;
-    private javax.swing.JTextField txtSearch;
     // End of variables declaration//GEN-END:variables
 
     private void showOnTable(List<Order> list) {
-         DefaultTableModel dtm = (DefaultTableModel) this.tblOrder.getModel();
+        DefaultTableModel dtm = (DefaultTableModel) this.tblOrder.getModel();
         //2.清空表格信息
         while (dtm.getRowCount() > 0) {
             dtm.removeRow(0);
@@ -329,17 +354,6 @@ public class OrderDetailFrame extends javax.swing.JInternalFrame {
             Vector vt = new Vector();
 //            vt.add(m.getMid());
             vt.add(o.getOid());
-            int nameId = o.getCid();
-            if(nameId == 0){
-                vt.add(null);
-            }
-            else{
-                Customer customer = customerBiz.findByID(nameId);       //通过查另外一张表来获得顾客的姓名
-                if(customer == null){
-                    System.out.println(nameId + "没有这个人。");
-                }
-                vt.add(customer.getCname());
-            }
             vt.add(o.getOpopulation());
             vt.add(o.getOtime());
             vt.add(o.getEid());
@@ -348,10 +362,10 @@ public class OrderDetailFrame extends javax.swing.JInternalFrame {
             dtm.addRow(vt);
         }
     }
-    
+
     /*
-    显示某个订单的菜品信息
-    */
+     显示某个订单的菜品信息
+     */
     private void showOnTable2(List<OrderDishes> list) {
         DefaultTableModel dtm = (DefaultTableModel) this.tblDishes.getModel();
         MenuBiz menuBiz = new MenuBizImpl();
@@ -360,7 +374,15 @@ public class OrderDetailFrame extends javax.swing.JInternalFrame {
             dtm.removeRow(0);
         }
         //3.显示数据
-        for(OrderDishes o : list){
+
+        ArrayList<String> strArray = new ArrayList<String>();
+        strArray.add("已退菜");
+        strArray.add("已下单");
+        strArray.add("正在做");
+        strArray.add("待上菜");
+        strArray.add("已上菜");
+
+        for (OrderDishes o : list) {
             Vector vt = new Vector();
             vt.add(o.getOid());
             int dishId = o.getMid();
@@ -369,6 +391,8 @@ public class OrderDetailFrame extends javax.swing.JInternalFrame {
             vt.add(m.getMname());
             vt.add(o.getOdcount());
             vt.add(o.getOdtime());
+            vt.add(strArray.get(o.getOdstate()));
+            vt.add(m.getMprice());
             dtm.addRow(vt);
         }
     }

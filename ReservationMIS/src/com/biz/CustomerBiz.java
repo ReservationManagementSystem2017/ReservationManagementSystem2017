@@ -31,5 +31,7 @@ public interface CustomerBiz {
     // 6模糊查询
     public List<Customer> findByCondition(String condition);
 
+    // 增加积分
+    public boolean addScore(int cid,double score);
     
 }

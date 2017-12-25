@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Vector;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Administrator
@@ -26,6 +27,7 @@ public class DiscountManageFrame extends javax.swing.JInternalFrame {
      */
     DiscountBiz dbiz = new DiscountBizImpl();
     int deltid;
+
     public DiscountManageFrame() {
         initComponents();
     }
@@ -43,7 +45,7 @@ public class DiscountManageFrame extends javax.swing.JInternalFrame {
         tblDiscount = new javax.swing.JTable();
         btnSearch = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        cbType = new javax.swing.JComboBox<>();
+        cbType = new javax.swing.JComboBox<String>();
         jLabel2 = new javax.swing.JLabel();
         txtDiscount = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -89,7 +91,7 @@ public class DiscountManageFrame extends javax.swing.JInternalFrame {
 
         jLabel1.setText("规则类型");
 
-        cbType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "折扣", "满减", " " }));
+        cbType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "折扣", "满减" }));
         cbType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbTypeActionPerformed(evt);
@@ -192,21 +194,19 @@ public class DiscountManageFrame extends javax.swing.JInternalFrame {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         List<Discount> list = dbiz.findAll();
-        //System.out.println("测试find by id："+dbiz.findByID(8).getDmeetmoney());
         showOnTable(list);
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void cbTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTypeActionPerformed
-        String type =(String) this.cbType.getSelectedItem();
-        if (type.equals("折扣")){
+        String type = (String) this.cbType.getSelectedItem();
+        if (type.equals("折扣")) {
             this.txtDiscount.setEditable(true);
             this.txtMeet.setEditable(false);
             this.txtDecrease.setEditable(false);
             this.txtDiscount.setText("");
             this.txtMeet.setText("");
             this.txtDecrease.setText("");
-        }
-        else if(type.equals("满减")){
+        } else if (type.equals("满减")) {
             this.txtDiscount.setEditable(false);
             this.txtMeet.setEditable(true);
             this.txtDecrease.setEditable(true);
@@ -220,35 +220,49 @@ public class DiscountManageFrame extends javax.swing.JInternalFrame {
         String dct = this.txtDiscount.getText().trim();
         String mt = this.txtMeet.getText().trim();
         String dcs = this.txtDecrease.getText().trim();
-        
-        String type =(String) this.cbType.getSelectedItem();
+
+        String type = (String) this.cbType.getSelectedItem();
         Discount d = new Discount();
-        if(type.equals("折扣")){
-            if(StringUtil.checkLength(dct)==false){
-            JOptionPane.showMessageDialog(this, "折扣额度不能为空");
-            return ;
+        if (type.equals("折扣")) {
+            if (StringUtil.checkLength(dct) == false) {
+                JOptionPane.showMessageDialog(this, "折扣额度不能为空");
+                return;
+            }
+            if (StringUtil.checkDiscount(dct) == false) {
+                JOptionPane.showMessageDialog(this, "折扣额度应小于1");
+                return;
             }
             //组合对象
             Double d_dcs = Double.valueOf(dct);
-            d = new Discount(null,1,d_dcs,0,0);
-        }
-        else if(type.equals("满减")){
-            if(StringUtil.checkLength(dcs)==false||StringUtil.checkLength(mt)==false){
-            JOptionPane.showMessageDialog(this, "满减不能为空");
-            return ;
-        }
-        d = new Discount(null,2,0,Double.valueOf(mt),Double.valueOf(dcs));
+            d = new Discount(null, 1, d_dcs, 0, 0);
+        } else if (type.equals("满减")) {
+            if (StringUtil.checkLength(dcs) == false || StringUtil.checkLength(mt) == false) {
+                JOptionPane.showMessageDialog(this, "满减不能为空");
+                return;
+            }
+            if (StringUtil.checkDecimal(dcs) == false || StringUtil.checkDecimal(mt) == false) {
+                JOptionPane.showMessageDialog(this, "满减只能为数字");
+                return;
+            }
+            int dcs_int = Integer.parseInt(dcs);
+            int mt_int = Integer.parseInt(mt);
+            if (mt_int>dcs_int) {
+                JOptionPane.showMessageDialog(this, "满减数额应该小于");
+                return;
+            }
+            
+            d = new Discount(null, 2, 0, Double.valueOf(mt), Double.valueOf(dcs));
 
         }
         //调用业务类
         boolean result = dbiz.add(d);
-        if(result == true){
-            JOptionPane.showMessageDialog(this,"添加成功");
+        if (result == true) {
+            JOptionPane.showMessageDialog(this, "添加成功");
             List<Discount> list = dbiz.findAll();
             //显示list中的信息
             showOnTable(list);
-        }else{
-            JOptionPane.showMessageDialog(this,"添加失败");
+        } else {
+            JOptionPane.showMessageDialog(this, "添加失败");
         }
         //清空面板信息
         clearInput();
@@ -256,13 +270,13 @@ public class DiscountManageFrame extends javax.swing.JInternalFrame {
 
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         int answer = JOptionPane.showConfirmDialog(this, "您确定要删除吗？");
-        if(answer == JOptionPane.YES_OPTION){
+        if (answer == JOptionPane.YES_OPTION) {
             // 删除
             //调用业务
             boolean result = dbiz.delete(deltid);
-            if(result == true){
+            if (result == true) {
                 JOptionPane.showMessageDialog(this, "删除成功");
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(this, "删除失败");
             }
         }
@@ -271,52 +285,51 @@ public class DiscountManageFrame extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void tblDiscountMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblDiscountMouseClicked
-            this.txtDiscount.setEditable(false);
-            this.txtMeet.setEditable(false);
-            this.txtDecrease.setEditable(false);
+        this.txtDiscount.setEditable(false);
+        this.txtMeet.setEditable(false);
+        this.txtDecrease.setEditable(false);
         // 鼠标选中某行，改行信息显示到输入面板。
         int row = this.tblDiscount.getSelectedRow();
         //根据row获取每列的值。
-        deltid =  new Integer(this.tblDiscount.getValueAt(row, 0).toString());
+        deltid = new Integer(this.tblDiscount.getValueAt(row, 0).toString());
 
         this.btnDelete.setEnabled(true);
     }//GEN-LAST:event_tblDiscountMouseClicked
-    
+
     private void clearInput() {
         this.txtDiscount.setText("");
         this.txtMeet.setText("");
         this.txtDecrease.setText("");
     }
+
     private void showOnTable(List<Discount> list) {
-      /**
-       * 将制定的list数据显示到表上
-       */  
+        /**
+         * 将制定的list数据显示到表上
+         */
         //1.获取指定表格模型
-        DefaultTableModel dtm =
-               (DefaultTableModel) this.tblDiscount.getModel();
+        DefaultTableModel dtm
+                = (DefaultTableModel) this.tblDiscount.getModel();
         //2.清空表格信息
-        while(dtm.getRowCount()>0){
+        while (dtm.getRowCount() > 0) {
             dtm.removeRow(0);
         }
         //3.显示数据
-         for(Discount d :list){
+        for (Discount d : list) {
             Vector vt = new Vector();
             vt.add(d.getDid());
-            Discount dct = d;
-            System.out.println(d.getDid());
-            System.out.println(d.getDtype());
-            System.out.println(d.getDiscountrate());
-            System.out.println(d.getDmeetmoney());
+//            System.out.println(d.getDid());
+//            System.out.println(d.getDtype());
+//            System.out.println(d.getDiscountrate());
+//            System.out.println(d.getDmeetmoney());
             System.out.println(d.getDreducemoney());
-            if(d.getDtype() == 1){
+            if (d.getDtype() == 1) {
                 //打折
                 vt.add("打折");
-                String str1 = "折扣额度："+Double.toString(d.getDiscountrate());
+                String str1 = "折扣额度：" + Double.toString(d.getDiscountrate());
                 vt.add(str1);
-            }
-            else {
+            } else {
                 vt.add("满减");
-                String str2 = "满"+Double.toString(d.getDmeetmoney())+"减"+Double.toString(d.getDreducemoney());
+                String str2 = "满" + Double.toString(d.getDmeetmoney()) + "减" + Double.toString(d.getDreducemoney());
                 vt.add(str2);
             }
             dtm.addRow(vt);

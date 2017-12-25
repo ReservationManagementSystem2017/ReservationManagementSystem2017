@@ -59,5 +59,12 @@ public class CustomerBizImpl implements CustomerBiz{
         return cdao.query(sql, Customer.class);
     }
    
+     // 增加积分
+    public boolean addScore(int cid,double score)
+    {
+        String sql = "update t_customer set cscore=cscore + ?  where cid = ?";
+         Object[] params={score,cid};
+        return cdao.update(sql, params);
+    }
 }
 

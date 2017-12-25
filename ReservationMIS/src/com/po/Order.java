@@ -11,7 +11,6 @@ package com.po;
  */
 public class Order {
     private Integer oid;//订单id
-    private Integer cid;//顾客id可以为null
     private Integer opopulation;//用餐人数
     private String otime;//下单时间
     private Integer eid;//服务员id
@@ -21,15 +20,16 @@ public class Order {
     public Order() {
     }
 
-    public Order(Integer oid, Integer cid, Integer opopulation, String otime, Integer eid, Integer tid, Integer rid) {
+    public Order(Integer oid, Integer opopulation, String otime, Integer eid, Integer tid, Integer rid) {
         this.oid = oid;
-        this.cid = cid;
         this.opopulation = opopulation;
         this.otime = otime;
         this.eid = eid;
         this.tid = tid;
         this.rid = rid;
     }
+
+   
 
     public Integer getOid() {
         return oid;
@@ -39,13 +39,6 @@ public class Order {
         this.oid = oid;
     }
 
-    public Integer getCid() {
-        return cid;
-    }
-
-    public void setCid(Integer cid) {
-        this.cid = cid;
-    }
 
     public Integer getOpopulation() {
         return opopulation;
