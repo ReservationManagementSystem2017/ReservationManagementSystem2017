@@ -64,11 +64,11 @@ public class OrderDishesByCookFrame extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "编号", "订单编号", "菜品名称", "订单时间"
+                "编号", "订单编号", "菜品名称", "份数", "订单时间"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -112,11 +112,11 @@ public class OrderDishesByCookFrame extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "编号", "订单编号", "菜品名称", "订单时间"
+                "编号", "订单编号", "菜品名称", "份数", "订单时间"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, true, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -327,6 +327,7 @@ public class OrderDishesByCookFrame extends javax.swing.JInternalFrame {
             vt.add(od.getOdid());
             vt.add(od.getMid());
             vt.add(mbiz.findByMid(od.getMid()).getMname());
+            vt.add(od.getOdcount());
             vt.add(od.getOdtime());
 //            vt.add(m.getMcount());
             dtm.addRow(vt);
@@ -346,6 +347,7 @@ public class OrderDishesByCookFrame extends javax.swing.JInternalFrame {
             vt.add(od.getOdid());
             vt.add(od.getMid());
             vt.add(mbiz.findByMid(od.getMid()).getMname());
+            vt.add(od.getOdcount());
             vt.add(od.getOdtime());
 //            vt.add(m.getMcount());
             dtm1.addRow(vt);
