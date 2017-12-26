@@ -16,6 +16,7 @@ import com.view.manage.RoomManageFrame;
 import com.view.manage.TableManageFrame;
 import com.view.manage.CookMenuManageFrame;
 import com.view.manage.PurchaseManageFrame;
+import com.view.manage.TestFrame;
 import com.view.order.BillByWaiterFrame;
 import com.view.order.OrderDishesByCookFrame;
 import com.view.order.OrderByWaiterFrame;
@@ -224,6 +225,7 @@ public class MainFrame extends javax.swing.JFrame {
         mnuSearch = new javax.swing.JMenu();
         itemOrderDetail = new javax.swing.JMenuItem();
         itemSearchBill = new javax.swing.JMenuItem();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
 
@@ -405,6 +407,14 @@ public class MainFrame extends javax.swing.JFrame {
         });
         mnuSearch.add(itemSearchBill);
 
+        jMenuItem1.setText("jMenuItem1");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        mnuSearch.add(jMenuItem1);
+
         jMenuBar1.add(mnuSearch);
 
         setJMenuBar(jMenuBar1);
@@ -541,6 +551,10 @@ public class MainFrame extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_itemExitSystemActionPerformed
 
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        showFrame(TestFrame.class);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -644,6 +658,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
+    private javax.swing.JMenuItem jMenuItem1;
     private com.view.MainDeskPaneDell mainDeskPaneDell;
     private javax.swing.JMenu mnuManager;
     private javax.swing.JMenu mnuOrder;
