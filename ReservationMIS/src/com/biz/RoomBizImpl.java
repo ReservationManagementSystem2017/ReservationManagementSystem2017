@@ -26,7 +26,7 @@ public class RoomBizImpl implements RoomBiz{
 
     @Override
     public boolean delete(int rid) {
-        String sql = "update t_room set state =0 where rid = ?";
+        String sql = "update t_room set rstate =0 where rid = ?";
 	//传递参数
 	Object[] params = {rid};
 	return rdao.update(sql, params);

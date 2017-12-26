@@ -46,8 +46,18 @@ public class TableManageFrame extends javax.swing.JInternalFrame {
 
         btnfind = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblProduct = new javax.swing.JTable();
+        tblTable = new javax.swing.JTable();
         btnEmpty = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        txtTid = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        txtTcount = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        txtTroomid = new javax.swing.JTextField();
+        btnAdd = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        btnReset = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
 
         setClosable(true);
         setTitle("桌子管理");
@@ -78,7 +88,7 @@ public class TableManageFrame extends javax.swing.JInternalFrame {
             }
         });
 
-        tblProduct.setModel(new javax.swing.table.DefaultTableModel(
+        tblTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -94,13 +104,54 @@ public class TableManageFrame extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(tblProduct);
+        tblTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblTableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblTable);
 
-        btnEmpty.setFont(new java.awt.Font("宋体", 0, 18)); // NOI18N
+        btnEmpty.setFont(new java.awt.Font("宋体", 1, 18)); // NOI18N
         btnEmpty.setText("查询空桌子");
         btnEmpty.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEmptyActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("桌子编号");
+
+        txtTid.setEnabled(false);
+
+        jLabel2.setText("座位数");
+
+        jLabel3.setText("房间号");
+
+        btnAdd.setText("添加");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
+
+        btnDelete.setText("删除");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
+        btnReset.setText("重置");
+        btnReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetActionPerformed(evt);
+            }
+        });
+
+        btnSave.setText("保存");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
             }
         });
 
@@ -109,26 +160,68 @@ public class TableManageFrame extends javax.swing.JInternalFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtTid, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(btnAdd)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnDelete)))
+                .addGap(26, 26, 26)
+                .addComponent(txtTcount, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3)
+                    .addComponent(btnReset))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(btnfind, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(141, 141, 141)
-                        .addComponent(btnEmpty, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(42, Short.MAX_VALUE))
+                        .addGap(100, 100, 100)
+                        .addComponent(btnSave))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(39, 39, 39)
+                        .addComponent(txtTroomid, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(44, 44, 44))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(23, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 669, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addComponent(btnfind, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnEmpty, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEmpty, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnfind, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnfind, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEmpty, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtTid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(txtTcount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtTroomid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAdd)
+                    .addComponent(btnDelete)
+                    .addComponent(btnReset)
+                    .addComponent(btnSave))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
 
         pack();
@@ -146,7 +239,7 @@ public class TableManageFrame extends javax.swing.JInternalFrame {
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
        FrameUtil.framemap.remove(Table.class.getName());
        //1.获取指定表格模型
-        DefaultTableModel dtm = (DefaultTableModel) this.tblProduct.getModel();
+        DefaultTableModel dtm = (DefaultTableModel) this.tblTable.getModel();
         //2.清空表格信息
         while(dtm.getRowCount()>0){
             dtm.removeRow(0);
@@ -159,12 +252,158 @@ public class TableManageFrame extends javax.swing.JInternalFrame {
         showOnTable1(list);
     }//GEN-LAST:event_btnEmptyActionPerformed
 
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        //String str_tid = this.txtTid.getText().trim();
+        String str_tcount = this.txtTcount.getText().trim();
+        String str_troomid = this.txtTroomid.getText().trim();
+
+        //数据格式验证(使用StringUtil)
+        //1.验证非空。
+     
+        /*if(StringUtil.checkLength(str_tid)==false){
+            JOptionPane.showMessageDialog(this, "桌子编号不能为空");
+            return ;
+        }*/
+        if(StringUtil.checkLength(str_tcount)==false){
+            JOptionPane.showMessageDialog(this, "座位数不能为空");
+            return ;
+        }
+        if(StringUtil.checkLength(str_troomid)==false){
+            JOptionPane.showMessageDialog(this, "所在房间编号不能为空");
+            return ;
+        }
+        
+        //2.数字格式验证
+        if(StringUtil.checkDecimal(str_tcount)==false){
+            JOptionPane.showMessageDialog(this, "座位数须为数字形式。");
+            return ;
+        }
+        if(StringUtil.checkDecimal(str_troomid)==false){
+            JOptionPane.showMessageDialog(this, "所在房间号须为数字形式。");
+            return ;
+        }
+       // Integer tid = Integer.parseInt(str_tid);
+        Integer tcount= Integer.parseInt(str_tcount);
+        Integer troomid= Integer.parseInt(str_troomid);
+        //组合对象
+        Table t = new Table(null,troomid,tcount,1);
+        //调用业务类
+        boolean result = tbiz.add(t);
+        if(result == true){
+            JOptionPane.showMessageDialog(this,"添加成功");
+            List<Table> list = tbiz.findAll();
+            //显示list中的信息
+            showOnTable(list);
+        }else{
+            JOptionPane.showMessageDialog(this,"添加失败");
+        }
+        //清空面板信息
+        clearInput();
+    }//GEN-LAST:event_btnAddActionPerformed
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        int answer = JOptionPane.showConfirmDialog(this, "您确定要删除吗？");
+        if(answer == JOptionPane.YES_OPTION){
+            // 删除商品
+            int tid = Integer.parseInt(this.txtTid.getText());
+            //调用业务
+            int rid = tbiz.findByID(tid).getRid();
+            Room rm = rbiz.findByID(rid);
+            Room rm1 = new Room(rm.getRid(),rm.getRname(),rm.getRcounttable()-1,rm.getRcondition());
+            boolean result1 = tbiz.delete(tid);
+            boolean result2 = rbiz.update(rm1);
+            if(result1 == true && result2 == true){
+                JOptionPane.showMessageDialog(this, "删除成功");
+                List<Table> list = tbiz.findAll();
+                //显示list中的信息
+                showOnTable(list);
+            }else{
+                JOptionPane.showMessageDialog(this, "删除失败");
+            }
+        }
+        clearInput();
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void tblTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblTableMouseClicked
+        // 鼠标选中某行，改行信息显示到输入面板。
+        int row = this.tblTable.getSelectedRow();
+        //根据row获取每列的值。
+        this.txtTid.setText(this.tblTable.getValueAt(row, 0)+"");
+        this.txtTcount.setText(this.tblTable.getValueAt(row, 1)+"");
+        this.txtTroomid.setText(this.tblTable.getValueAt(row, 3)+"");
+        //保存，删除按钮可用。
+        this.btnSave.setEnabled(true);
+        this.btnDelete.setEnabled(true);
+    }//GEN-LAST:event_tblTableMouseClicked
+
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
+        clearInput();
+        this.btnSave.setEnabled(false);
+        this.btnDelete.setEnabled(false);
+    }//GEN-LAST:event_btnResetActionPerformed
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        String tid = this.txtTid.getText().trim();
+        String tcount = this.txtTcount.getText().trim();
+        String troomid = this.txtTroomid.getText().trim();
+        //数据格式验证(使用StringUtil)
+        //1.验证非空。
+        if(StringUtil.checkLength(tid)==false){
+            JOptionPane.showMessageDialog(this, "桌子号不能为空");
+            return ;
+        }
+        if(StringUtil.checkLength(tcount)==false){
+            JOptionPane.showMessageDialog(this, "座位数不能为空");
+            return ;
+        }
+        if(StringUtil.checkLength(troomid)==false){
+            JOptionPane.showMessageDialog(this, "所在房间号不能为空");
+            return ;
+        }
+        
+        //组合对象
+        int tcondition = tbiz.findByID(Integer.parseInt(tid)).getTcondition();
+        int trid = tbiz.findByID(Integer.parseInt(tid)).getRid();//桌子修改前所在房间号
+        Table t = new Table(Integer.parseInt(tid),Integer.parseInt(troomid),Integer.parseInt(tcount),tcondition);
+        int trid1 = Integer.parseInt(troomid);//桌子修改后所在房间号
+        //调用业务类
+        boolean result1 = tbiz.update(t);
+        boolean result2 = false;
+        boolean result3 = false;
+        if(trid1 != trid){
+            //前后房间号不等，则修改。
+            //首先需要将原来房间的桌子数-1；
+            Room rm = rbiz.findByID(trid);
+            Room rm1 = new Room(rm.getRid(),rm.getRname(),rm.getRcounttable()-1,rm.getRcondition());
+            Room rm2 = rbiz.findByID(trid1);
+            Room rm3 = new Room(rm2.getRid(),rm2.getRname(),rm2.getRcounttable()+1,rm2.getRcondition());
+            result2 = rbiz.update(rm1);
+            result3 = rbiz.update(rm3);
+        }
+        else result2 = true;
+        if(result1 == true && result2 == true && result3 == true){
+            JOptionPane.showMessageDialog(this,"修改成功");
+            List<Table> list = tbiz.findAll();
+            //显示list中的信息
+            showOnTable(list);
+        }else{
+            JOptionPane.showMessageDialog(this,"修改失败");
+        }
+        //清空面板信息
+        clearInput();
+    }//GEN-LAST:event_btnSaveActionPerformed
+        private void clearInput() {
+        this.txtTid.setText("");
+        this.txtTcount.setText("");
+        this.txtTroomid.setText("");
+
+    }
 
 
     //小程序3.将list数据显示到表格上
     public void showOnTable(List<Table> list) {
         //1.获取指定表格模型
-        DefaultTableModel dtm = (DefaultTableModel) this.tblProduct.getModel();
+        DefaultTableModel dtm = (DefaultTableModel) this.tblTable.getModel();
         //2.清空表格信息
         while(dtm.getRowCount()>0){
             dtm.removeRow(0);
@@ -187,7 +426,7 @@ public class TableManageFrame extends javax.swing.JInternalFrame {
     }
         public void showOnTable1(List<Table> list) {
         //1.获取指定表格模型
-        DefaultTableModel dtm = (DefaultTableModel) this.tblProduct.getModel();
+        DefaultTableModel dtm = (DefaultTableModel) this.tblTable.getModel();
         //2.清空表格信息
         while(dtm.getRowCount()>0){
             dtm.removeRow(0);
@@ -211,10 +450,20 @@ public class TableManageFrame extends javax.swing.JInternalFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEmpty;
+    private javax.swing.JButton btnReset;
+    private javax.swing.JButton btnSave;
     private javax.swing.JButton btnfind;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tblProduct;
+    private javax.swing.JTable tblTable;
+    private javax.swing.JTextField txtTcount;
+    private javax.swing.JTextField txtTid;
+    private javax.swing.JTextField txtTroomid;
     // End of variables declaration//GEN-END:variables
 }
 

@@ -13,7 +13,7 @@ public class Table {
     private Integer tid;//餐桌id
     private Integer rid;//房间id
     private Integer tseat;//座位数量
-    private Integer tcondition;//使用情况
+    private Integer tcondition;//使用情况 1为未被使用，0为已被使用
     //state,0销毁，1存在
 
     public Table() {
