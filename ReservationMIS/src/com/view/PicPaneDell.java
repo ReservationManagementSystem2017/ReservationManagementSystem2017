@@ -24,7 +24,7 @@ public class PicPaneDell extends javax.swing.JPanel {
     public PicPaneDell() {
         initComponents();
            //设置面板的背景图片，注意图片路径
-        this.setImgURL(this.getClass().getResource("/com/img/background.jpg"));
+        this.setImgURL(this.getClass().getResource("/com/img/food.jpg"));
 
     }
    // 增加成员方法：
@@ -50,11 +50,11 @@ public class PicPaneDell extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1117, Short.MAX_VALUE)
+            .addGap(0, 861, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 677, Short.MAX_VALUE)
+            .addGap(0, 620, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
