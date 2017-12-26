@@ -9,6 +9,7 @@ import com.biz.RoomBizImpl;
 import com.po.Room;
 import com.util.FrameUtil;
 import com.util.StringUtil;
+import java.awt.Color;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Vector;
@@ -27,6 +28,9 @@ public class RoomManageFrame extends javax.swing.JInternalFrame {
     RoomBiz rbiz = new RoomBizImpl();
     public RoomManageFrame() {
         initComponents();
+         this.jScrollPane1.getViewport().setBackground(Color.WHITE);
+         this.btnSave.setEnabled(false);
+         this.btnDelete.setEnabled(false);
     }
 
     /**
@@ -39,20 +43,21 @@ public class RoomManageFrame extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jDialog1 = new javax.swing.JDialog();
-        btnfind = new javax.swing.JButton();
+        homePanel1 = new com.view.manage.HomePanel();
         txtCondition = new javax.swing.JTextField();
+        btnfind = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblRoom = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        txtRname = new javax.swing.JTextField();
         txtRid = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        txtRname = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
         txtRcount = new javax.swing.JTextField();
         btnAdd = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
-        btnSave = new javax.swing.JButton();
         btnReset = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
@@ -70,6 +75,10 @@ public class RoomManageFrame extends javax.swing.JInternalFrame {
         setResizable(true);
         setTitle("房间管理");
 
+        txtCondition.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
+
+        btnfind.setBackground(new java.awt.Color(255, 255, 102));
+        btnfind.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
         btnfind.setText("查询");
         btnfind.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,19 +102,30 @@ public class RoomManageFrame extends javax.swing.JInternalFrame {
         });
         jScrollPane1.setViewportView(tblRoom);
 
+        jLabel1.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(102, 102, 102));
         jLabel1.setText("房间号");
 
-        jLabel2.setText("房间名");
-
-        jLabel3.setText("最大容纳桌数");
-
-        txtRname.setText(" ");
-
+        txtRid.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
         txtRid.setText(" ");
         txtRid.setEnabled(false);
 
+        jLabel2.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel2.setText("房间名");
+
+        txtRname.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
+        txtRname.setText(" ");
+
+        jLabel3.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 51, 51));
+        jLabel3.setText("最大容纳桌数");
+
+        txtRcount.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
         txtRcount.setText(" ");
 
+        btnAdd.setBackground(new java.awt.Color(255, 255, 102));
+        btnAdd.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
         btnAdd.setText("添加");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -113,6 +133,8 @@ public class RoomManageFrame extends javax.swing.JInternalFrame {
             }
         });
 
+        btnDelete.setBackground(new java.awt.Color(255, 255, 102));
+        btnDelete.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
         btnDelete.setText("删除");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,13 +142,8 @@ public class RoomManageFrame extends javax.swing.JInternalFrame {
             }
         });
 
-        btnSave.setText("保存");
-        btnSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSaveActionPerformed(evt);
-            }
-        });
-
+        btnReset.setBackground(new java.awt.Color(255, 255, 102));
+        btnReset.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
         btnReset.setText("重置");
         btnReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -134,73 +151,89 @@ public class RoomManageFrame extends javax.swing.JInternalFrame {
             }
         });
 
+        btnSave.setBackground(new java.awt.Color(255, 255, 102));
+        btnSave.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
+        btnSave.setText("保存");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout homePanel1Layout = new javax.swing.GroupLayout(homePanel1);
+        homePanel1.setLayout(homePanel1Layout);
+        homePanel1Layout.setHorizontalGroup(
+            homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(homePanel1Layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addGroup(homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 573, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(homePanel1Layout.createSequentialGroup()
+                        .addGap(171, 171, 171)
+                        .addComponent(txtCondition, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(33, 33, 33)
+                        .addComponent(btnfind))
+                    .addGroup(homePanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtRid, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addGroup(homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(homePanel1Layout.createSequentialGroup()
+                                .addComponent(btnReset)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnAdd)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnDelete)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnSave))
+                            .addGroup(homePanel1Layout.createSequentialGroup()
+                                .addComponent(txtRname, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel3)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtRcount, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(39, Short.MAX_VALUE))
+        );
+        homePanel1Layout.setVerticalGroup(
+            homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(homePanel1Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addGroup(homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCondition, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnfind, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addGroup(homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtRid, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtRname, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtRcount, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addGroup(homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnReset, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(31, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(txtCondition, javax.swing.GroupLayout.PREFERRED_SIZE, 489, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnfind))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 573, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(20, 20, 20)
-                                .addComponent(jLabel1)
-                                .addGap(27, 27, 27)
-                                .addComponent(txtRid, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(48, 48, 48)
-                                .addComponent(jLabel2)
-                                .addGap(31, 31, 31)
-                                .addComponent(txtRname, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(37, 37, 37)
-                                .addComponent(btnAdd)
-                                .addGap(83, 83, 83)
-                                .addComponent(btnDelete)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
-                                .addComponent(btnReset)))
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(19, 19, 19)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtRcount, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnSave)
-                                .addGap(42, 42, 42)))))
-                .addContainerGap(18, Short.MAX_VALUE))
+            .addComponent(homePanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(40, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnfind)
-                    .addComponent(txtCondition, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtRname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel3)
-                    .addComponent(txtRcount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtRid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAdd)
-                    .addComponent(btnDelete)
-                    .addComponent(btnSave)
-                    .addComponent(btnReset))
-                .addGap(39, 39, 39))
+                .addComponent(homePanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -224,7 +257,6 @@ public class RoomManageFrame extends javax.swing.JInternalFrame {
               
         //数据格式验证(使用StringUtil)
         //1.验证非空。
-     
         if(StringUtil.checkLength(rname)==false){
             JOptionPane.showMessageDialog(this, "房间名称不能为空");
             return ;
@@ -255,9 +287,14 @@ public class RoomManageFrame extends javax.swing.JInternalFrame {
         int answer = JOptionPane.showConfirmDialog(this, "您确定要删除吗？");
         if(answer == JOptionPane.YES_OPTION){
             // 删除商品
-            int cusid = Integer.parseInt(this.txtRid.getText());
+            int rid = Integer.parseInt(this.txtRid.getText());
+            Room r = rbiz.findByID(rid);
+            if(r.getRcondition()!=0){
+                 JOptionPane.showMessageDialog(this, "该房间还有桌子");
+                 return;
+            }
             //调用业务
-            boolean result = rbiz.delete(cusid);
+            boolean result = rbiz.delete(rid);
             if(result == true){
                 JOptionPane.showMessageDialog(this, "删除成功");
                 List<Room> list = rbiz.findAll();
@@ -280,6 +317,7 @@ public class RoomManageFrame extends javax.swing.JInternalFrame {
         //保存，删除按钮可用。
         this.btnSave.setEnabled(true);
         this.btnDelete.setEnabled(true);
+        this.btnAdd.setEnabled(false);
     }//GEN-LAST:event_tblRoomMouseClicked
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
@@ -343,6 +381,9 @@ public class RoomManageFrame extends javax.swing.JInternalFrame {
         this.txtRid.setText("");
         this.txtRname.setText("");
         this.txtRcount.setText("");
+        this.btnSave.setEnabled(false);
+         this.btnDelete.setEnabled(false);
+         this.btnAdd.setEnabled(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -351,6 +392,7 @@ public class RoomManageFrame extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnReset;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnfind;
+    private com.view.manage.HomePanel homePanel1;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

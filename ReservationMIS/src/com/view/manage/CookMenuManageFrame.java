@@ -433,7 +433,7 @@ public class CookMenuManageFrame extends javax.swing.JInternalFrame {
         int selectrow = this.tblRelation.getSelectedRow();
         //String ename = (String) this.tblRelation.getValueAt(selectrow, 0);
         //String muname = (String) this.tblRelation.getValueAt(selectrow, 1);
-        Integer cmid=(Integer)this.tblRelation.getValueAt(selectrow, 2);
+        Integer cmid=(Integer)this.tblRelation.getValueAt(selectrow, 0);
         CookMenu cm=new CookMenu(cmid,null,null);
         boolean result=cmbiz.delete(cmid);
         if (result == true) {

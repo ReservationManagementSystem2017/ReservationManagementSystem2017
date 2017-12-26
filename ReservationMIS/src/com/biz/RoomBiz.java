@@ -26,6 +26,9 @@ public interface RoomBiz {
         public List<Room> findByCondition(String conditions);
 	/*public List<Product> findByCondition (String condition);
         public List<Product> findByCondition(String conditions,String type,Integer proid);*/
+        
+        //增加一张桌子
+        public boolean addTable(int rid);
 
 }
 

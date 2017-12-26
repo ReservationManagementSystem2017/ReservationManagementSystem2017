@@ -21,7 +21,7 @@ public class BillBizImpl implements BillBiz  {
     public boolean add(Bill b) {
         String sql = "insert into t_bill values(?,?,?,?,?,?,1)";
         //params中的参数是按顺序逐个给？赋值，所以需要注意数据表顺序
-        Object[] params = {null, b.getBmoney(),b.getCid(),b.getEid(),b.getBtime(),b.getBinvoice()};
+        Object[] params = {b.getBid(), b.getBmoney(),b.getCid(),b.getEid(),b.getBtime(),b.getBinvoice()};
         return edao.update(sql, params);
     }
 

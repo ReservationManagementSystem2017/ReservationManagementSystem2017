@@ -59,7 +59,7 @@ public class OrderDishesBizImpl implements OrderDishesBiz {
 
     //查找已经做好的菜
     public List<OrderDishes> findFinshed() {
-        String sql = "select * from t_orderdishes where odstate=2";
+        String sql = "select * from t_orderdishes where odstate=3";
         return edao.query(sql, OrderDishes.class);
     }
 

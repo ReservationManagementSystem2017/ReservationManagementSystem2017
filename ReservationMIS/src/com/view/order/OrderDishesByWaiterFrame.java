@@ -265,7 +265,10 @@ public class OrderDishesByWaiterFrame extends javax.swing.JInternalFrame {
             String name=me.getMname();
             vt.add(name);
             vt.add(od.getOdcount());
+//            System.out.println(od.getOdid());
+//            System.out.println(od.getOid());
             Order o=obiz.findByID(od.getOid());
+//            System.out.println(o.getOid());
             Integer tid=o.getTid();
             vt.add(tid);
             vt.add(od.getOdid());

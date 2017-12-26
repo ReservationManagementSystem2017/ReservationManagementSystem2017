@@ -20,7 +20,7 @@ public class RoomBizImpl implements RoomBiz{
     @Override
     public boolean add(Room r) {
         String sql = "insert into t_room values(?,?,?,?,?)";
-        Object[] params ={r.getRid(),r.getRname(),r.getRcounttable(),r.getRcondition(),1};
+        Object[] params ={null,r.getRname(),r.getRcounttable(),r.getRcondition(),1};
 	return rdao.update(sql,params);    
     }
 
@@ -58,4 +58,12 @@ public class RoomBizImpl implements RoomBiz{
         }
         return rdao.query(sql, Room.class);
     }
+    
+    public boolean addTable(int rid)
+    {
+        String sql = "update t_room  set rcondition=rcondition + 1 where rid = ?";
+	Object[] params ={rid};
+	return rdao.update(sql, params);
+    }
+    
 }

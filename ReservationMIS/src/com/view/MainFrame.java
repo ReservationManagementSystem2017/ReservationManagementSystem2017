@@ -56,15 +56,15 @@ public class MainFrame extends javax.swing.JFrame {
         //        关于权限
         //null表示没有登录
         if (permission == null) {
-//            //菜单
-//            mnuOrder.setEnabled(false);
-//            mnuManager.setEnabled(false);
-//            mnuSearch.setEnabled(false);
-//            //菜单项
-//            itemUpdatePassword.setEnabled(false);
-//            itemExitLogin.setEnabled(false);
-//            itemLogin.setEnabled(true);
-//            itemRegister.setEnabled(true);
+            //菜单
+            mnuOrder.setEnabled(false);
+            mnuManager.setEnabled(false);
+            mnuSearch.setEnabled(false);
+            //菜单项
+            itemUpdatePassword.setEnabled(false);
+            itemExitLogin.setEnabled(false);
+            itemLogin.setEnabled(true);
+            itemRegister.setEnabled(true);
         }
         //老板拥有所有权限
         if ("经理".equals(permission)) {
