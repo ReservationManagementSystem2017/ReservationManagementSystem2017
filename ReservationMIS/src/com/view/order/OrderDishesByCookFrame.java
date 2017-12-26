@@ -9,8 +9,11 @@ import com.biz.MenuBiz;
 import com.biz.MenuBizImpl;
 import com.biz.OrderDishesBiz;
 import com.biz.OrderDishesBizImpl;
+import com.biz.UserBiz;
+import com.biz.UserBizImpl;
 import com.po.Order;
 import com.po.OrderDishes;
+import com.po.User;
 import java.util.List;
 import java.util.Vector;
 import javax.swing.JOptionPane;
@@ -24,12 +27,21 @@ public class OrderDishesByCookFrame extends javax.swing.JInternalFrame {
 
     OrderDishesBiz odbiz = new OrderDishesBizImpl();
     MenuBiz mbiz = new MenuBizImpl();
-    int Eid = 4;//待定
+    UserBiz ubiz = new UserBizImpl();
+    public User userNew = null;//设置静态值对象，供界面传值用
 
     /**
      * Creates new form OrderByCookFrame
      */
     public OrderDishesByCookFrame() {
+        initComponents();
+        this.btnCook.setEnabled(false);
+        this.btnCancel.setEnabled(false);
+        this.btnFinish.setEnabled(false);
+    }
+
+    public OrderDishesByCookFrame(User user) {
+        this.userNew = user;
         initComponents();
         this.btnCook.setEnabled(false);
         this.btnCancel.setEnabled(false);
@@ -222,10 +234,10 @@ public class OrderDishesByCookFrame extends javax.swing.JInternalFrame {
             }
 
         }
-        List<OrderDishes> list = odbiz.toCookByEid(Eid);
+        List<OrderDishes> list = odbiz.toCookByEid(userNew.getEid());
         //显示list信息
         showOnTableToCook(list);//
-        List<OrderDishes> list1 = odbiz.cookingByEid(Eid);
+        List<OrderDishes> list1 = odbiz.cookingByEid(userNew.getEid());
         //显示list信息
         showOnTableCooking(list1);//
 //        DefaultTableModel dtm = (DefaultTableModel) this.tblMenu.getModel();
@@ -236,7 +248,7 @@ public class OrderDishesByCookFrame extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_btnCookActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        List<OrderDishes> list = odbiz.toCookByEid(Eid);
+        List<OrderDishes> list = odbiz.toCookByEid(userNew.getEid());
         showOnTableToCook(list);
         this.btnCook.setEnabled(false);
         this.btnCancel.setEnabled(false);
@@ -261,10 +273,10 @@ public class OrderDishesByCookFrame extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "做菜失败");
             }
         }
-        List<OrderDishes> list = odbiz.toCookByEid(Eid);
+        List<OrderDishes> list = odbiz.toCookByEid(userNew.getEid());
         //显示list信息
         showOnTableToCook(list);//
-        List<OrderDishes> list1 = odbiz.cookingByEid(Eid);
+        List<OrderDishes> list1 = odbiz.cookingByEid(userNew.getEid());
         //显示list信息
         showOnTableCooking(list1);//
 
@@ -280,7 +292,7 @@ public class OrderDishesByCookFrame extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_tblCookingMouseClicked
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        List<OrderDishes> list = odbiz.cookingByEid(Eid);
+        List<OrderDishes> list = odbiz.cookingByEid(userNew.getEid());
         showOnTableCooking(list);
     }//GEN-LAST:event_btnUpdateActionPerformed
 
@@ -302,10 +314,10 @@ public class OrderDishesByCookFrame extends javax.swing.JInternalFrame {
                 JOptionPane.showMessageDialog(this, "取消做菜失败");
             }
         }
-        List<OrderDishes> list = odbiz.toCookByEid(Eid);
+        List<OrderDishes> list = odbiz.toCookByEid(userNew.getEid());
         //显示list信息
         showOnTableToCook(list);//
-        List<OrderDishes> list1 = odbiz.cookingByEid(Eid);
+        List<OrderDishes> list1 = odbiz.cookingByEid(userNew.getEid());
         //显示list信息
         showOnTableCooking(list1);//
         this.btnCook.setEnabled(false);

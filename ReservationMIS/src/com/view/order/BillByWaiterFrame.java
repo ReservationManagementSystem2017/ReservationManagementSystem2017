@@ -21,6 +21,8 @@ import com.biz.RoomBiz;
 import com.biz.RoomBizImpl;
 import com.biz.TableBiz;
 import com.biz.TableBizImpl;
+import com.biz.UserBiz;
+import com.biz.UserBizImpl;
 import com.po.Bill;
 import com.po.Customer;
 import com.po.Discount;
@@ -29,6 +31,7 @@ import com.po.Order;
 import com.po.OrderDishes;
 import com.po.Room;
 import com.po.Table;
+import com.po.User;
 import com.util.StringUtil;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -52,11 +55,19 @@ public class BillByWaiterFrame extends javax.swing.JInternalFrame {
     BillBiz bbiz = new BillBizImpl();
     TableBiz tbiz = new TableBizImpl();
     RoomBiz rbiz = new RoomBizImpl();
-
+    UserBiz ubiz = new UserBizImpl();
+     public User userNew = null;//设置静态值对象，供界面传值用
     /**
      * Creates new form BillByWaiterFrame
      */
     public BillByWaiterFrame() {
+        initComponents();
+        initDiscount();
+    }
+    
+     public BillByWaiterFrame(User user) {
+         System.out.println(user.getPermission());
+        this.userNew = user;
         initComponents();
         initDiscount();
     }
@@ -482,11 +493,11 @@ public class BillByWaiterFrame extends javax.swing.JInternalFrame {
         //
         Bill b = new Bill();
         if (cidFlag == true) {
-            b = new Bill(oid, actualPrice, cid_int, 1, time, false);
+            b = new Bill(oid, actualPrice, cid_int, userNew.getEid(), time, false);
             cbiz.addScore(cid_int, actualPrice/10);//积分
             
         } else {
-            b = new Bill(oid, actualPrice, null, 1, time, false);
+            b = new Bill(oid, actualPrice, null, userNew.getEid(), time, false);
         }
         //生成订单，并获取订单对象
         boolean result = bbiz.add(b);

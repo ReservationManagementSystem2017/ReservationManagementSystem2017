@@ -6,6 +6,7 @@
 package com.util;
 
 import com.po.User;
+import java.lang.reflect.Constructor;
 import java.util.HashMap;
 import javax.swing.JInternalFrame;
 
@@ -39,17 +40,20 @@ public class FrameUtil {
         }
         return frame;
     }
-    public static JInternalFrame buildFrame(Class clazz,User user){
-        JInternalFrame frame = null;
+    
+    public static JInternalFrame buildFrame(Class clazz,User user) throws NoSuchMethodException{
+       JInternalFrame frame = null;
+//        System.out.println( user.getUid()+"   22222222222222222");
+        Constructor con=clazz.getDeclaredConstructor(new Class[]{User.class});
         if(framemap.containsKey(clazz.getName())){
             //根据键直接获取对象
             frame =  framemap.get(clazz.getName());
         }else{
             try {
                 //集合中不存在键，说明之前没有创建过
-                frame = (JInternalFrame) clazz.newInstance();
+                frame = (JInternalFrame) con.newInstance(user);
                 //存入集合
-                framemap.put(clazz.getName(), frame);
+                framemap.put(con.getName(), frame);
             } catch (Exception ex) {
                 ex.printStackTrace();
             }

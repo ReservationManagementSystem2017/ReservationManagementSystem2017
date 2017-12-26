@@ -17,12 +17,16 @@ import com.biz.RoomBiz;
 import com.biz.RoomBizImpl;
 import com.biz.TableBiz;
 import com.biz.TableBizImpl;
+import com.biz.UserBiz;
+import com.biz.UserBizImpl;
 import com.po.Menu;
 import com.po.Order;
 import com.po.OrderDishes;
 import com.po.Room;
 import com.po.Table;
+import com.po.User;
 import com.util.StringUtil;
+import com.view.MainFrame;
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -47,15 +51,27 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
     TableBiz tbiz = new TableBizImpl();
     RoomBiz rbiz = new RoomBizImpl();
     OrderDishesBiz odbiz = new OrderDishesBizImpl();
+    UserBiz ubiz = new UserBizImpl();
+     public User userNew = null;//设置静态值对象，供界面传值用
 
     /**
      * Creates new form OrderByWaiter
      */
     public OrderByWaiterFrame() {
+//        System.out.println("aaa");
         initComponents();
         initPurchaseTable();
-
     }
+    
+    public OrderByWaiterFrame(User user) {
+//        System.out.println(user.getPermission());
+        this.userNew = user;
+        initComponents();
+        initPurchaseTable();
+    }
+    
+
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -400,7 +416,7 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
                 return;
             }
         }
-       
+
         String cusNumber = this.txtCusNumber.getText().trim();
         if (StringUtil.checkLength(cusNumber) == false) {
             JOptionPane.showMessageDialog(this, "顾客人数不能为空");
@@ -433,7 +449,7 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
         DateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String time = format.format(date);
 
-        Order o = new Order(null, cusNumber_int, time, 1, tid, rid);
+        Order o = new Order(null, cusNumber_int, time, userNew.getEid(), tid, rid);
         //生成订单，并获取订单对象
         boolean result_order = obiz.add(o);
         Order newOrder = obiz.findLastOne();
@@ -441,19 +457,19 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
         //table类的修改
         t.setTcondition(0);
         boolean result_table = tbiz.update(t);
-        
+
         //Room类的修改。
         int rrid = t.getRid();
         Room room = rbiz.findByID(rrid);
         int curcondition = room.getRcondition();
-        room.setRcondition(curcondition+1);
+        room.setRcondition(curcondition + 1);
         boolean result_room = rbiz.update(room);
 
         for (int row = 0; row < dtm.getRowCount(); row++) {
             Integer oid = newOrder.getOid();
             Integer mid = (Integer) this.tblOrder.getValueAt(row, 0);
             Integer odcount = (Integer) this.tblOrder.getValueAt(row, 5);
-            OrderDishes od = new OrderDishes(null, oid, mid, odcount, time,1);
+            OrderDishes od = new OrderDishes(null, oid, mid, odcount, time, 1);
             odbiz.add(od);
             Menu m = mbiz.findByID(mid);
             mbiz.reduceMstorage(mid, odcount);
@@ -464,7 +480,7 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
         } else {
             JOptionPane.showMessageDialog(this, "创建订单失败");
         }
-        clearUp();    
+        clearUp();
 
     }//GEN-LAST:event_btnCreateOrderActionPerformed
 

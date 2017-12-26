@@ -29,7 +29,7 @@ public class LocationUtil {
     * @param comp
     */
   public static void setFullScreen(Component comp){
-     comp.setSize(getScreenSize());
+//     comp.setSize(getScreenSize());
   }
   /**
    * 设置组件屏幕居中

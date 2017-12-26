@@ -10,7 +10,6 @@ import com.biz.UserBizImpl;
 import com.po.User;
 import com.util.LocationUtil;
 import com.util.StringUtil;
-
 import javax.swing.JOptionPane;
 
 /**
@@ -51,6 +50,7 @@ public class LoginFrame extends javax.swing.JDialog {
         lblPassword = new javax.swing.JLabel();
         txtPassword = new javax.swing.JPasswordField();
         btnLogin = new javax.swing.JButton();
+        btnRegister = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         lblInstruction = new javax.swing.JLabel();
         lblCode = new javax.swing.JLabel();
@@ -63,7 +63,6 @@ public class LoginFrame extends javax.swing.JDialog {
         lblUsername.setText("用户名");
 
         txtUsername.setFont(new java.awt.Font("宋体", 0, 14)); // NOI18N
-        txtUsername.setText("123456");
         txtUsername.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
         txtUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -94,6 +93,16 @@ public class LoginFrame extends javax.swing.JDialog {
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoginActionPerformed(evt);
+            }
+        });
+
+        btnRegister.setFont(new java.awt.Font("宋体", 1, 18)); // NOI18N
+        btnRegister.setText("注册");
+        btnRegister.setToolTipText("注册新用户");
+        btnRegister.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(204, 51, 255), new java.awt.Color(204, 102, 255)));
+        btnRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegisterActionPerformed(evt);
             }
         });
 
@@ -129,9 +138,10 @@ public class LoginFrame extends javax.swing.JDialog {
                 .addGap(59, 59, 59)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(45, 45, 45)
                         .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -170,6 +180,7 @@ public class LoginFrame extends javax.swing.JDialog {
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(33, Short.MAX_VALUE))
         );
@@ -184,14 +195,14 @@ public class LoginFrame extends javax.swing.JDialog {
 //         this.txtUsername.setText("");
         this.txtUsername.setFont(null);
     }
-    
+
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         //处理登录按钮事件
         //1.获取用户名和密码
         String username = this.txtUsername.getText();
         char[] pwds = this.txtPassword.getPassword();
         String password = new String(pwds);//将字符型数组转成字符串数组
-        if(this.txtCode.getText().equals(this.lblCheckCode.getText())==false){
+        if (this.txtCode.getText().equals(this.lblCheckCode.getText()) == false) {
             JOptionPane.showMessageDialog(this, "验证码错误");
             this.txtCode.setText("");
             getCheckCode();
@@ -202,7 +213,7 @@ public class LoginFrame extends javax.swing.JDialog {
         if (SearchUserName == null) {
             JOptionPane.showMessageDialog(this, "用户名不存在");
         } else {
-            if (SearchUserName.getPassword().equals(password)==true) {
+            if (SearchUserName.getPassword().equals(password) == true) {
                 //打开主界面，并将登录对象传递给主界面
 //                //先传值
 //                MainFrame.user = user;
@@ -224,6 +235,18 @@ public class LoginFrame extends javax.swing.JDialog {
 //            mf.setVisible(true);//顯示
 //            this.dispose();//登錄界面校會
     }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
+
+        //关闭原窗口
+        clearInput();
+        this.dispose();
+        //创建新窗口
+        RegisterFrame_Short rdfs = new RegisterFrame_Short(null, true);
+        //显示
+        LocationUtil.setScreenCenter(rdfs);
+        rdfs.setVisible(true);
+    }//GEN-LAST:event_btnRegisterActionPerformed
     private void clearInput() {
         this.txtUsername.setText("");
         this.txtPassword.setText("");
@@ -239,9 +262,9 @@ public class LoginFrame extends javax.swing.JDialog {
     }//GEN-LAST:event_txtPasswordKeyPressed
 
     private void txtUsernameKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUsernameKeyTyped
-        if(!this.txtUsername.getText().equals("")){
-            this.txtUsername.setText("");
-        }
+//        if (!this.txtUsername.getText().equals("")) {
+//            this.txtUsername.setText("");
+//        }
     }//GEN-LAST:event_txtUsernameKeyTyped
 
     private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
@@ -308,6 +331,7 @@ public class LoginFrame extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancel;
     private javax.swing.JButton btnLogin;
+    private javax.swing.JButton btnRegister;
     private javax.swing.JLabel lblCheckCode;
     private javax.swing.JLabel lblCode;
     private javax.swing.JLabel lblInstruction;
