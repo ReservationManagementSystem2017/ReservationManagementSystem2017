@@ -106,6 +106,11 @@ public class BillByWaiterFrame extends javax.swing.JInternalFrame {
         lblDiscount2 = new javax.swing.JLabel();
 
         setClosable(true);
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
 
         btnSearch.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
         btnSearch.setForeground(new java.awt.Color(51, 51, 51));
@@ -527,6 +532,10 @@ public class BillByWaiterFrame extends javax.swing.JInternalFrame {
         clearUp();
 
     }//GEN-LAST:event_btnPayActionPerformed
+
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        initDiscount();
+    }//GEN-LAST:event_formMouseClicked
 
     private void showOnTable(List<Order> list) {
         //1.获取指定表格（tblProduct）模型

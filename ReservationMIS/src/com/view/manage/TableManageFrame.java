@@ -380,7 +380,10 @@ public class TableManageFrame extends javax.swing.JInternalFrame {
             result2 = rbiz.update(rm1);
             result3 = rbiz.update(rm3);
         }
-        else result2 = true;
+        else {
+            result2 = true;
+            result3 = true;
+        }
         if(result1 == true && result2 == true && result3 == true){
             JOptionPane.showMessageDialog(this,"修改成功");
             List<Table> list = tbiz.findAll();
