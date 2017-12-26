@@ -22,7 +22,7 @@ public class HomePanel extends JPanel {
     Image img;  
     public HomePanel() {  
         //  /img/HomeImg.jpg 是存放在你正在编写的项目的bin文件夹下的img文件夹下的一个图片  
-        icon=new ImageIcon(getClass().getResource("/com/img/yellow.jpg"));  
+        icon=new ImageIcon(getClass().getResource("/com/img/rubai.jpg"));  
         img=icon.getImage();  
     }  
     public void paintComponent(Graphics g) {  

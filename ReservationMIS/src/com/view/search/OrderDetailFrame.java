@@ -18,6 +18,7 @@ import com.po.Menu;
 import com.po.Order;
 import com.po.OrderDishes;
 import com.util.StringUtil;
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -42,6 +43,8 @@ public class OrderDetailFrame extends javax.swing.JInternalFrame {
         initComponents();
         this.btnDelete.setEnabled(false);
 //        initSelect();
+        this.jScrollPane1.getViewport().setBackground(Color.WHITE);
+        this.jScrollPane2.getViewport().setBackground(Color.WHITE);
     }
 
 //    private void initSelect() {
@@ -61,17 +64,50 @@ public class OrderDetailFrame extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        homePanel1 = new com.view.HomePanel();
+        lblOrderDetail = new javax.swing.JLabel();
+        choiceEmp = new javax.swing.JComboBox();
+        jButton1 = new javax.swing.JButton();
+        lblMenuDetail = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblOrder = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblDishes = new javax.swing.JTable();
         btnDelete = new javax.swing.JButton();
-        choiceEmp = new javax.swing.JComboBox();
-        lblOrderDetail = new javax.swing.JLabel();
-        lblMenuDetail = new javax.swing.JLabel();
 
         setClosable(true);
+        setTitle("订单详情");
+
+        lblOrderDetail.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
+        lblOrderDetail.setForeground(new java.awt.Color(255, 51, 51));
+        lblOrderDetail.setText("订单明细");
+
+        choiceEmp.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
+        choiceEmp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "当前订单", "还有未煮的菜的订单", "有正在煮的菜的订单", "有等待上菜的订单", "已上菜的订单", "历史订单" }));
+        choiceEmp.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
+        choiceEmp.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                choiceEmpItemStateChanged(evt);
+            }
+        });
+        choiceEmp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                choiceEmpActionPerformed(evt);
+            }
+        });
+
+        jButton1.setBackground(new java.awt.Color(255, 255, 102));
+        jButton1.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
+        jButton1.setText("查询");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        lblMenuDetail.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
+        lblMenuDetail.setForeground(new java.awt.Color(255, 51, 51));
+        lblMenuDetail.setText("菜单详情页");
 
         tblOrder.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -102,14 +138,6 @@ public class OrderDetailFrame extends javax.swing.JInternalFrame {
             tblOrder.getColumnModel().getColumn(3).setResizable(false);
             tblOrder.getColumnModel().getColumn(4).setResizable(false);
         }
-
-        jButton1.setForeground(new java.awt.Color(204, 0, 0));
-        jButton1.setText("确定");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         tblDishes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -143,6 +171,8 @@ public class OrderDetailFrame extends javax.swing.JInternalFrame {
             tblDishes.getColumnModel().getColumn(6).setResizable(false);
         }
 
+        btnDelete.setBackground(new java.awt.Color(255, 255, 102));
+        btnDelete.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
         btnDelete.setText("删除");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,66 +180,58 @@ public class OrderDetailFrame extends javax.swing.JInternalFrame {
             }
         });
 
-        choiceEmp.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "当前订单", "还有未煮的菜的订单", "有正在煮的菜的订单", "有等待上菜的订单", "已上菜的订单", "历史订单" }));
-        choiceEmp.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
-        choiceEmp.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                choiceEmpItemStateChanged(evt);
-            }
-        });
-        choiceEmp.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                choiceEmpActionPerformed(evt);
-            }
-        });
-
-        lblOrderDetail.setText("订单明细");
-
-        lblMenuDetail.setText("菜单详情页");
+        javax.swing.GroupLayout homePanel1Layout = new javax.swing.GroupLayout(homePanel1);
+        homePanel1.setLayout(homePanel1Layout);
+        homePanel1Layout.setHorizontalGroup(
+            homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(homePanel1Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addGroup(homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 646, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblMenuDetail)
+                        .addComponent(lblOrderDetail)
+                        .addGroup(homePanel1Layout.createSequentialGroup()
+                            .addComponent(choiceEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jButton1))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 646, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(41, Short.MAX_VALUE))
+        );
+        homePanel1Layout.setVerticalGroup(
+            homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(homePanel1Layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(lblOrderDetail)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(choiceEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addComponent(lblMenuDetail)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 36, Short.MAX_VALUE)
+                .addComponent(btnDelete)
+                .addGap(40, 40, 40))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 646, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 646, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(300, 300, 300)
-                        .addComponent(lblOrderDetail))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(290, 290, 290)
-                        .addComponent(lblMenuDetail))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(231, 231, 231)
-                        .addComponent(choiceEmp, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1)))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addComponent(homePanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(lblOrderDetail)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(choiceEmp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                .addComponent(lblMenuDetail)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
-                .addGap(43, 43, 43)
-                .addComponent(btnDelete)
-                .addContainerGap())
+                .addComponent(homePanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -334,6 +356,7 @@ public class OrderDetailFrame extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnDelete;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox choiceEmp;
+    private com.view.HomePanel homePanel1;
     private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

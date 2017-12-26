@@ -118,7 +118,7 @@ public class LoginFrame extends javax.swing.JDialog {
 
         lblInstruction.setFont(new java.awt.Font("黑体", 1, 14)); // NOI18N
         lblInstruction.setForeground(new java.awt.Color(204, 0, 51));
-        lblInstruction.setText("欢迎进入戴尔进销存管理系统【登录界面】");
+        lblInstruction.setText("欢迎进入订餐管理系统【登录界面】");
 
         lblCode.setFont(new java.awt.Font("宋体", 1, 16)); // NOI18N
         lblCode.setText("验证码");
@@ -156,8 +156,10 @@ public class LoginFrame extends javax.swing.JDialog {
                                 .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(lblCheckCode, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addComponent(lblInstruction))
-                .addContainerGap(56, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(lblInstruction)))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -50,9 +50,12 @@
                           </Group>
                       </Group>
                   </Group>
-                  <Component id="lblInstruction" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+                      <Component id="lblInstruction" min="-2" max="-2" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace pref="56" max="32767" attributes="0"/>
+              <EmptySpace pref="63" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -209,7 +212,7 @@
         <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="33" green="0" red="cc" type="rgb"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="&#x6b22;&#x8fce;&#x8fdb;&#x5165;&#x6234;&#x5c14;&#x8fdb;&#x9500;&#x5b58;&#x7ba1;&#x7406;&#x7cfb;&#x7edf;&#x3010;&#x767b;&#x5f55;&#x754c;&#x9762;&#x3011;"/>
+        <Property name="text" type="java.lang.String" value="&#x6b22;&#x8fce;&#x8fdb;&#x5165;&#x8ba2;&#x9910;&#x7ba1;&#x7406;&#x7cfb;&#x7edf;&#x3010;&#x767b;&#x5f55;&#x754c;&#x9762;&#x3011;"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblCode">

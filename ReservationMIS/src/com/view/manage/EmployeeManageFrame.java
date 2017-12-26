@@ -9,9 +9,12 @@ import com.biz.EmployeeBiz;
 import com.biz.EmployeeBizImpl;
 import com.po.Employee;
 import com.util.StringUtil;
+import java.awt.Color;
 import java.util.List;
 import java.util.Vector;
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
+import javax.swing.plaf.basic.BasicInternalFrameUI;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -32,10 +35,18 @@ public class EmployeeManageFrame extends javax.swing.JInternalFrame {
         this.btnSave.setEnabled(false);
         this.btnDelete.setEnabled(false);
         this.btnCancel.setEnabled(false);
+        this.jScrollPane1.getViewport().setBackground(Color.WHITE);
+        this.cobEmpsex.setBackground(Color.WHITE);
+        this.cobEmptitle.setBackground(Color.WHITE);
+//        this.setBorder(BorderFactory.createEmptyBorder());//去掉边框
+       
+        
         //初始化Title
         initEmpSex();
         //初始化Type
         initEmpType();
+//        this.btnSearch.setForeground(Color.red);
+//        this.btnSearch.setBackground(Color.black);
     }
 
     private void initEmpSex() {
@@ -65,46 +76,82 @@ public class EmployeeManageFrame extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        homePanel2 = new com.view.HomePanel();
+        txtCondition = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblEmployee = new javax.swing.JTable();
-        lblEmpid = new javax.swing.JPanel();
         lblEmpID = new javax.swing.JLabel();
         txtEmpid = new javax.swing.JTextField();
         lblEmpname = new javax.swing.JLabel();
         txtEmpname = new javax.swing.JTextField();
-        lblEmpage = new javax.swing.JLabel();
-        txtage = new javax.swing.JTextField();
         lblEmpsex = new javax.swing.JLabel();
         cobEmpsex = new javax.swing.JComboBox();
-        lblEmpwage = new javax.swing.JLabel();
-        txtEmpwage = new javax.swing.JTextField();
-        lblEmptel = new javax.swing.JLabel();
-        txtEmptel = new javax.swing.JTextField();
-        lblEmptype = new javax.swing.JLabel();
+        lblEmpage = new javax.swing.JLabel();
+        txtage = new javax.swing.JTextField();
         cobEmptitle = new javax.swing.JComboBox();
-        lblNotice = new javax.swing.JLabel();
-        btnLoad = new javax.swing.JButton();
+        lblEmptype = new javax.swing.JLabel();
+        txtEmptel = new javax.swing.JTextField();
+        lblEmptel = new javax.swing.JLabel();
+        txtEmpwage = new javax.swing.JTextField();
+        lblEmpwage = new javax.swing.JLabel();
         btnAdd = new javax.swing.JButton();
         btnSave = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         btnExit = new javax.swing.JButton();
-        txtCondition = new javax.swing.JTextField();
+        btnLoad = new javax.swing.JButton();
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
 
         setClosable(true);
+        setTitle("员工管理");
+        setPreferredSize(new java.awt.Dimension(900, 600));
 
-        btnSearch.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
+        txtCondition.setFont(new java.awt.Font("华文细黑", 0, 15)); // NOI18N
+        txtCondition.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
+        txtCondition.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtConditionActionPerformed(evt);
+            }
+        });
+        txtCondition.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtConditionKeyPressed(evt);
+            }
+        });
+
+        btnSearch.setBackground(new java.awt.Color(255, 255, 102));
+        btnSearch.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
         btnSearch.setForeground(new java.awt.Color(51, 51, 51));
-        btnSearch.setText("Search");
+        btnSearch.setText("搜索");
         btnSearch.setToolTipText("模糊查询：员工姓名");
-        btnSearch.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(204, 51, 255), new java.awt.Color(204, 102, 255)));
+        btnSearch.setBorder(null);
+        btnSearch.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnSearch.setMaximumSize(new java.awt.Dimension(40, 40));
+        btnSearch.setMinimumSize(new java.awt.Dimension(40, 40));
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSearchActionPerformed(evt);
             }
         });
 
+        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
+
+        tblEmployee.setFont(new java.awt.Font("华文细黑", 0, 15)); // NOI18N
         tblEmployee.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -121,6 +168,7 @@ public class EmployeeManageFrame extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblEmployee.getTableHeader().setReorderingAllowed(false);
         tblEmployee.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblEmployeeMouseClicked(evt);
@@ -137,10 +185,11 @@ public class EmployeeManageFrame extends javax.swing.JInternalFrame {
             tblEmployee.getColumnModel().getColumn(6).setResizable(false);
         }
 
-        lblEmpID.setFont(new java.awt.Font("宋体", 1, 14)); // NOI18N
-        lblEmpID.setForeground(new java.awt.Color(204, 0, 0));
+        lblEmpID.setBackground(new java.awt.Color(255, 51, 51));
+        lblEmpID.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
+        lblEmpID.setForeground(new java.awt.Color(153, 153, 153));
         lblEmpID.setText("员工编号");
-        lblEmpID.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
+        lblEmpID.setToolTipText(" ");
 
         txtEmpid.setEditable(false);
         txtEmpid.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
@@ -150,11 +199,11 @@ public class EmployeeManageFrame extends javax.swing.JInternalFrame {
             }
         });
 
-        lblEmpname.setFont(new java.awt.Font("微软雅黑 Light", 1, 14)); // NOI18N
-        lblEmpname.setForeground(new java.awt.Color(204, 0, 51));
+        lblEmpname.setBackground(new java.awt.Color(255, 51, 51));
+        lblEmpname.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
+        lblEmpname.setForeground(new java.awt.Color(255, 51, 51));
         lblEmpname.setText("员工姓名");
-        lblEmpname.setToolTipText("员工姓名须由2-4个中文组成");
-        lblEmpname.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
+        lblEmpname.setToolTipText(" ");
 
         txtEmpname.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
         txtEmpname.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -163,9 +212,25 @@ public class EmployeeManageFrame extends javax.swing.JInternalFrame {
             }
         });
 
-        lblEmpage.setFont(new java.awt.Font("微软雅黑 Light", 1, 14)); // NOI18N
+        lblEmpsex.setBackground(new java.awt.Color(255, 51, 51));
+        lblEmpsex.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
+        lblEmpsex.setForeground(new java.awt.Color(255, 51, 51));
+        lblEmpsex.setText("性别");
+        lblEmpsex.setToolTipText(" ");
+
+        cobEmpsex.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
+        cobEmpsex.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
+        cobEmpsex.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cobEmpsexItemStateChanged(evt);
+            }
+        });
+
+        lblEmpage.setBackground(new java.awt.Color(255, 51, 51));
+        lblEmpage.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
+        lblEmpage.setForeground(new java.awt.Color(255, 51, 51));
         lblEmpage.setText("年龄");
-        lblEmpage.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
+        lblEmpage.setToolTipText(" ");
 
         txtage.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
         txtage.addActionListener(new java.awt.event.ActionListener() {
@@ -178,43 +243,6 @@ public class EmployeeManageFrame extends javax.swing.JInternalFrame {
                 txtageKeyPressed(evt);
             }
         });
-
-        lblEmpsex.setFont(new java.awt.Font("微软雅黑 Light", 1, 14)); // NOI18N
-        lblEmpsex.setForeground(new java.awt.Color(204, 0, 51));
-        lblEmpsex.setText("性别");
-        lblEmpsex.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
-
-        cobEmpsex.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
-        cobEmpsex.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
-        cobEmpsex.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cobEmpsexItemStateChanged(evt);
-            }
-        });
-
-        lblEmpwage.setFont(new java.awt.Font("宋体", 1, 14)); // NOI18N
-        lblEmpwage.setText("工资");
-        lblEmpwage.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
-
-        txtEmpwage.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
-
-        lblEmptel.setFont(new java.awt.Font("微软雅黑 Light", 1, 14)); // NOI18N
-        lblEmptel.setForeground(new java.awt.Color(204, 0, 51));
-        lblEmptel.setText("联系方式");
-        lblEmptel.setToolTipText("手机号须由11位数字组成");
-        lblEmptel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
-
-        txtEmptel.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
-        txtEmptel.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtEmptelKeyPressed(evt);
-            }
-        });
-
-        lblEmptype.setFont(new java.awt.Font("微软雅黑 Light", 1, 14)); // NOI18N
-        lblEmptype.setForeground(new java.awt.Color(204, 0, 51));
-        lblEmptype.setText("身份");
-        lblEmptype.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
 
         cobEmptitle.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
         cobEmptitle.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
@@ -229,198 +257,217 @@ public class EmployeeManageFrame extends javax.swing.JInternalFrame {
             }
         });
 
-        lblNotice.setFont(new java.awt.Font("宋体", 1, 12)); // NOI18N
-        lblNotice.setForeground(new java.awt.Color(204, 0, 0));
-        lblNotice.setText("注意：红色字体项目为必填！");
+        lblEmptype.setBackground(new java.awt.Color(255, 51, 51));
+        lblEmptype.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
+        lblEmptype.setForeground(new java.awt.Color(255, 51, 51));
+        lblEmptype.setText("身份");
+        lblEmptype.setToolTipText(" ");
 
-        btnLoad.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
-        btnLoad.setText("Load");
-        btnLoad.setToolTipText("加载数据库内全部员工信息");
-        btnLoad.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
-        btnLoad.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoadActionPerformed(evt);
+        txtEmptel.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
+        txtEmptel.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtEmptelKeyPressed(evt);
             }
         });
 
-        btnAdd.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
-        btnAdd.setText("Add");
+        lblEmptel.setBackground(new java.awt.Color(255, 51, 51));
+        lblEmptel.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
+        lblEmptel.setForeground(new java.awt.Color(255, 51, 51));
+        lblEmptel.setText("联系方式");
+        lblEmptel.setToolTipText(" ");
+
+        txtEmpwage.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
+
+        lblEmpwage.setBackground(new java.awt.Color(255, 51, 51));
+        lblEmpwage.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
+        lblEmpwage.setForeground(new java.awt.Color(255, 51, 51));
+        lblEmpwage.setText("员工工资");
+        lblEmpwage.setToolTipText(" ");
+
+        btnAdd.setBackground(new java.awt.Color(255, 255, 102));
+        btnAdd.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
+        btnAdd.setForeground(new java.awt.Color(51, 51, 51));
+        btnAdd.setText("增加");
         btnAdd.setToolTipText("增加新员工");
-        btnAdd.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
+        btnAdd.setBorder(null);
+        btnAdd.setOpaque(false);
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
             }
         });
 
-        btnSave.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
-        btnSave.setText("Save");
+        btnSave.setBackground(new java.awt.Color(255, 255, 102));
+        btnSave.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
+        btnSave.setForeground(new java.awt.Color(51, 51, 51));
+        btnSave.setText("保存");
         btnSave.setToolTipText("保存修改");
-        btnSave.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
+        btnSave.setBorder(null);
+        btnSave.setOpaque(false);
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveActionPerformed(evt);
             }
         });
 
-        btnDelete.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
-        btnDelete.setText("Delete");
+        btnDelete.setBackground(new java.awt.Color(255, 255, 102));
+        btnDelete.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
+        btnDelete.setForeground(new java.awt.Color(51, 51, 51));
+        btnDelete.setText("删除");
         btnDelete.setToolTipText("删除选中员工信息");
-        btnDelete.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
+        btnDelete.setBorder(null);
+        btnDelete.setOpaque(false);
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDeleteActionPerformed(evt);
             }
         });
 
-        btnCancel.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
-        btnCancel.setText("Cancel");
+        btnCancel.setBackground(new java.awt.Color(255, 255, 102));
+        btnCancel.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
+        btnCancel.setForeground(new java.awt.Color(51, 51, 51));
+        btnCancel.setText("取消");
         btnCancel.setToolTipText("取消选中");
-        btnCancel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
+        btnCancel.setBorder(null);
+        btnCancel.setOpaque(false);
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelActionPerformed(evt);
             }
         });
 
-        btnExit.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
-        btnExit.setText("Exit");
+        btnExit.setBackground(new java.awt.Color(255, 255, 102));
+        btnExit.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
+        btnExit.setForeground(new java.awt.Color(51, 51, 51));
+        btnExit.setText("退出");
         btnExit.setToolTipText("关闭员工管理界面");
-        btnExit.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
+        btnExit.setBorder(null);
+        btnExit.setOpaque(false);
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExitActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout lblEmpidLayout = new javax.swing.GroupLayout(lblEmpid);
-        lblEmpid.setLayout(lblEmpidLayout);
-        lblEmpidLayout.setHorizontalGroup(
-            lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(lblEmpidLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(lblEmpidLayout.createSequentialGroup()
-                            .addComponent(lblEmpwage, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(txtEmpwage, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(20, 20, 20)
-                            .addComponent(lblEmptel))
-                        .addGroup(lblEmpidLayout.createSequentialGroup()
-                            .addComponent(lblEmpID)
-                            .addGap(18, 18, 18)
-                            .addComponent(txtEmpid, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(lblEmpname)))
-                    .addComponent(lblNotice))
-                .addGap(18, 18, 18)
-                .addGroup(lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(lblEmpidLayout.createSequentialGroup()
-                        .addGroup(lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(lblEmpidLayout.createSequentialGroup()
-                                .addComponent(lblEmptype)
-                                .addGap(36, 36, 36)
-                                .addComponent(cobEmptitle, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(lblEmpidLayout.createSequentialGroup()
+        btnLoad.setBackground(new java.awt.Color(255, 255, 102));
+        btnLoad.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
+        btnLoad.setForeground(new java.awt.Color(51, 51, 51));
+        btnLoad.setText("加载");
+        btnLoad.setToolTipText("加载数据库内全部员工信息");
+        btnLoad.setBorder(null);
+        btnLoad.setOpaque(false);
+        btnLoad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoadActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout homePanel2Layout = new javax.swing.GroupLayout(homePanel2);
+        homePanel2.setLayout(homePanel2Layout);
+        homePanel2Layout.setHorizontalGroup(
+            homePanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(homePanel2Layout.createSequentialGroup()
+                .addGroup(homePanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(homePanel2Layout.createSequentialGroup()
+                        .addGap(319, 319, 319)
+                        .addComponent(txtCondition, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(homePanel2Layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(homePanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 811, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(homePanel2Layout.createSequentialGroup()
+                                .addGroup(homePanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(lblEmpID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(lblEmpwage))
+                                .addGap(18, 18, 18)
+                                .addGroup(homePanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, homePanel2Layout.createSequentialGroup()
+                                        .addComponent(txtEmpid, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(21, 21, 21)
+                                        .addComponent(lblEmpname)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtEmpname, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(21, 21, 21)
+                                        .addComponent(lblEmpsex)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(cobEmpsex, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(21, 21, 21)
+                                        .addComponent(lblEmpage)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtage, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, homePanel2Layout.createSequentialGroup()
+                                        .addComponent(txtEmpwage, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(21, 21, 21)
+                                        .addComponent(lblEmptel)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtEmptel, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(lblEmptype)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(cobEmptitle, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, homePanel2Layout.createSequentialGroup()
                                 .addComponent(btnLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(34, 34, 34)
+                                .addGap(18, 18, 18)
                                 .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(28, 28, 28)
+                                .addGap(18, 18, 18)
                                 .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(40, 40, 40)
-                        .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(lblEmpidLayout.createSequentialGroup()
-                        .addComponent(txtEmpname, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(32, 32, 32)
-                        .addComponent(lblEmpsex)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cobEmpsex, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblEmpage)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtage, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txtEmptel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        lblEmpidLayout.setVerticalGroup(
-            lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(lblEmpidLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        homePanel2Layout.setVerticalGroup(
+            homePanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(homePanel2Layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addGroup(homePanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCondition, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addGroup(homePanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblEmpID)
                     .addComponent(txtEmpid, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtEmpname, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblEmpname)
+                    .addComponent(txtEmpname, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblEmpsex)
                     .addComponent(cobEmpsex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtage, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblEmpage))
                 .addGap(18, 18, 18)
-                .addGroup(lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(homePanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblEmptel)
                     .addComponent(txtEmpwage, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtEmptel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblEmpwage)
                     .addComponent(lblEmptype)
-                    .addComponent(cobEmptitle, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(59, 59, 59)
-                .addGroup(lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cobEmptitle, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtEmptel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(46, 46, 46)
+                .addGroup(homePanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNotice))
-                .addContainerGap(30, Short.MAX_VALUE))
+                    .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(39, 39, 39))
         );
-
-        txtCondition.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
-        txtCondition.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtConditionActionPerformed(evt);
-            }
-        });
-        txtCondition.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtConditionKeyPressed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtCondition, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(271, 271, 271))
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addComponent(lblEmpid, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+            .addComponent(homePanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCondition, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lblEmpid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(homePanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -775,16 +822,17 @@ public class EmployeeManageFrame extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnSearch;
     private javax.swing.JComboBox cobEmpsex;
     private javax.swing.JComboBox cobEmptitle;
+    private com.view.HomePanel homePanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblEmpID;
     private javax.swing.JLabel lblEmpage;
-    private javax.swing.JPanel lblEmpid;
     private javax.swing.JLabel lblEmpname;
     private javax.swing.JLabel lblEmpsex;
     private javax.swing.JLabel lblEmptel;
     private javax.swing.JLabel lblEmptype;
     private javax.swing.JLabel lblEmpwage;
-    private javax.swing.JLabel lblNotice;
     private javax.swing.JTable tblEmployee;
     private javax.swing.JTextField txtCondition;
     private javax.swing.JTextField txtEmpid;

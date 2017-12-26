@@ -22,6 +22,7 @@ import com.po.OrderDishes;
 import com.po.Room;
 import com.po.Table;
 import com.util.StringUtil;
+import java.awt.Color;
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -51,6 +52,11 @@ public class OrderDishesByWaiterFrame extends javax.swing.JInternalFrame {
     public OrderDishesByWaiterFrame() {
         initComponents();
         this.btnShangcai.setEnabled(false);
+         //隐藏两列
+        DefaultTableColumnModel dtm_order = (DefaultTableColumnModel) this.tblMenu.getColumnModel();
+        dtm_order.getColumn(3).setMinWidth(0);
+        dtm_order.getColumn(3).setMaxWidth(0);
+         this.jScrollPane1.getViewport().setBackground(Color.WHITE);
     }
 
     /**
@@ -62,6 +68,7 @@ public class OrderDishesByWaiterFrame extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        homePanel1 = new com.view.HomePanel();
         lblDish = new javax.swing.JLabel();
         btnSearch = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -70,10 +77,16 @@ public class OrderDishesByWaiterFrame extends javax.swing.JInternalFrame {
         btnExit1 = new javax.swing.JButton();
 
         setClosable(true);
+        setTitle("服务员上菜");
 
+        lblDish.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
+        lblDish.setForeground(new java.awt.Color(255, 51, 51));
         lblDish.setText("待上菜");
 
+        btnSearch.setBackground(new java.awt.Color(255, 255, 102));
+        btnSearch.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
         btnSearch.setText("查询");
+        btnSearch.setBorder(null);
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSearchActionPerformed(evt);
@@ -85,75 +98,102 @@ public class OrderDishesByWaiterFrame extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "菜品名称", "菜品数量", "上菜桌号", "odid"
+                "菜品名称", "菜品数量", "上菜桌号", "等待菜编号"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, true
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        tblMenu.getTableHeader().setReorderingAllowed(false);
         tblMenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblMenuMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tblMenu);
+        if (tblMenu.getColumnModel().getColumnCount() > 0) {
+            tblMenu.getColumnModel().getColumn(0).setResizable(false);
+            tblMenu.getColumnModel().getColumn(1).setResizable(false);
+            tblMenu.getColumnModel().getColumn(2).setResizable(false);
+            tblMenu.getColumnModel().getColumn(3).setResizable(false);
+        }
 
+        btnShangcai.setBackground(new java.awt.Color(255, 255, 102));
+        btnShangcai.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
         btnShangcai.setText("上菜");
+        btnShangcai.setBorder(null);
         btnShangcai.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnShangcaiActionPerformed(evt);
             }
         });
 
-        btnExit1.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
-        btnExit1.setText("Exit");
+        btnExit1.setBackground(new java.awt.Color(255, 255, 102));
+        btnExit1.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
+        btnExit1.setText("退出");
         btnExit1.setToolTipText("关闭员工管理界面");
-        btnExit1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
+        btnExit1.setBorder(null);
         btnExit1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExit1ActionPerformed(evt);
             }
         });
 
+        javax.swing.GroupLayout homePanel1Layout = new javax.swing.GroupLayout(homePanel1);
+        homePanel1.setLayout(homePanel1Layout);
+        homePanel1Layout.setHorizontalGroup(
+            homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(homePanel1Layout.createSequentialGroup()
+                .addGroup(homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(homePanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnShangcai, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(25, 25, 25)
+                        .addComponent(btnExit1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, homePanel1Layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addGroup(homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(homePanel1Layout.createSequentialGroup()
+                                .addComponent(lblDish)
+                                .addGap(313, 313, 313)
+                                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(39, Short.MAX_VALUE))
+        );
+        homePanel1Layout.setVerticalGroup(
+            homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(homePanel1Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addGroup(homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblDish)
+                    .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addGroup(homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnShangcai, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnExit1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(32, 32, 32))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
-                        .addComponent(lblDish)
-                        .addGap(320, 320, 320)
-                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 437, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(btnExit1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnShangcai, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                .addContainerGap(79, Short.MAX_VALUE))
+                .addComponent(homePanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblDish)
-                    .addComponent(btnSearch))
-                .addGap(30, 30, 30)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(btnShangcai)
-                .addGap(18, 18, 18)
-                .addComponent(btnExit1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addComponent(homePanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -241,6 +281,7 @@ public class OrderDishesByWaiterFrame extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnExit1;
     private javax.swing.JButton btnSearch;
     private javax.swing.JButton btnShangcai;
+    private com.view.HomePanel homePanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblDish;
     private javax.swing.JTable tblMenu;

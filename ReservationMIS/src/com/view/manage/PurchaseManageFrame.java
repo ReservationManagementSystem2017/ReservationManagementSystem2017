@@ -12,11 +12,13 @@ import com.biz.OrderDishesBizImpl;
 import com.po.Menu;
 import com.po.OrderDishes;
 import com.util.StringUtil;
+import java.awt.Color;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Vector;
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -35,6 +37,9 @@ public class PurchaseManageFrame extends javax.swing.JInternalFrame {
     public PurchaseManageFrame() {
         initComponents();
         initPurchase();
+        this.jScrollPane1.getViewport().setBackground(Color.WHITE);
+        this.cobNumber.setBackground(Color.WHITE);
+        this.setBorder(BorderFactory.createEmptyBorder());//去掉边框
     }
 
     private void initPurchase() {
@@ -54,31 +59,56 @@ public class PurchaseManageFrame extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        homePanel1 = new com.view.HomePanel();
+        txtCondition = new javax.swing.JTextField();
+        btnSearch = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblMenu = new javax.swing.JTable();
-        btnSearch = new javax.swing.JButton();
-        txtCondition = new javax.swing.JTextField();
-        txtStorage = new javax.swing.JTextField();
         lblMenuID = new javax.swing.JLabel();
         txtMenuid = new javax.swing.JTextField();
-        lblMenuname = new javax.swing.JLabel();
-        txtMenuname = new javax.swing.JTextField();
-        txtNumber = new javax.swing.JTextField();
-        btnComfirm = new javax.swing.JButton();
-        cobNumber = new javax.swing.JComboBox();
         lblMstorage = new javax.swing.JLabel();
+        lblMenuname = new javax.swing.JLabel();
+        txtNumber = new javax.swing.JTextField();
         lblNumber = new javax.swing.JLabel();
-        lblNotice = new javax.swing.JLabel();
+        cobNumber = new javax.swing.JComboBox();
+        btnComfirm = new javax.swing.JButton();
         btnExit = new javax.swing.JButton();
+        txtStorage = new javax.swing.JTextField();
+        txtMenuname1 = new javax.swing.JTextField();
 
         setClosable(true);
+        setTitle("采购管理");
+
+        txtCondition.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
+        txtCondition.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtConditionActionPerformed(evt);
+            }
+        });
+        txtCondition.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtConditionKeyPressed(evt);
+            }
+        });
+
+        btnSearch.setBackground(new java.awt.Color(255, 255, 102));
+        btnSearch.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
+        btnSearch.setForeground(new java.awt.Color(51, 51, 51));
+        btnSearch.setText("搜索");
+        btnSearch.setToolTipText("模糊查询：员工姓名");
+        btnSearch.setBorder(null);
+        btnSearch.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchActionPerformed(evt);
+            }
+        });
 
         tblMenu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "菜品ID", "菜品名称", "种类", "价格", "已售份额", "库存量", "昨日销售量"
+                "菜品编号", "菜品名称", "种类", "价格", "已售份额", "库存量", "昨日销售量"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -89,6 +119,7 @@ public class PurchaseManageFrame extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblMenu.getTableHeader().setReorderingAllowed(false);
         tblMenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblMenuMouseClicked(evt);
@@ -104,38 +135,12 @@ public class PurchaseManageFrame extends javax.swing.JInternalFrame {
             tblMenu.getColumnModel().getColumn(6).setResizable(false);
         }
 
-        btnSearch.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
-        btnSearch.setForeground(new java.awt.Color(51, 51, 51));
-        btnSearch.setText("Search");
-        btnSearch.setToolTipText("模糊查询：员工姓名");
-        btnSearch.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(204, 51, 255), new java.awt.Color(204, 102, 255)));
-        btnSearch.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSearchActionPerformed(evt);
-            }
-        });
-
-        txtCondition.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
-        txtCondition.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtConditionActionPerformed(evt);
-            }
-        });
-        txtCondition.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtConditionKeyPressed(evt);
-            }
-        });
-
-        txtStorage.setEditable(false);
-        txtStorage.setText(" ");
-
-        lblMenuID.setFont(new java.awt.Font("方正兰亭超细黑简体", 1, 18)); // NOI18N
+        lblMenuID.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
         lblMenuID.setForeground(new java.awt.Color(102, 102, 102));
         lblMenuID.setText("菜品编号");
-        lblMenuID.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
 
         txtMenuid.setEditable(false);
+        txtMenuid.setFont(new java.awt.Font("华文细黑", 1, 18)); // NOI18N
         txtMenuid.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
         txtMenuid.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,27 +148,35 @@ public class PurchaseManageFrame extends javax.swing.JInternalFrame {
             }
         });
 
-        lblMenuname.setFont(new java.awt.Font("方正兰亭超细黑简体", 1, 18)); // NOI18N
+        lblMstorage.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
+        lblMstorage.setForeground(new java.awt.Color(102, 102, 102));
+        lblMstorage.setText("库存数量");
+
+        lblMenuname.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
         lblMenuname.setForeground(new java.awt.Color(255, 51, 51));
         lblMenuname.setText("菜品名称");
         lblMenuname.setToolTipText("员工姓名须由2-4个中文组成");
-        lblMenuname.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
 
-        txtMenuname.setEditable(false);
-        txtMenuname.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
-        txtMenuname.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtMenunameKeyPressed(evt);
-            }
-        });
-
-        btnComfirm.setText("确认");
-        btnComfirm.addActionListener(new java.awt.event.ActionListener() {
+        txtNumber.setEditable(false);
+        txtNumber.setFont(new java.awt.Font("华文细黑", 1, 18)); // NOI18N
+        txtNumber.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
+        txtNumber.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnComfirmActionPerformed(evt);
+                txtNumberActionPerformed(evt);
+            }
+        });
+        txtNumber.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNumberKeyPressed(evt);
             }
         });
 
+        lblNumber.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
+        lblNumber.setForeground(new java.awt.Color(255, 51, 51));
+        lblNumber.setText("修改数量");
+        lblNumber.setToolTipText("员工姓名须由2-4个中文组成");
+
+        cobNumber.setFont(new java.awt.Font("华文细黑", 1, 18)); // NOI18N
         cobNumber.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
         cobNumber.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
         cobNumber.addItemListener(new java.awt.event.ItemListener() {
@@ -172,103 +185,130 @@ public class PurchaseManageFrame extends javax.swing.JInternalFrame {
             }
         });
 
-        lblMstorage.setFont(new java.awt.Font("方正兰亭超细黑简体", 1, 18)); // NOI18N
-        lblMstorage.setForeground(new java.awt.Color(102, 102, 102));
-        lblMstorage.setText("库存数量");
-        lblMstorage.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
+        btnComfirm.setBackground(new java.awt.Color(255, 255, 102));
+        btnComfirm.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
+        btnComfirm.setText("确认");
+        btnComfirm.setBorder(null);
+        btnComfirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnComfirmActionPerformed(evt);
+            }
+        });
 
-        lblNumber.setFont(new java.awt.Font("方正兰亭超细黑简体", 1, 18)); // NOI18N
-        lblNumber.setForeground(new java.awt.Color(255, 51, 51));
-        lblNumber.setText("修改数量");
-        lblNumber.setToolTipText("员工姓名须由2-4个中文组成");
-        lblNumber.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
-
-        lblNotice.setFont(new java.awt.Font("宋体", 1, 12)); // NOI18N
-        lblNotice.setForeground(new java.awt.Color(255, 51, 51));
-        lblNotice.setText("注意：红色字体项目为必填！");
-
+        btnExit.setBackground(new java.awt.Color(255, 255, 102));
+        btnExit.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
         btnExit.setText("退出");
+        btnExit.setBorder(null);
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExitActionPerformed(evt);
             }
         });
 
+        txtStorage.setEditable(false);
+        txtStorage.setFont(new java.awt.Font("华文细黑", 1, 18)); // NOI18N
+        txtStorage.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
+        txtStorage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtStorageActionPerformed(evt);
+            }
+        });
+
+        txtMenuname1.setEditable(false);
+        txtMenuname1.setFont(new java.awt.Font("华文细黑", 1, 18)); // NOI18N
+        txtMenuname1.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
+        txtMenuname1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtMenuname1KeyPressed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout homePanel1Layout = new javax.swing.GroupLayout(homePanel1);
+        homePanel1.setLayout(homePanel1Layout);
+        homePanel1Layout.setHorizontalGroup(
+            homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(homePanel1Layout.createSequentialGroup()
+                .addGroup(homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, homePanel1Layout.createSequentialGroup()
+                        .addGap(210, 210, 210)
+                        .addComponent(txtCondition, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, homePanel1Layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addGroup(homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 722, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(homePanel1Layout.createSequentialGroup()
+                                .addGroup(homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblMstorage)
+                                    .addComponent(lblMenuID))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtMenuid, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtStorage, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(30, 30, 30)
+                                .addGroup(homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, homePanel1Layout.createSequentialGroup()
+                                        .addGroup(homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblNumber, javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(lblMenuname, javax.swing.GroupLayout.Alignment.TRAILING))
+                                        .addGap(35, 35, 35)
+                                        .addGroup(homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(homePanel1Layout.createSequentialGroup()
+                                                .addComponent(cobNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(31, 31, 31)
+                                                .addComponent(txtNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(txtMenuname1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(79, 79, 79))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, homePanel1Layout.createSequentialGroup()
+                                        .addComponent(btnComfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(24, 24, 24)
+                                        .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                .addContainerGap(40, Short.MAX_VALUE))
+        );
+        homePanel1Layout.setVerticalGroup(
+            homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(homePanel1Layout.createSequentialGroup()
+                .addGap(47, 47, 47)
+                .addGroup(homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtCondition, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addGroup(homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblMenuID)
+                    .addComponent(txtMenuid, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblMenuname)
+                    .addComponent(txtMenuname1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25)
+                .addGroup(homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cobNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblMstorage)
+                    .addComponent(lblNumber)
+                    .addComponent(txtStorage, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
+                .addGroup(homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnComfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(33, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtCondition, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
-                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(244, 244, 244))
             .addGroup(layout.createSequentialGroup()
-                .addGap(51, 51, 51)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 722, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(56, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(96, 96, 96)
-                                .addComponent(txtMenuid, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(lblMenuID)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblMstorage)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtStorage, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblMenuname)
-                            .addComponent(lblNumber))
-                        .addGap(29, 29, 29)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(cobNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(29, 29, 29)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(btnComfirm)
-                                    .addComponent(txtNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(32, 32, 32)
-                                .addComponent(btnExit))
-                            .addComponent(txtMenuname, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(lblNotice)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(homePanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(41, 41, 41)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCondition, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblMenuID)
-                    .addComponent(txtMenuid, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtMenuname, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblMenuname))
-                .addGap(25, 25, 25)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtStorage, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cobNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblMstorage)
-                    .addComponent(lblNumber))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNotice)
-                    .addComponent(btnComfirm)
-                    .addComponent(btnExit))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(homePanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -279,7 +319,7 @@ public class PurchaseManageFrame extends javax.swing.JInternalFrame {
         int row = this.tblMenu.getSelectedRow();
         //根据row获取每列的值
         this.txtMenuid.setText(this.tblMenu.getValueAt(row, 0) + "");
-        this.txtMenuname.setText(this.tblMenu.getValueAt(row, 1) + "");
+        this.txtNumber.setText(this.tblMenu.getValueAt(row, 1) + "");
         this.txtStorage.setText(this.tblMenu.getValueAt(row, 5) + "");
 
 
@@ -305,9 +345,9 @@ public class PurchaseManageFrame extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMenuidActionPerformed
 
-    private void txtMenunameKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMenunameKeyPressed
+    private void txtNumberKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNumberKeyPressed
 
-    }//GEN-LAST:event_txtMenunameKeyPressed
+    }//GEN-LAST:event_txtNumberKeyPressed
 
     private void cobNumberItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cobNumberItemStateChanged
 
@@ -321,7 +361,7 @@ public class PurchaseManageFrame extends javax.swing.JInternalFrame {
             return;
         }
         //菜品名称非空验证
-        if (StringUtil.checkLength(this.txtMenuname.getText().trim()) == false) {
+        if (StringUtil.checkLength(this.txtNumber.getText().trim()) == false) {
             JOptionPane.showMessageDialog(this, "菜品名称不能为空");
             return;
         }
@@ -403,6 +443,18 @@ public class PurchaseManageFrame extends javax.swing.JInternalFrame {
         }
     }//GEN-LAST:event_btnExitActionPerformed
 
+    private void txtStorageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtStorageActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtStorageActionPerformed
+
+    private void txtMenuname1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMenuname1KeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMenuname1KeyPressed
+
+    private void txtNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumberActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNumberActionPerformed
+
     public void showOnTable(List<Menu> list) {
         //1.获取表格模型
         DefaultTableModel dtm = (DefaultTableModel) this.tblMenu.getModel();
@@ -440,23 +492,23 @@ public class PurchaseManageFrame extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnExit;
     private javax.swing.JButton btnSearch;
     private javax.swing.JComboBox cobNumber;
+    private com.view.HomePanel homePanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblMenuID;
     private javax.swing.JLabel lblMenuname;
     private javax.swing.JLabel lblMstorage;
-    private javax.swing.JLabel lblNotice;
     private javax.swing.JLabel lblNumber;
     private javax.swing.JTable tblMenu;
     private javax.swing.JTextField txtCondition;
     private javax.swing.JTextField txtMenuid;
-    private javax.swing.JTextField txtMenuname;
+    private javax.swing.JTextField txtMenuname1;
     private javax.swing.JTextField txtNumber;
     private javax.swing.JTextField txtStorage;
     // End of variables declaration//GEN-END:variables
 
     private void clearInput() {
         this.txtMenuid.setText("");
-        this.txtMenuname.setText("");
+        this.txtNumber.setText("");
         this.txtStorage.setText("");
         this.txtNumber.setText("");
         this.cobNumber.setSelectedIndex(0);

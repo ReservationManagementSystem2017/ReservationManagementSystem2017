@@ -16,7 +16,6 @@ import com.view.manage.RoomManageFrame;
 import com.view.manage.TableManageFrame;
 import com.view.manage.CookMenuManageFrame;
 import com.view.manage.PurchaseManageFrame;
-import com.view.manage.TestFrame;
 import com.view.order.BillByWaiterFrame;
 import com.view.order.OrderDishesByCookFrame;
 import com.view.order.OrderByWaiterFrame;
@@ -57,29 +56,15 @@ public class MainFrame extends javax.swing.JFrame {
         //        关于权限
         //null表示没有登录
         if (permission == null) {
-            //菜单
-            mnuOrder.setEnabled(false);
-            mnuManager.setEnabled(false);
-            mnuSearch.setEnabled(false);
-            //菜单项
-            itemUpdatePassword.setEnabled(false);
-            itemExitLogin.setEnabled(false);
-            itemLogin.setEnabled(true);
-            itemRegister.setEnabled(true);
-//            //工具栏按钮
-//            btnProductManager.setVisible(false);
-//            btnSupplierManager.setVisible(false);
-//            btnCustomerManager.setVisible(false);
-//            btnEmployeeManager.setVisible(false);
-//            btnPurchase.setVisible(false);
-//            btnRetPurchase.setVisible(false);
-//            btnSellOut.setVisible(false);
-//            btnRetSell.setVisible(false);
-//            btnSupplierRecord.setVisible(false);
-//    itemOrderDetail        btnCustomerRecord.setVisible(false);
-//            btnStoreSearch.setVisible(false);
-//            btnPurchaseRecord.setVisible(false);
-//            btnExitLogin.setVisible(false);
+//            //菜单
+//            mnuOrder.setEnabled(false);
+//            mnuManager.setEnabled(false);
+//            mnuSearch.setEnabled(false);
+//            //菜单项
+//            itemUpdatePassword.setEnabled(false);
+//            itemExitLogin.setEnabled(false);
+//            itemLogin.setEnabled(true);
+//            itemRegister.setEnabled(true);
         }
         //老板拥有所有权限
         if ("经理".equals(permission)) {
@@ -227,7 +212,6 @@ public class MainFrame extends javax.swing.JFrame {
         mnuSearch = new javax.swing.JMenu();
         itemOrderDetail = new javax.swing.JMenuItem();
         itemSearchBill = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
 
@@ -242,6 +226,7 @@ public class MainFrame extends javax.swing.JFrame {
         mnuSystem.setText("系统设置");
         mnuSystem.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
 
+        itemLogin.setFont(new java.awt.Font("华文细黑", 0, 15)); // NOI18N
         itemLogin.setText("登录用户");
         itemLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -250,6 +235,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
         mnuSystem.add(itemLogin);
 
+        itemRegister.setFont(new java.awt.Font("华文细黑", 0, 15)); // NOI18N
         itemRegister.setText("注册用户");
         itemRegister.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -258,6 +244,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
         mnuSystem.add(itemRegister);
 
+        itemUpdatePassword.setFont(new java.awt.Font("华文细黑", 0, 15)); // NOI18N
         itemUpdatePassword.setText("修改密码");
         itemUpdatePassword.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -266,6 +253,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
         mnuSystem.add(itemUpdatePassword);
 
+        itemExitLogin.setFont(new java.awt.Font("华文细黑", 0, 15)); // NOI18N
         itemExitLogin.setText("退出登录");
         itemExitLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -274,6 +262,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
         mnuSystem.add(itemExitLogin);
 
+        itemExitSystem.setFont(new java.awt.Font("华文细黑", 0, 15)); // NOI18N
         itemExitSystem.setText("退出系统");
         itemExitSystem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -287,6 +276,7 @@ public class MainFrame extends javax.swing.JFrame {
         mnuOrder.setText("订单管理");
         mnuOrder.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
 
+        itemOrderByWaiter.setFont(new java.awt.Font("华文细黑", 0, 15)); // NOI18N
         itemOrderByWaiter.setText("顾客下单");
         itemOrderByWaiter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -295,6 +285,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
         mnuOrder.add(itemOrderByWaiter);
 
+        itemOrderDishesByCook.setFont(new java.awt.Font("华文细黑", 0, 15)); // NOI18N
         itemOrderDishesByCook.setText("厨师做菜");
         itemOrderDishesByCook.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -303,6 +294,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
         mnuOrder.add(itemOrderDishesByCook);
 
+        itemOrderDishesByWaiter.setFont(new java.awt.Font("华文细黑", 0, 15)); // NOI18N
         itemOrderDishesByWaiter.setText("服务员上菜");
         itemOrderDishesByWaiter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -311,6 +303,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
         mnuOrder.add(itemOrderDishesByWaiter);
 
+        itemBillByWaiter.setFont(new java.awt.Font("华文细黑", 0, 15)); // NOI18N
         itemBillByWaiter.setText("顾客结账");
         itemBillByWaiter.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -324,6 +317,7 @@ public class MainFrame extends javax.swing.JFrame {
         mnuManager.setText("基本资料管理");
         mnuManager.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
 
+        itemEmployeeManage.setFont(new java.awt.Font("华文细黑", 0, 15)); // NOI18N
         itemEmployeeManage.setText("职员管理");
         itemEmployeeManage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -332,6 +326,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
         mnuManager.add(itemEmployeeManage);
 
+        itemCustomerManage.setFont(new java.awt.Font("华文细黑", 0, 15)); // NOI18N
         itemCustomerManage.setText("顾客管理");
         itemCustomerManage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -340,6 +335,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
         mnuManager.add(itemCustomerManage);
 
+        itemDiscountManage.setFont(new java.awt.Font("华文细黑", 0, 15)); // NOI18N
         itemDiscountManage.setText("打折管理");
         itemDiscountManage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -348,6 +344,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
         mnuManager.add(itemDiscountManage);
 
+        itemMenuManage.setFont(new java.awt.Font("华文细黑", 0, 15)); // NOI18N
         itemMenuManage.setText("菜单管理");
         itemMenuManage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -356,6 +353,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
         mnuManager.add(itemMenuManage);
 
+        itemRoomManage.setFont(new java.awt.Font("华文细黑", 0, 15)); // NOI18N
         itemRoomManage.setText("房间管理");
         itemRoomManage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -364,6 +362,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
         mnuManager.add(itemRoomManage);
 
+        itemTableManage.setFont(new java.awt.Font("华文细黑", 0, 15)); // NOI18N
         itemTableManage.setText("餐桌管理");
         itemTableManage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -372,6 +371,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
         mnuManager.add(itemTableManage);
 
+        itemCookMenu.setFont(new java.awt.Font("华文细黑", 0, 15)); // NOI18N
         itemCookMenu.setText("厨师菜品关联管理");
         itemCookMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -380,6 +380,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
         mnuManager.add(itemCookMenu);
 
+        itemPurchase.setFont(new java.awt.Font("华文细黑", 0, 15)); // NOI18N
         itemPurchase.setText("采购管理");
         itemPurchase.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -393,6 +394,7 @@ public class MainFrame extends javax.swing.JFrame {
         mnuSearch.setText("订单查询");
         mnuSearch.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
 
+        itemOrderDetail.setFont(new java.awt.Font("华文细黑", 0, 15)); // NOI18N
         itemOrderDetail.setText("订单详细");
         itemOrderDetail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -401,6 +403,7 @@ public class MainFrame extends javax.swing.JFrame {
         });
         mnuSearch.add(itemOrderDetail);
 
+        itemSearchBill.setFont(new java.awt.Font("华文细黑", 0, 15)); // NOI18N
         itemSearchBill.setText("历史账单查询");
         itemSearchBill.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -408,14 +411,6 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         mnuSearch.add(itemSearchBill);
-
-        jMenuItem1.setText("jMenuItem1");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
-            }
-        });
-        mnuSearch.add(jMenuItem1);
 
         jMenuBar1.add(mnuSearch);
 
@@ -549,10 +544,6 @@ public class MainFrame extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_itemExitSystemActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        showFrame(TestFrame.class);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -578,6 +569,7 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MainFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
@@ -656,7 +648,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
-    private javax.swing.JMenuItem jMenuItem1;
     private com.view.MainDeskPaneDell mainDeskPaneDell;
     private javax.swing.JMenu mnuManager;
     private javax.swing.JMenu mnuOrder;

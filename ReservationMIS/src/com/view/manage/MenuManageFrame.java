@@ -9,9 +9,12 @@ import com.biz.MenuBiz;
 import com.biz.MenuBizImpl;
 import com.po.Menu;
 import com.util.StringUtil;
+import java.awt.Color;
 import java.util.List;
 import java.util.Vector;
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableColumnModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -27,6 +30,14 @@ public class MenuManageFrame extends javax.swing.JInternalFrame {
      */
     public MenuManageFrame() {
         initComponents();
+         DefaultTableColumnModel dtm_order = (DefaultTableColumnModel) this.tblMenu.getColumnModel();
+        dtm_order.getColumn(0).setMinWidth(0);
+        dtm_order.getColumn(0).setMaxWidth(0);
+        this.btnSave.setEnabled(false);
+        this.btnDelete.setEnabled(false);
+        this.btnCancel.setEnabled(false);
+        this.jScrollPane1.getViewport().setBackground(Color.WHITE);
+        this.setBorder(BorderFactory.createEmptyBorder());//去掉边框
     }
 
     /**
@@ -38,44 +49,59 @@ public class MenuManageFrame extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        homePanel1 = new com.view.HomePanel();
+        txtCondition = new javax.swing.JTextField();
         btnSearch = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblMenu = new javax.swing.JTable();
-        lblEmpid = new javax.swing.JPanel();
         lblMenuID = new javax.swing.JLabel();
-        txtMenuid = new javax.swing.JTextField();
-        lblMenuname = new javax.swing.JLabel();
-        txtMenuname = new javax.swing.JTextField();
-        lblMenuam = new javax.swing.JLabel();
-        txtamt = new javax.swing.JTextField();
-        lblMenutype = new javax.swing.JLabel();
-        lblMenutime = new javax.swing.JLabel();
-        txtMenutime = new javax.swing.JTextField();
         tlblMenuprice = new javax.swing.JLabel();
+        txtMenuid = new javax.swing.JTextField();
+        txtMenuprice = new javax.swing.JTextField();
+        lblMenuname = new javax.swing.JLabel();
+        lblMenutime = new javax.swing.JLabel();
+        txtMenuname = new javax.swing.JTextField();
+        txtMenutime = new javax.swing.JTextField();
+        lblMenutype = new javax.swing.JLabel();
         txtMenutype = new javax.swing.JTextField();
-        lblNotice = new javax.swing.JLabel();
+        txtamt = new javax.swing.JTextField();
+        lblMenuam = new javax.swing.JLabel();
         btnLoad = new javax.swing.JButton();
         btnAdd = new javax.swing.JButton();
-        btnSave = new javax.swing.JButton();
-        btnDelete = new javax.swing.JButton();
         btnCancel = new javax.swing.JButton();
         btnExit = new javax.swing.JButton();
-        txtMenuprice = new javax.swing.JTextField();
-        txtCondition = new javax.swing.JTextField();
+        btnDelete = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
 
         setClosable(true);
+        setTitle("菜单管理");
 
-        btnSearch.setFont(new java.awt.Font("Arial Black", 1, 14)); // NOI18N
+        txtCondition.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
+        txtCondition.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
+        txtCondition.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtConditionActionPerformed(evt);
+            }
+        });
+        txtCondition.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtConditionKeyPressed(evt);
+            }
+        });
+
+        btnSearch.setBackground(new java.awt.Color(255, 255, 102));
+        btnSearch.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
         btnSearch.setForeground(new java.awt.Color(51, 51, 51));
-        btnSearch.setText("Search");
+        btnSearch.setText("搜索");
         btnSearch.setToolTipText("");
-        btnSearch.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(204, 51, 255), new java.awt.Color(204, 102, 255)));
+        btnSearch.setBorder(null);
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSearchActionPerformed(evt);
             }
         });
 
+        tblMenu.setFont(new java.awt.Font("华文细黑", 0, 14)); // NOI18N
         tblMenu.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -92,6 +118,7 @@ public class MenuManageFrame extends javax.swing.JInternalFrame {
                 return canEdit [columnIndex];
             }
         });
+        tblMenu.getTableHeader().setReorderingAllowed(false);
         tblMenu.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tblMenuMouseClicked(evt);
@@ -108,12 +135,17 @@ public class MenuManageFrame extends javax.swing.JInternalFrame {
             tblMenu.getColumnModel().getColumn(6).setResizable(false);
         }
 
-        lblMenuID.setFont(new java.awt.Font("方正兰亭超细黑简体", 1, 18)); // NOI18N
+        lblMenuID.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
         lblMenuID.setForeground(new java.awt.Color(153, 153, 153));
         lblMenuID.setText("菜品编号");
-        lblMenuID.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
+
+        tlblMenuprice.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
+        tlblMenuprice.setForeground(new java.awt.Color(255, 51, 51));
+        tlblMenuprice.setText("菜品价格");
+        tlblMenuprice.setToolTipText("");
 
         txtMenuid.setEditable(false);
+        txtMenuid.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
         txtMenuid.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
         txtMenuid.setSelectedTextColor(new java.awt.Color(153, 153, 153));
         txtMenuid.addActionListener(new java.awt.event.ActionListener() {
@@ -122,12 +154,24 @@ public class MenuManageFrame extends javax.swing.JInternalFrame {
             }
         });
 
-        lblMenuname.setFont(new java.awt.Font("方正兰亭超细黑简体", 1, 18)); // NOI18N
+        txtMenuprice.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
+        txtMenuprice.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
+        txtMenuprice.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtMenupriceKeyPressed(evt);
+            }
+        });
+
+        lblMenuname.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
         lblMenuname.setForeground(new java.awt.Color(255, 51, 51));
         lblMenuname.setText("菜品名称");
         lblMenuname.setToolTipText("");
-        lblMenuname.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
 
+        lblMenutime.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
+        lblMenutime.setForeground(new java.awt.Color(255, 51, 51));
+        lblMenutime.setText("所需时间");
+
+        txtMenuname.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
         txtMenuname.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
         txtMenuname.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -135,12 +179,23 @@ public class MenuManageFrame extends javax.swing.JInternalFrame {
             }
         });
 
-        lblMenuam.setFont(new java.awt.Font("方正兰亭超细黑简体", 1, 18)); // NOI18N
-        lblMenuam.setForeground(new java.awt.Color(102, 102, 102));
-        lblMenuam.setText("已售份额");
-        lblMenuam.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
+        txtMenutime.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
+        txtMenutime.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
+
+        lblMenutype.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
+        lblMenutype.setForeground(new java.awt.Color(255, 51, 51));
+        lblMenutype.setText("菜品种类");
+
+        txtMenutype.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
+        txtMenutype.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
+        txtMenutype.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtMenutypeKeyPressed(evt);
+            }
+        });
 
         txtamt.setEditable(false);
+        txtamt.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
         txtamt.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
         txtamt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -153,233 +208,179 @@ public class MenuManageFrame extends javax.swing.JInternalFrame {
             }
         });
 
-        lblMenutype.setFont(new java.awt.Font("方正兰亭超细黑简体", 1, 18)); // NOI18N
-        lblMenutype.setForeground(new java.awt.Color(255, 51, 51));
-        lblMenutype.setText("菜品种类");
-        lblMenutype.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
+        lblMenuam.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
+        lblMenuam.setForeground(new java.awt.Color(102, 102, 102));
+        lblMenuam.setText("已售份额");
 
-        lblMenutime.setFont(new java.awt.Font("方正兰亭超细黑简体", 1, 18)); // NOI18N
-        lblMenutime.setForeground(new java.awt.Color(255, 51, 51));
-        lblMenutime.setText("所需时间");
-        lblMenutime.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
-
-        txtMenutime.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
-
-        tlblMenuprice.setFont(new java.awt.Font("方正兰亭超细黑简体", 1, 18)); // NOI18N
-        tlblMenuprice.setForeground(new java.awt.Color(255, 51, 51));
-        tlblMenuprice.setText("菜品价格");
-        tlblMenuprice.setToolTipText("");
-        tlblMenuprice.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
-
-        txtMenutype.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
-        txtMenutype.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtMenutypeKeyPressed(evt);
-            }
-        });
-
-        lblNotice.setFont(new java.awt.Font("宋体", 1, 12)); // NOI18N
-        lblNotice.setForeground(new java.awt.Color(255, 51, 51));
-        lblNotice.setText("注意：红色字体项目为必填！");
-
-        btnLoad.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
-        btnLoad.setText("Load");
+        btnLoad.setBackground(new java.awt.Color(255, 255, 102));
+        btnLoad.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
+        btnLoad.setText("加载");
         btnLoad.setToolTipText("加载全部菜品信息");
-        btnLoad.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
+        btnLoad.setBorder(null);
         btnLoad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLoadActionPerformed(evt);
             }
         });
 
-        btnAdd.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
-        btnAdd.setText("Add");
+        btnAdd.setBackground(new java.awt.Color(255, 255, 102));
+        btnAdd.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
+        btnAdd.setText("增加");
         btnAdd.setToolTipText("增加新菜品");
-        btnAdd.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
+        btnAdd.setBorder(null);
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAddActionPerformed(evt);
             }
         });
 
-        btnSave.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
-        btnSave.setText("Save");
-        btnSave.setToolTipText("保存修改");
-        btnSave.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
-        btnSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSaveActionPerformed(evt);
-            }
-        });
-
-        btnDelete.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
-        btnDelete.setText("Delete");
-        btnDelete.setToolTipText("删除选中菜品信息");
-        btnDelete.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
-        btnDelete.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDeleteActionPerformed(evt);
-            }
-        });
-
-        btnCancel.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
-        btnCancel.setText("Cancel");
+        btnCancel.setBackground(new java.awt.Color(255, 255, 102));
+        btnCancel.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
+        btnCancel.setText("取消");
         btnCancel.setToolTipText("取消选中");
-        btnCancel.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
+        btnCancel.setBorder(null);
         btnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelActionPerformed(evt);
             }
         });
 
-        btnExit.setFont(new java.awt.Font("Arial Black", 0, 14)); // NOI18N
-        btnExit.setText("Exit");
+        btnExit.setBackground(new java.awt.Color(255, 255, 102));
+        btnExit.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
+        btnExit.setText("退出");
         btnExit.setToolTipText("关闭菜单管理界面");
-        btnExit.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
+        btnExit.setBorder(null);
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnExitActionPerformed(evt);
             }
         });
 
-        txtMenuprice.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
-        txtMenuprice.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtMenupriceKeyPressed(evt);
+        btnDelete.setBackground(new java.awt.Color(255, 255, 102));
+        btnDelete.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
+        btnDelete.setText("删除");
+        btnDelete.setToolTipText("删除选中菜品信息");
+        btnDelete.setBorder(null);
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout lblEmpidLayout = new javax.swing.GroupLayout(lblEmpid);
-        lblEmpid.setLayout(lblEmpidLayout);
-        lblEmpidLayout.setHorizontalGroup(
-            lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(lblEmpidLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(lblEmpidLayout.createSequentialGroup()
-                        .addComponent(lblNotice)
-                        .addGap(109, 109, 109)
-                        .addComponent(btnLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(lblEmpidLayout.createSequentialGroup()
-                        .addGroup(lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(lblEmpidLayout.createSequentialGroup()
-                                .addComponent(lblMenuID, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+        btnSave.setBackground(new java.awt.Color(255, 255, 102));
+        btnSave.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
+        btnSave.setText("保存");
+        btnSave.setToolTipText("保存修改");
+        btnSave.setBorder(null);
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout homePanel1Layout = new javax.swing.GroupLayout(homePanel1);
+        homePanel1.setLayout(homePanel1Layout);
+        homePanel1Layout.setHorizontalGroup(
+            homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, homePanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(txtCondition, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(272, 272, 272))
+            .addGroup(homePanel1Layout.createSequentialGroup()
+                .addGap(41, 41, 41)
+                .addGroup(homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 809, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(homePanel1Layout.createSequentialGroup()
+                        .addGroup(homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(tlblMenuprice)
+                            .addComponent(lblMenuID, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtMenuid, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtMenuprice, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(69, 69, 69)
+                        .addGroup(homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(homePanel1Layout.createSequentialGroup()
+                                .addComponent(btnLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addComponent(txtMenuid, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(lblEmpidLayout.createSequentialGroup()
-                                .addComponent(tlblMenuprice)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtMenuprice, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(22, 22, 22)
-                        .addGroup(lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblMenutime)
-                            .addComponent(lblMenuname))))
-                .addGap(34, 34, 34)
-                .addGroup(lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(lblEmpidLayout.createSequentialGroup()
-                        .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(34, 34, 34)
-                        .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(28, 28, 28)
-                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(lblEmpidLayout.createSequentialGroup()
-                        .addGroup(lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(lblEmpidLayout.createSequentialGroup()
-                                .addComponent(txtMenutime, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(31, 31, 31)
-                                .addComponent(lblMenuam))
-                            .addGroup(lblEmpidLayout.createSequentialGroup()
-                                .addComponent(txtMenuname, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(29, 29, 29)
-                                .addComponent(lblMenutype)))
-                        .addGap(18, 18, 18)
-                        .addGroup(lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtamt, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtMenutype, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(36, Short.MAX_VALUE))
+                                .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(homePanel1Layout.createSequentialGroup()
+                                .addGroup(homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblMenuname)
+                                    .addComponent(lblMenutime))
+                                .addGap(18, 18, 18)
+                                .addGroup(homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtMenutime, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtMenuname, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(68, 68, 68)
+                                .addGroup(homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(homePanel1Layout.createSequentialGroup()
+                                        .addComponent(lblMenuam)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtamt, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(homePanel1Layout.createSequentialGroup()
+                                        .addComponent(lblMenutype)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtMenutype, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
-        lblEmpidLayout.setVerticalGroup(
-            lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(lblEmpidLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblMenuID)
-                    .addComponent(txtMenuid, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+        homePanel1Layout.setVerticalGroup(
+            homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(homePanel1Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addGroup(homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCondition, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblMenutype)
+                    .addComponent(txtMenutype, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtMenuname, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblMenuname)
-                    .addComponent(lblMenutype)
-                    .addComponent(txtMenutype, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(lblEmpidLayout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addGroup(lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(tlblMenuprice)
-                            .addComponent(txtMenuprice, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblMenutime)
-                            .addComponent(txtMenutime, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblMenuam)))
-                    .addGroup(lblEmpidLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtamt, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(31, 31, 31)
-                .addGroup(lblEmpidLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtMenuid, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblMenuID))
+                .addGap(18, 18, 18)
+                .addGroup(homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblMenuam)
+                        .addComponent(txtamt, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblMenutime)
+                        .addComponent(txtMenutime, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtMenuprice, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tlblMenuprice)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 49, Short.MAX_VALUE)
+                .addGroup(homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnLoad, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblNotice))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnAdd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(35, 35, 35))
         );
-
-        txtCondition.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
-        txtCondition.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtConditionActionPerformed(evt);
-            }
-        });
-        txtCondition.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txtConditionKeyPressed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(txtCondition, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
-                .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(271, 271, 271))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblEmpid, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 852, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+            .addComponent(homePanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCondition, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(lblEmpid, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(homePanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -396,6 +397,7 @@ public class MenuManageFrame extends javax.swing.JInternalFrame {
         this.btnDelete.setEnabled(false);
         this.btnCancel.setEnabled(false);
         this.btnAdd.setEnabled(true);
+        
     }//GEN-LAST:event_btnSearchActionPerformed
 
     private void tblMenuMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMenuMouseClicked
@@ -656,14 +658,13 @@ public class MenuManageFrame extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnLoad;
     private javax.swing.JButton btnSave;
     private javax.swing.JButton btnSearch;
+    private com.view.HomePanel homePanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JPanel lblEmpid;
     private javax.swing.JLabel lblMenuID;
     private javax.swing.JLabel lblMenuam;
     private javax.swing.JLabel lblMenuname;
     private javax.swing.JLabel lblMenutime;
     private javax.swing.JLabel lblMenutype;
-    private javax.swing.JLabel lblNotice;
     private javax.swing.JTable tblMenu;
     private javax.swing.JLabel tlblMenuprice;
     private javax.swing.JTextField txtCondition;
