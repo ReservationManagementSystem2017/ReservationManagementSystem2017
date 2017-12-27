@@ -49,6 +49,8 @@ public class OrderDishesByWaiterFrame extends javax.swing.JInternalFrame {
    OrderDishesBiz odbiz = new OrderDishesBizImpl();
      MenuBiz mbiz = new MenuBizImpl();
      OrderBiz obiz = new OrderBizImpl();
+     RoomBiz rbiz = new RoomBizImpl();
+     TableBiz tbiz = new TableBizImpl();
     public OrderDishesByWaiterFrame() {
         initComponents();
         this.btnShangcai.setEnabled(false);
@@ -98,11 +100,11 @@ public class OrderDishesByWaiterFrame extends javax.swing.JInternalFrame {
 
             },
             new String [] {
-                "菜品名称", "菜品数量", "上菜桌号", "等待菜编号"
+                "菜品名称", "菜品数量", "上菜桌号", "等待菜编号", "房间名称"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -121,6 +123,7 @@ public class OrderDishesByWaiterFrame extends javax.swing.JInternalFrame {
             tblMenu.getColumnModel().getColumn(1).setResizable(false);
             tblMenu.getColumnModel().getColumn(2).setResizable(false);
             tblMenu.getColumnModel().getColumn(3).setResizable(false);
+            tblMenu.getColumnModel().getColumn(4).setResizable(false);
         }
 
         btnShangcai.setBackground(new java.awt.Color(255, 255, 102));
@@ -270,8 +273,11 @@ public class OrderDishesByWaiterFrame extends javax.swing.JInternalFrame {
             Order o=obiz.findByID(od.getOid());
 //            System.out.println(o.getOid());
             Integer tid=o.getTid();
+            Table t = tbiz.findByID(tid);
             vt.add(tid);
             vt.add(od.getOdid());
+            Room r = rbiz.findByID(t.getRid());
+            vt.add(r.getRname());
             dtm.addRow(vt);
         }   
     }

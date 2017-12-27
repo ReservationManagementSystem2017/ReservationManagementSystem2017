@@ -24,7 +24,7 @@ public class PicPaneDell extends javax.swing.JPanel {
     public PicPaneDell() {
         initComponents();
            //设置面板的背景图片，注意图片路径
-        this.setImgURL(this.getClass().getResource("/com/img/food.jpg"));
+        this.setImgURL(this.getClass().getResource("/com/img/foodbackground.jpg"));
 
     }
    // 增加成员方法：

@@ -168,9 +168,9 @@ public class MainFrame extends javax.swing.JFrame {
         }
 
         if (user == null) {
-            this.setTitle("订餐管理系统[暂未登陆]");
+            this.setTitle("吃了么 订餐管理系统[暂未登陆]");
         } else {
-            this.setTitle("订餐管理系统 [ " + user.getUname() + "  -  " + user.getPermission() + " ]");
+            this.setTitle("吃了么 订餐管理系统 [ " + user.getUname() + "  -  " + user.getPermission() + " ]");
         }
     }
 

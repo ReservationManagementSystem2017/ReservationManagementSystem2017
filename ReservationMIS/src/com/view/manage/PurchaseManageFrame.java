@@ -176,7 +176,7 @@ public class PurchaseManageFrame extends javax.swing.JInternalFrame {
         lblNumber.setText("修改数量");
         lblNumber.setToolTipText("员工姓名须由2-4个中文组成");
 
-        cobNumber.setFont(new java.awt.Font("华文细黑", 1, 18)); // NOI18N
+        cobNumber.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
         cobNumber.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
         cobNumber.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
         cobNumber.addItemListener(new java.awt.event.ItemListener() {
@@ -249,22 +249,21 @@ public class PurchaseManageFrame extends javax.swing.JInternalFrame {
                                     .addComponent(txtStorage, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(30, 30, 30)
                                 .addGroup(homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, homePanel1Layout.createSequentialGroup()
-                                        .addGroup(homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblNumber, javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(lblMenuname, javax.swing.GroupLayout.Alignment.TRAILING))
-                                        .addGap(35, 35, 35)
-                                        .addGroup(homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(homePanel1Layout.createSequentialGroup()
-                                                .addComponent(cobNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(31, 31, 31)
-                                                .addComponent(txtNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addComponent(txtMenuname1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(79, 79, 79))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, homePanel1Layout.createSequentialGroup()
+                                    .addComponent(lblNumber, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblMenuname, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addGap(35, 35, 35)
+                                .addGroup(homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(txtMenuname1, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                                    .addComponent(cobNumber, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(homePanel1Layout.createSequentialGroup()
+                                        .addGap(45, 45, 45)
                                         .addComponent(btnComfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(24, 24, 24)
-                                        .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                        .addComponent(btnExit, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(homePanel1Layout.createSequentialGroup()
+                                        .addGap(29, 29, 29)
+                                        .addComponent(txtNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                 .addContainerGap(40, Short.MAX_VALUE))
         );
         homePanel1Layout.setVerticalGroup(
@@ -319,7 +318,7 @@ public class PurchaseManageFrame extends javax.swing.JInternalFrame {
         int row = this.tblMenu.getSelectedRow();
         //根据row获取每列的值
         this.txtMenuid.setText(this.tblMenu.getValueAt(row, 0) + "");
-        this.txtNumber.setText(this.tblMenu.getValueAt(row, 1) + "");
+        this.txtMenuname1.setText(this.tblMenu.getValueAt(row, 1) + "");
         this.txtStorage.setText(this.tblMenu.getValueAt(row, 5) + "");
 
 

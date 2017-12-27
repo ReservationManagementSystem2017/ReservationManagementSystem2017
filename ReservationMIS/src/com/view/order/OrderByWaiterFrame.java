@@ -235,7 +235,6 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
         lblCusNumber.setForeground(new java.awt.Color(255, 51, 51));
         lblCusNumber.setText("顾客人数");
         lblCusNumber.setToolTipText("员工姓名须由2-4个中文组成");
-        lblCusNumber.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
 
         txtCusNumber.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
         txtCusNumber.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
@@ -249,7 +248,6 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
         lblTable.setForeground(new java.awt.Color(102, 102, 102));
         lblTable.setText("桌子编号");
         lblTable.setToolTipText("员工姓名须由2-4个中文组成");
-        lblTable.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
 
         txtTable.setEditable(false);
         txtTable.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
@@ -264,7 +262,6 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
         lblRoom.setForeground(new java.awt.Color(102, 102, 102));
         lblRoom.setText("房间编号");
         lblRoom.setToolTipText("员工姓名须由2-4个中文组成");
-        lblRoom.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED, new java.awt.Color(102, 102, 255), new java.awt.Color(153, 153, 255), new java.awt.Color(255, 51, 255), new java.awt.Color(204, 102, 255)));
 
         txtRoom.setEditable(false);
         txtRoom.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
