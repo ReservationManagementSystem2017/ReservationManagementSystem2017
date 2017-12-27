@@ -561,11 +561,11 @@ public class BillByWaiterFrame extends javax.swing.JInternalFrame {
         t.setTcondition(1);
         tbiz.update(t);
 
-        //房间中可用桌子数增加1
-        Room room = rbiz.findByID(tid);
-        int curcondition = room.getRcondition();
-        room.setRcondition(curcondition - 1);
-        boolean result_room = rbiz.update(room);
+//        //房间中可用桌子数增加1
+//        Room room = rbiz.findByID(tid);
+//        int curcondition = room.getRcondition();
+//        room.setRcondition(curcondition - 1);
+//        boolean result_room = rbiz.update(room);
         
         
         if (result == true) {

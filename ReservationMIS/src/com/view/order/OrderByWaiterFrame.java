@@ -506,12 +506,12 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
         t.setTcondition(0);
         boolean result_table = tbiz.update(t);
 
-        //Room类的修改。
-        int rrid = t.getRid();
-        Room room = rbiz.findByID(rrid);
-        int curcondition = room.getRcondition();
-        room.setRcondition(curcondition + 1);
-        boolean result_room = rbiz.update(room);
+//        //Room类的修改。
+//        int rrid = t.getRid();
+//        Room room = rbiz.findByID(rrid);
+//        int curcondition = room.getRcondition();
+//        room.setRcondition(curcondition + 1);
+//        boolean result_room = rbiz.update(room);
 
         for (int row = 0; row < dtm.getRowCount(); row++) {
             Integer oid = newOrder.getOid();
