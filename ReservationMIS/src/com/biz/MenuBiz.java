@@ -47,6 +47,9 @@ public interface MenuBiz {
     //找到库存不为0的模糊查找
     public List<Menu> findByConditionBaseStorage(String condition);
     
+    //增加销售量
+    public boolean addCount(int mid,int number);
+    
     
 
 }

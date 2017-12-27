@@ -96,5 +96,13 @@ public class MenuBizImpl implements MenuBiz {
         return edao.query(sql, Menu.class);
     }
     
+     public boolean addCount(int mid,int number)
+     {
+         String sql = "update t_menu set mcount = mcount + ?  where mid = ?";
+        Object[] params = {number, mid};
+        return edao.update(sql, params);
+     }
+    
+    
    
 }

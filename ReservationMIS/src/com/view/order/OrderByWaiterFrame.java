@@ -536,6 +536,7 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
             odbiz.add(od);
             Menu m = mbiz.findByID(mid);
             mbiz.reduceMstorage(mid, odcount);
+            mbiz.addCount(mid, odcount);
         }
 
         if (result_order == true) {
