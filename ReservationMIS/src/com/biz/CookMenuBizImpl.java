@@ -57,4 +57,20 @@ public class CookMenuBizImpl implements CookMenuBiz{
         Object[] params = {eid,mid};
         return edao.query(sql, CookMenu.class,params);
    }
+   
+   public boolean updatebyEid(int eid)
+   {
+        String sql = "update t_cook_menu set cmstate=0 where eid = ?";
+        //params中的参数是按顺序逐个给？赋值，所以需要注意数据表顺序
+        Object[] params = {eid};
+        return edao.update(sql, params);
+   }
+   
+   public boolean updatebyMid(int mid)
+   {
+        String sql = "update t_cook_menu set cmstate=0 where mid = ?";
+        //params中的参数是按顺序逐个给？赋值，所以需要注意数据表顺序
+        Object[] params = {mid};
+        return edao.update(sql, params);
+   }
 }

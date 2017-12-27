@@ -5,8 +5,11 @@
  */
 package com.view.manage;
 
+import com.biz.CookMenuBiz;
+import com.biz.CookMenuBizImpl;
 import com.biz.EmployeeBiz;
 import com.biz.EmployeeBizImpl;
+import com.po.CookMenu;
 import com.po.Employee;
 import com.util.StringUtil;
 import java.awt.Color;
@@ -24,7 +27,7 @@ import javax.swing.table.DefaultTableModel;
 public class EmployeeManageFrame extends javax.swing.JInternalFrame {
 
     EmployeeBiz ebiz = new EmployeeBizImpl();
-
+    CookMenuBiz cmbiz = new CookMenuBizImpl();
     /**
      * Creates new form EmployeeManageFrame
      */
@@ -711,6 +714,7 @@ public class EmployeeManageFrame extends javax.swing.JInternalFrame {
             //删除商品
             int empid = Integer.parseInt(this.txtEmpid.getText());
             //调用业务
+            cmbiz.updatebyEid(empid);
             boolean result = ebiz.delete(empid);
             if (result == true) {
                 JOptionPane.showMessageDialog(this, "删除成功");

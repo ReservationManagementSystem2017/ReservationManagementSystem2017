@@ -30,4 +30,10 @@ import java.util.List;
     
     // 6 查询是否有重复的初始和菜单的联系
     public List<CookMenu>  isRepetion(int eid, int mid);
+    
+    //级联删除与eid相关的联系
+    public boolean updatebyEid(int eid);
+    
+    //级联删除与mid相关的联系
+    public boolean updatebyMid(int mid);
 }

@@ -5,6 +5,8 @@
  */
 package com.view.manage;
 
+import com.biz.CookMenuBiz;
+import com.biz.CookMenuBizImpl;
 import com.biz.MenuBiz;
 import com.biz.MenuBizImpl;
 import com.po.Menu;
@@ -24,6 +26,7 @@ import javax.swing.table.DefaultTableModel;
 public class MenuManageFrame extends javax.swing.JInternalFrame {
 
     MenuBiz mbiz = new MenuBizImpl();
+    CookMenuBiz cmbiz = new CookMenuBizImpl();
 
     /**
      * Creates new form MenuManageFrame
@@ -589,6 +592,8 @@ public class MenuManageFrame extends javax.swing.JInternalFrame {
             int mpid = Integer.parseInt(this.txtMenuid.getText());
             //调用业务
             boolean result = mbiz.delete(mpid);
+            cmbiz.updatebyMid(mpid);
+            
             if (result == true) {
                 JOptionPane.showMessageDialog(this, "删除成功");
                 //刷新表格
