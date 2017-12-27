@@ -8,7 +8,9 @@ package com.view.manage;
 import com.biz.CustomerBiz;
 import com.biz.CustomerBizImpl;
 import com.po.Customer;
+import com.util.FrameUtil;
 import com.util.StringUtil;
+import com.view.order.OrderDishesByCookFrame;
 import java.awt.Color;
 import java.util.List;
 import java.util.Vector;
@@ -69,6 +71,23 @@ public class CustomerManageFrame extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setTitle("顾客管理");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosed(evt);
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         txtCondition.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
         txtCondition.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
@@ -556,6 +575,11 @@ public class CustomerManageFrame extends javax.swing.JInternalFrame {
     private void txtConditionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtConditionKeyPressed
         this.getRootPane().setDefaultButton(btnSearch);
     }//GEN-LAST:event_txtConditionKeyPressed
+
+    private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
+      //窗口关闭，从map中移除
+        FrameUtil.framemap.remove(CustomerManageFrame.class.getName());
+    }//GEN-LAST:event_formInternalFrameClosed
     private void clearInput() {
         this.txtCid.setText("");
         this.txtCname.setText("");

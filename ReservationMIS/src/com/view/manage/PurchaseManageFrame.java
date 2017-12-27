@@ -11,6 +11,7 @@ import com.biz.OrderDishesBiz;
 import com.biz.OrderDishesBizImpl;
 import com.po.Menu;
 import com.po.OrderDishes;
+import com.util.FrameUtil;
 import com.util.StringUtil;
 import java.awt.Color;
 import java.text.DateFormat;
@@ -78,6 +79,23 @@ public class PurchaseManageFrame extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setTitle("采购管理");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosed(evt);
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         txtCondition.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
         txtCondition.addActionListener(new java.awt.event.ActionListener() {
@@ -453,6 +471,11 @@ public class PurchaseManageFrame extends javax.swing.JInternalFrame {
     private void txtNumberActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumberActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNumberActionPerformed
+
+    private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
+        //窗口关闭，从map中移除
+        FrameUtil.framemap.remove(PurchaseManageFrame.class.getName());
+    }//GEN-LAST:event_formInternalFrameClosed
 
     public void showOnTable(List<Menu> list) {
         //1.获取表格模型

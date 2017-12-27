@@ -25,6 +25,9 @@ public interface MenuBiz {
 
     // 4 根据编号查找菜单
     public Menu findByID(int mid);
+    
+    //找到所有编号
+    public Menu findbyID_all(int mid);
 
     // 5 查询所有菜单
     public List<Menu> findAll();

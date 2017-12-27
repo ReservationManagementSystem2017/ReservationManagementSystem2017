@@ -267,7 +267,7 @@ public class TableManageFrame extends javax.swing.JInternalFrame {
 
 
     private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
-        FrameUtil.framemap.remove(Table.class.getName());
+        FrameUtil.framemap.remove(TableManageFrame.class.getName());
         //1.获取指定表格模型
         DefaultTableModel dtm = (DefaultTableModel) this.tblTable.getModel();
         //2.清空表格信息

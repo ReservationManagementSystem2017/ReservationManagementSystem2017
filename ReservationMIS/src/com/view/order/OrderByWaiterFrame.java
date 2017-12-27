@@ -25,6 +25,7 @@ import com.po.OrderDishes;
 import com.po.Room;
 import com.po.Table;
 import com.po.User;
+import com.util.FrameUtil;
 import com.util.StringUtil;
 import com.view.MainFrame;
 import java.awt.Color;
@@ -111,6 +112,23 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setTitle("顾客下单");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosed(evt);
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         lblMenu.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
         lblMenu.setForeground(new java.awt.Color(255, 51, 51));
@@ -557,6 +575,11 @@ public class OrderByWaiterFrame extends javax.swing.JInternalFrame {
 //        List<Room> rlist = rbiz.findByRcondition();
         showOnTable_tables(tlist);
     }//GEN-LAST:event_btnUpdateActionPerformed
+
+    private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
+         //窗口关闭，从map中移除
+        FrameUtil.framemap.remove(OrderByWaiterFrame.class.getName());
+    }//GEN-LAST:event_formInternalFrameClosed
 
     private void showOnTable(List<Menu> list) {
         //1.获取指定表格（tblMenu）模型

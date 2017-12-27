@@ -13,7 +13,9 @@ import com.po.Bill;
 import com.po.Menu;
 import com.po.Order;
 import com.po.OrderDishes;
+import com.util.FrameUtil;
 import com.util.StringUtil;
+import com.view.order.OrderDishesByCookFrame;
 import java.awt.Color;
 import java.util.List;
 import java.util.Vector;
@@ -67,6 +69,23 @@ public class SearchBillFrame extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setTitle("历史账单查询");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosed(evt);
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         cobSelect.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
         cobSelect.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " " }));
@@ -148,11 +167,10 @@ public class SearchBillFrame extends javax.swing.JInternalFrame {
         homePanel1Layout.setHorizontalGroup(
             homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(homePanel1Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
                 .addGroup(homePanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(btnClear)
-                    .addGroup(homePanel1Layout.createSequentialGroup()
-                        .addGap(40, 40, 40)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 821, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 821, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(40, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, homePanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -261,6 +279,11 @@ public class SearchBillFrame extends javax.swing.JInternalFrame {
             dtm.removeRow(0);
         }
     }//GEN-LAST:event_btnClearActionPerformed
+
+    private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
+       //窗口关闭，从map中移除
+        FrameUtil.framemap.remove(SearchBillFrame.class.getName());
+    }//GEN-LAST:event_formInternalFrameClosed
 
     private void showOnTable(List<Bill> blist) {
         //1.获取指定表格（tblOrder）模型

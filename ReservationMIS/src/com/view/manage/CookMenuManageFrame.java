@@ -23,8 +23,10 @@ import javax.swing.table.DefaultTableModel;
 import com.biz.EmployeeBiz;
 import com.biz.EmployeeBizImpl;
 import com.po.Employee;
+import com.util.FrameUtil;
 import com.util.StringUtil;
 import com.view.HomePanel;
+import com.view.order.OrderDishesByCookFrame;
 import java.awt.Color;
 import java.util.List;
 import java.util.Vector;
@@ -98,6 +100,23 @@ public class CookMenuManageFrame extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setTitle("厨师菜品关联管理");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosed(evt);
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         btnSearch.setBackground(new java.awt.Color(255, 255, 102));
         btnSearch.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
@@ -556,6 +575,11 @@ public class CookMenuManageFrame extends javax.swing.JInternalFrame {
             this.dispose();
         }
     }//GEN-LAST:event_btnExitActionPerformed
+
+    private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
+         //窗口关闭，从map中移除
+        FrameUtil.framemap.remove(CookMenuManageFrame.class.getName());
+    }//GEN-LAST:event_formInternalFrameClosed
     private void showOnTable(List<CookMenu> list) {
         //1.获取指定表格模型
         DefaultTableModel dtm = (DefaultTableModel) this.tblRelation.getModel();

@@ -66,6 +66,23 @@ public class DiscountManageFrame extends javax.swing.JInternalFrame {
         setClosable(true);
         setResizable(true);
         setTitle("折扣规则管理");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosed(evt);
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         tblDiscount.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -339,6 +356,11 @@ public class DiscountManageFrame extends javax.swing.JInternalFrame {
 
         this.btnDelete.setEnabled(true);
     }//GEN-LAST:event_tblDiscountMouseClicked
+
+    private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
+      //窗口关闭，从map中移除
+        FrameUtil.framemap.remove(DiscountManageFrame.class.getName());
+    }//GEN-LAST:event_formInternalFrameClosed
 
     private void clearInput() {
         this.txtDiscount.setText("");

@@ -534,6 +534,7 @@ public class MainFrame extends javax.swing.JFrame {
         }
         user = null;
         this.initButton(null);
+        
     }//GEN-LAST:event_itemExitLoginActionPerformed
 
     private void itemExitSystemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemExitSystemActionPerformed

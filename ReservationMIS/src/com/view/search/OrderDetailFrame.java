@@ -17,7 +17,9 @@ import com.po.Customer;
 import com.po.Menu;
 import com.po.Order;
 import com.po.OrderDishes;
+import com.util.FrameUtil;
 import com.util.StringUtil;
+import com.view.order.OrderDishesByCookFrame;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
@@ -77,6 +79,23 @@ public class OrderDetailFrame extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setTitle("订单详情");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosed(evt);
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         lblOrderDetail.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
         lblOrderDetail.setForeground(new java.awt.Color(255, 51, 51));
@@ -350,6 +369,11 @@ public class OrderDetailFrame extends javax.swing.JInternalFrame {
 //            this.btnDelete.setEnabled(false);
 //        }
     }//GEN-LAST:event_choiceEmpActionPerformed
+
+    private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
+        //窗口关闭，从map中移除
+        FrameUtil.framemap.remove(OrderDetailFrame.class.getName());
+    }//GEN-LAST:event_formInternalFrameClosed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

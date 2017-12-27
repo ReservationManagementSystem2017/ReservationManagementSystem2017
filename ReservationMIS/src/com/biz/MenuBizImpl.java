@@ -48,6 +48,13 @@ public class MenuBizImpl implements MenuBiz {
         return (Menu) edao.get(sql, Menu.class, params);
 
     }
+    
+    public Menu findbyID_all(int mid)
+    {
+        String sql = "select * from t_menu where mid=?";
+        Object[] params = {mid};
+        return (Menu) edao.get(sql, Menu.class, params);
+    }
 
     public List<Menu> findAll() {
         String sql = "select * from t_menu where mstate = 1";

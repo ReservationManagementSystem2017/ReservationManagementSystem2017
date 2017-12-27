@@ -32,6 +32,7 @@ import com.po.OrderDishes;
 import com.po.Room;
 import com.po.Table;
 import com.po.User;
+import com.util.FrameUtil;
 import com.util.StringUtil;
 import java.awt.Color;
 import java.text.DateFormat;
@@ -110,6 +111,23 @@ public class BillByWaiterFrame extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setTitle("顾客结账");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosed(evt);
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         lblDiscount.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
         lblDiscount.setForeground(new java.awt.Color(255, 51, 51));
@@ -578,6 +596,11 @@ public class BillByWaiterFrame extends javax.swing.JInternalFrame {
 
     }//GEN-LAST:event_btnPayActionPerformed
 
+    private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
+         //窗口关闭，从map中移除
+        FrameUtil.framemap.remove(BillByWaiterFrame.class.getName());
+    }//GEN-LAST:event_formInternalFrameClosed
+
     private void showOnTable(List<Order> list) {
         //1.获取指定表格（tblProduct）模型
         DefaultTableModel dtm = (DefaultTableModel) this.tblOrder.getModel();
@@ -597,7 +620,7 @@ public class BillByWaiterFrame extends javax.swing.JInternalFrame {
             double totalPrice = 0;
             List<OrderDishes> odlist = odbiz.findByOidNot0(o.getOid());
             for (OrderDishes od : odlist) {
-                Menu m = mbiz.findByID(od.getMid());
+                Menu m = mbiz.findbyID_all(od.getMid());
                 totalPrice += od.getOdcount() * m.getMprice();
             }
             vt.add(totalPrice);

@@ -14,6 +14,7 @@ import com.biz.UserBizImpl;
 import com.po.Order;
 import com.po.OrderDishes;
 import com.po.User;
+import com.util.FrameUtil;
 import java.awt.Color;
 import java.util.List;
 import java.util.Vector;
@@ -75,6 +76,23 @@ public class OrderDishesByCookFrame extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setTitle("厨师做菜");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosed(evt);
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         lblMenu.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
         lblMenu.setForeground(new java.awt.Color(255, 51, 51));
@@ -299,6 +317,8 @@ public class OrderDishesByCookFrame extends javax.swing.JInternalFrame {
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
         List<OrderDishes> list = odbiz.toCookByEid(userNew.getEid());
+        System.out.println(userNew.getEid());
+        
         showOnTableToCook(list);
         this.btnCook.setEnabled(false);
         this.btnCancel.setEnabled(false);
@@ -352,7 +372,7 @@ public class OrderDishesByCookFrame extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "请选择要取消的的菜！");
             return;
         }
-        int answer = JOptionPane.showConfirmDialog(this, "您确定完成了吗？");
+        int answer = JOptionPane.showConfirmDialog(this, "您确定取消了吗？");
         if (answer == JOptionPane.YES_OPTION) {
             //删除菜
             Integer odid = (Integer) this.tblCooking.getValueAt(row, 0);
@@ -375,6 +395,11 @@ public class OrderDishesByCookFrame extends javax.swing.JInternalFrame {
         this.btnFinish.setEnabled(false);
 
     }//GEN-LAST:event_btnCancelActionPerformed
+
+    private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
+      //窗口关闭，从map中移除
+        FrameUtil.framemap.remove(OrderDishesByCookFrame.class.getName());
+    }//GEN-LAST:event_formInternalFrameClosed
 
     private void showOnTableToCook(List<OrderDishes> list) {
         //1.获取指定表格（tblMenu）模型

@@ -10,7 +10,9 @@ import com.biz.CookMenuBizImpl;
 import com.biz.MenuBiz;
 import com.biz.MenuBizImpl;
 import com.po.Menu;
+import com.util.FrameUtil;
 import com.util.StringUtil;
+import com.view.order.OrderDishesByCookFrame;
 import java.awt.Color;
 import java.util.List;
 import java.util.Vector;
@@ -78,6 +80,23 @@ public class MenuManageFrame extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setTitle("菜单管理");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosed(evt);
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         txtCondition.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
         txtCondition.setBorder(javax.swing.BorderFactory.createEtchedBorder(new java.awt.Color(204, 255, 255), new java.awt.Color(204, 153, 255)));
@@ -653,6 +672,11 @@ public class MenuManageFrame extends javax.swing.JInternalFrame {
     private void txtMenupriceKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMenupriceKeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMenupriceKeyPressed
+
+    private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
+         //窗口关闭，从map中移除
+        FrameUtil.framemap.remove(MenuManageFrame.class.getName());
+    }//GEN-LAST:event_formInternalFrameClosed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

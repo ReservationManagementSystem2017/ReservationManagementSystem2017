@@ -74,6 +74,23 @@ public class RoomManageFrame extends javax.swing.JInternalFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(true);
         setTitle("房间管理");
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameClosed(evt);
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+            }
+        });
 
         txtCondition.setFont(new java.awt.Font("华文细黑", 0, 18)); // NOI18N
 
@@ -355,6 +372,11 @@ public class RoomManageFrame extends javax.swing.JInternalFrame {
         //清空面板信息
         clearInput();
     }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void formInternalFrameClosed(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameClosed
+         //窗口关闭，从map中移除
+        FrameUtil.framemap.remove(RoomManageFrame.class.getName());
+    }//GEN-LAST:event_formInternalFrameClosed
 
     /**
      * @param args the command line arguments
